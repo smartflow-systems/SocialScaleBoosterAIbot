@@ -108,7 +108,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       <h1>SmartFlow AI: 10x E-Com Sales with AI Bots</h1>
       <p>Premium no-code platform for e-commerce automation. Boost revenue, engagement, and conversions across all social platforms with intelligent AI-powered bots.</p>
       <button class="cta" onclick="window.location.href='/dashboard'">Start Free Trial</button>
-      
+
       <div class="features">
         <div class="feature">
           <h3>🤖 AI-Powered Automation</h3>
@@ -146,7 +146,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const botId = parseInt(req.params.id);
       const bot = await storage.getBot(botId);
-      
+
       if (!bot) {
         return res.status(404).json({ error: "Bot not found" });
       }
@@ -155,7 +155,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const createdDate = bot.createdAt ? new Date(bot.createdAt) : new Date();
       const daysSinceCreated = Math.floor((Date.now() - createdDate.getTime()) / (1000 * 60 * 60 * 24)) || 1;
       const isActive = bot.status === 'active';
-      
+
       const stats = {
         botId: botId,
         name: bot.name,
@@ -197,7 +197,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const userId = 1; // Mock user ID
       const user = await storage.getUser(userId);
-      
+
       // Check bot limit for free users
       if (!user?.isPremium && (user?.botCount || 0) >= 3) {
         return res.status(403).json({ message: "Free plan limited to 3 bots. Upgrade to Pro for unlimited bots." });
@@ -206,7 +206,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const botData = insertBotSchema.parse({ ...req.body, userId });
       const bot = await storage.createBot(botData);
       await storage.incrementUserBotCount(userId);
-      
+
       res.json(bot);
     } catch (error: any) {
       res.status(400).json({ message: error.message });
@@ -227,7 +227,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const botId = parseInt(req.params.id);
       const { status } = req.body;
-      
+
       if (!status || !['active', 'paused', 'stopped'].includes(status)) {
         return res.status(400).json({ message: "Invalid status" });
       }
@@ -294,7 +294,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         storage.getRevenueMetrics(userId),
         storage.getEngagementMetrics(userId)
       ]);
-      
+
       // Generate mock chart data
       const chartData = {
         revenue: {
@@ -385,7 +385,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const userId = 1; // Mock user ID
       let user = await storage.getUser(userId);
-      
+
       if (!user) {
         return res.status(404).json({ message: "User not found" });
       }
@@ -393,7 +393,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Check if user already has a subscription
       if (user.stripeSubscriptionId) {
         const subscription = await stripe.subscriptions.retrieve(user.stripeSubscriptionId);
-        
+
         if (subscription.status === 'active') {
           return res.json({
             subscriptionId: subscription.id,
@@ -420,19 +420,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Create subscription
       const subscription = await stripe.subscriptions.create({
         customer: stripeCustomerId,
-        items: [{
-          price_data: {
-            currency: 'usd',
-            product_data: {
-              name: 'SmartFlow AI Pro Plan',
-              description: 'Unlimited bots, premium features, and advanced analytics',
+        line_items: [
+          {
+            price_data: {
+              currency: 'usd',
+              product: 'SmartFlow AI Pro',
+              unit_amount: 4900, // $49.00
+              recurring: {
+                interval: 'month',
+              },
             },
-            unit_amount: 4900, // $49.00
-            recurring: {
-              interval: 'month',
-            },
+            quantity: 1,
           },
-        }],
+        ],
         payment_behavior: 'default_incomplete',
         payment_settings: {
           save_default_payment_method: 'on_subscription',
@@ -462,13 +462,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const userId = 1; // Mock user ID
       const user = await storage.getUser(userId);
-      
+
       if (!user || !user.stripeSubscriptionId) {
         return res.json({ status: 'no_subscription', isPremium: user?.isPremium || false });
       }
 
       const subscription = await stripe.subscriptions.retrieve(user.stripeSubscriptionId);
-      
+
       res.json({
         status: subscription.status,
         isPremium: user.isPremium,
@@ -490,7 +490,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const userId = 1; // Mock user ID
       const user = await storage.getUser(userId);
-      
+
       if (!user || !user.stripeSubscriptionId) {
         return res.status(404).json({ message: "No active subscription found" });
       }

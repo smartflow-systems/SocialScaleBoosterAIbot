@@ -11,8 +11,8 @@ import {
   Title,
   Tooltip,
   Legend,
-  ArcElement,
   BarElement,
+  ArcElement,
 } from 'chart.js';
 
 ChartJS.register(
@@ -23,8 +23,8 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
-  ArcElement,
-  BarElement
+  BarElement,
+  ArcElement
 );
 
 interface AdvancedMetricsProps {
