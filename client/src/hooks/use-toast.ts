@@ -168,6 +168,35 @@ function toast({ ...props }: Toast) {
   }
 }
 
+// Enhanced toast functions for FlowScale AI
+function toastSuccess(title: string, description?: string) {
+  return toast({
+    title,
+    description,
+    className: "bg-accent-gold text-primary-black border-accent-gold font-semibold",
+    style: {
+      backgroundColor: "#FFD700",
+      color: "#000000",
+      border: "1px solid #FFD700",
+      boxShadow: "0 0 20px rgba(255, 215, 0, 0.3)",
+    }
+  });
+}
+
+function toastPremium(title: string, description?: string) {
+  return toast({
+    title,
+    description,
+    className: "bg-gradient-to-r from-accent-gold to-yellow-400 text-primary-black border-accent-gold font-bold",
+    style: {
+      background: "linear-gradient(135deg, #FFD700 0%, #FFC107 100%)",
+      color: "#000000",
+      border: "1px solid #FFD700",
+      boxShadow: "0 0 30px rgba(255, 215, 0, 0.5)",
+    }
+  });
+}
+
 function useToast() {
   const [state, setState] = React.useState<State>(memoryState)
 
@@ -184,8 +213,10 @@ function useToast() {
   return {
     ...state,
     toast,
+    toastSuccess,
+    toastPremium,
     dismiss: (toastId?: string) => dispatch({ type: "DISMISS_TOAST", toastId }),
   }
 }
 
-export { useToast, toast }
+export { useToast, toast, toastSuccess, toastPremium }

@@ -59,7 +59,7 @@ export default function CreateBotDialog({ isPremium, botCount }: CreateBotDialog
     platform: "",
     preset: ""
   });
-  const { toast } = useToast();
+  const toast = useToast();
   const queryClient = useQueryClient();
 
   const createBotMutation = useMutation({
@@ -70,10 +70,10 @@ export default function CreateBotDialog({ isPremium, botCount }: CreateBotDialog
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/bots"] });
       queryClient.invalidateQueries({ queryKey: ["/api/user/status"] });
-      toast({
-        title: "Bot Created",
-        description: "Your new automation bot is ready to start generating sales!",
-      });
+      toast.toastSuccess(
+        "🤖 Bot Created Successfully!",
+        "Your new FlowScale AI bot is ready to start generating sales!"
+      );
       setOpen(false);
       setFormData({ name: "", description: "", platform: "", preset: "" });
     },
@@ -91,11 +91,10 @@ export default function CreateBotDialog({ isPremium, botCount }: CreateBotDialog
     
     // Check bot limits for free users
     if (!isPremium && botCount >= 3) {
-      toast({
-        title: "Upgrade Required",
-        description: "Free plan is limited to 3 bots. Upgrade to Pro for unlimited bots.",
-        variant: "destructive",
-      });
+      toast.toastPremium(
+        "👑 Upgrade to FlowScale Pro",
+        "Free plan is limited to 3 bots. Upgrade to Pro for unlimited AI automation!"
+      );
       return;
     }
 

@@ -11,7 +11,7 @@ export default function Navigation() {
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center space-x-2 cursor-pointer" onClick={() => setLocation("/")}>
             <Bot className="text-accent-gold w-8 h-8" />
-            <span className="text-xl font-bold text-accent-gold">SFS ScaleBots</span>
+            <span className="text-xl font-bold text-accent-gold">FlowScale AI</span>
           </div>
           <div className="hidden md:flex items-center space-x-8">
             <a href="#features" className="text-neutral-gray hover:text-accent-gold transition-colors">Features</a>

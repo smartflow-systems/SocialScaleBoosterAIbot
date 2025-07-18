@@ -25,13 +25,13 @@ export default function Landing() {
         
         <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-            <span className="text-accent-gold">SFS ScaleBots:</span><br />
-            <span className="text-white">No-Code AI to 10x</span><br />
-            <span className="text-accent-gold">E-Com Social Sales</span>
+            <span className="text-accent-gold">FlowScale AI:</span><br />
+            <span className="text-white">10x E-Com Sales</span><br />
+            <span className="text-accent-gold">with AI Bots</span>
           </h1>
           
           <p className="text-xl md:text-2xl text-neutral-gray mb-8 max-w-3xl mx-auto leading-relaxed">
-            Automate posts, engage buyers, convert revenue. Build intelligent social media bots without coding and watch your e-commerce sales skyrocket.
+            Premium no-code platform for e-commerce automation. Boost revenue, engagement, and conversions across all social platforms with intelligent AI-powered bots.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">

@@ -1,8 +1,8 @@
-# SFS ScaleBots - AI E-Commerce Social Media Bot Platform
+# FlowScale AI - AI E-Commerce Social Media Bot Platform
 
 ## Overview
 
-SFS ScaleBots is a premium no-code AI platform designed to automate e-commerce social media sales through intelligent bot builders. The application allows users to create, manage, and deploy social media automation bots across platforms like TikTok, Instagram, Facebook, Twitter, and YouTube to increase engagement and drive revenue. Now features a complete SEO-optimized landing page, advanced analytics dashboard, comprehensive marketplace, and Stripe payment integration.
+FlowScale AI is a premium no-code AI platform designed to automate e-commerce social media sales through intelligent bot builders. The application allows users to create, manage, and deploy social media automation bots across platforms like TikTok, Instagram, Facebook, Twitter, and YouTube to increase engagement and drive revenue. Now features a complete SEO-optimized landing page, advanced analytics dashboard, comprehensive marketplace, and Stripe payment integration.
 
 ## User Preferences
 
@@ -10,7 +10,8 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Updates (January 2025)
 
-✓ **SEO-Optimized Landing Page**: Implemented crawlable landing page with proper meta tags, Open Graph tags, and semantic HTML structure for search engine visibility
+✓ **Brand Rebrand to FlowScale AI**: Updated all branding from SFS ScaleBots to FlowScale AI with refined messaging
+✓ **Server-Side Rendered Landing Page**: Implemented Express SSR route for crawlable landing page with static HTML content, proper meta tags, and SEO optimization
 ✓ **Analytics Dashboard**: Added Chart.js integration with real-time e-commerce metrics, engagement tracking, ROI calculations, and platform performance analytics  
 ✓ **Enhanced Marketplace**: Created comprehensive bot template marketplace with category filtering, search functionality, and premium template system
 ✓ **Stripe Payment Integration**: Implemented secure payment processing for premium subscriptions with checkout flow and upgrade functionality
