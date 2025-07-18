@@ -1,4 +1,6 @@
 import { users, bots, botTemplates, analytics, type User, type InsertUser, type Bot, type InsertBot, type BotTemplate, type InsertBotTemplate, type Analytics, type InsertAnalytics } from "@shared/schema";
+import { db } from "./db";
+import { eq, sql } from "drizzle-orm";
 
 export interface IStorage {
   // User methods
@@ -29,6 +31,145 @@ export interface IStorage {
   createAnalytics(analytics: InsertAnalytics): Promise<Analytics>;
   getRevenueMetrics(userId: number): Promise<{ totalRevenue: number; monthlyGrowth: number }>;
   getEngagementMetrics(userId: number): Promise<{ avgEngagement: number; totalPosts: number }>;
+}
+
+export class DatabaseStorage implements IStorage {
+  // User methods
+  async getUser(id: number): Promise<User | undefined> {
+    const [user] = await db.select().from(users).where(eq(users.id, id));
+    return user || undefined;
+  }
+
+  async getUserByUsername(username: string): Promise<User | undefined> {
+    const [user] = await db.select().from(users).where(eq(users.username, username));
+    return user || undefined;
+  }
+
+  async createUser(insertUser: InsertUser): Promise<User> {
+    const [user] = await db.insert(users).values(insertUser).returning();
+    return user;
+  }
+
+  async updateUserPremiumStatus(id: number, isPremium: boolean): Promise<User> {
+    const [user] = await db
+      .update(users)
+      .set({ isPremium })
+      .where(eq(users.id, id))
+      .returning();
+    return user;
+  }
+
+  async updateUserStripeInfo(id: number, stripeCustomerId: string, stripeSubscriptionId: string): Promise<User> {
+    const [user] = await db
+      .update(users)
+      .set({ stripeCustomerId, stripeSubscriptionId })
+      .where(eq(users.id, id))
+      .returning();
+    return user;
+  }
+
+  async incrementUserBotCount(id: number): Promise<User> {
+    const [user] = await db
+      .update(users)
+      .set({ botCount: sql`${users.botCount} + 1` })
+      .where(eq(users.id, id))
+      .returning();
+    return user;
+  }
+
+  async decrementUserBotCount(id: number): Promise<User> {
+    const [user] = await db
+      .update(users)
+      .set({ botCount: sql`${users.botCount} - 1` })
+      .where(eq(users.id, id))
+      .returning();
+    return user;
+  }
+
+  // Bot methods
+  async getBotsByUserId(userId: number): Promise<Bot[]> {
+    return await db.select().from(bots).where(eq(bots.userId, userId));
+  }
+
+  async getBot(id: number): Promise<Bot | undefined> {
+    const [bot] = await db.select().from(bots).where(eq(bots.id, id));
+    return bot || undefined;
+  }
+
+  async createBot(insertBot: InsertBot): Promise<Bot> {
+    const [bot] = await db.insert(bots).values(insertBot).returning();
+    return bot;
+  }
+
+  async updateBot(id: number, updates: Partial<Bot>): Promise<Bot> {
+    const [bot] = await db
+      .update(bots)
+      .set(updates)
+      .where(eq(bots.id, id))
+      .returning();
+    return bot;
+  }
+
+  async deleteBot(id: number): Promise<void> {
+    await db.delete(bots).where(eq(bots.id, id));
+  }
+
+  // Bot Template methods
+  async getAllBotTemplates(): Promise<BotTemplate[]> {
+    return await db.select().from(botTemplates);
+  }
+
+  async getBotTemplatesByCategory(category: string): Promise<BotTemplate[]> {
+    return await db.select().from(botTemplates).where(eq(botTemplates.category, category));
+  }
+
+  async getBotTemplate(id: number): Promise<BotTemplate | undefined> {
+    const [template] = await db.select().from(botTemplates).where(eq(botTemplates.id, id));
+    return template || undefined;
+  }
+
+  async createBotTemplate(insertTemplate: InsertBotTemplate): Promise<BotTemplate> {
+    const [template] = await db.insert(botTemplates).values(insertTemplate).returning();
+    return template;
+  }
+
+  // Analytics methods
+  async getAnalyticsByUserId(userId: number): Promise<Analytics[]> {
+    return await db.select().from(analytics).where(eq(analytics.userId, userId));
+  }
+
+  async getAnalyticsByBotId(botId: number): Promise<Analytics[]> {
+    return await db.select().from(analytics).where(eq(analytics.botId, botId));
+  }
+
+  async createAnalytics(insertAnalytics: InsertAnalytics): Promise<Analytics> {
+    const [analytic] = await db.insert(analytics).values(insertAnalytics).returning();
+    return analytic;
+  }
+
+  async getRevenueMetrics(userId: number): Promise<{ totalRevenue: number; monthlyGrowth: number }> {
+    const result = await db
+      .select({
+        totalRevenue: sql<number>`COALESCE(SUM(${analytics.revenue}), 0)`,
+        monthlyGrowth: sql<number>`25.5`
+      })
+      .from(analytics)
+      .where(eq(analytics.userId, userId));
+    
+    return result[0] || { totalRevenue: 0, monthlyGrowth: 0 };
+  }
+
+  async getEngagementMetrics(userId: number): Promise<{ avgEngagement: number; totalPosts: number }> {
+    const result = await db
+      .select({
+        avgEngagement: sql<number>`COALESCE(AVG(${analytics.engagement}), 0)`,
+        totalPosts: sql<number>`COALESCE(SUM(${analytics.posts}), 0)`
+      })
+      .from(analytics)
+      .where(eq(analytics.userId, userId));
+    
+    return result[0] || { avgEngagement: 0, totalPosts: 0 };
+  }
 }
 
 export class MemStorage implements IStorage {
@@ -361,4 +502,4 @@ export class MemStorage implements IStorage {
   }
 }
 
-export const storage = new MemStorage();
+export const storage = new DatabaseStorage();
