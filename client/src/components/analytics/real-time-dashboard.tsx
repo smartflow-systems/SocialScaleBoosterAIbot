@@ -62,12 +62,12 @@ export default function RealTimeDashboard() {
           liveRevenue - 5,
           liveRevenue
         ],
-        borderColor: '#FFD700',
-        backgroundColor: 'rgba(255, 215, 0, 0.1)',
+        borderColor: '#F59E0B',
+        backgroundColor: 'rgba(245, 158, 11, 0.1)',
         borderWidth: 3,
         tension: 0.4,
-        pointBackgroundColor: '#FFD700',
-        pointBorderColor: '#000000',
+        pointBackgroundColor: '#F59E0B',
+        pointBorderColor: '#1a1a1a',
         pointBorderWidth: 2,
       }
     ]
@@ -86,8 +86,8 @@ export default function RealTimeDashboard() {
           liveEngagement - 0.2,
           liveEngagement
         ],
-        backgroundColor: '#FFD700',
-        borderColor: '#3E2723',
+        backgroundColor: '#F59E0B',
+        borderColor: '#2a2a2a',
         borderWidth: 1,
       }
     ]
@@ -116,7 +116,7 @@ export default function RealTimeDashboard() {
           }
         },
         grid: {
-          color: 'rgba(62, 39, 35, 0.3)'
+          color: 'rgba(42, 42, 42, 0.3)'
         }
       },
       y: {
@@ -127,7 +127,7 @@ export default function RealTimeDashboard() {
           }
         },
         grid: {
-          color: 'rgba(62, 39, 35, 0.3)'
+          color: 'rgba(42, 42, 42, 0.3)'
         }
       }
     }
@@ -137,13 +137,13 @@ export default function RealTimeDashboard() {
     <div className="space-y-6">
       {/* Live Metrics Cards */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <Card className="bg-secondary-brown border-accent-gold pulse-gold">
+        <Card className="bg-card-bg border-accent-gold pulse-gold">
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray">Live Revenue</p>
+                <p className="text-sm text-neutral-gray">Live Revenue</p>
                 <p className="text-2xl font-bold text-accent-gold">${liveRevenue.toFixed(2)}</p>
-                <Badge className="bg-accent-gold text-primary-black text-xs mt-1">
+                <Badge className="bg-accent-gold text-black text-xs mt-1">
                   <Activity className="w-3 h-3 mr-1" />
                   LIVE
                 </Badge>
@@ -153,11 +153,11 @@ export default function RealTimeDashboard() {
           </CardContent>
         </Card>
 
-        <Card className="bg-secondary-brown border-accent-gold">
+        <Card className="bg-card-bg border-accent-gold">
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray">Engagement Rate</p>
+                <p className="text-sm text-neutral-gray">Engagement Rate</p>
                 <p className="text-2xl font-bold text-white">{liveEngagement.toFixed(1)}%</p>
                 <p className="text-xs text-accent-gold">+0.3% from last hour</p>
               </div>

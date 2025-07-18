@@ -3,55 +3,57 @@
 @tailwind utilities;
 
 :root {
-  /* STRICT COLOR ENFORCEMENT - Only Primary Black, Secondary Dark Brown, Accent Gold */
-  --background: #000000;
+  /* Warmer Gold/Yellow Theme from Reference Images */
+  --background: #1a1a1a;
   --foreground: #FFFFFF;
-  --muted: #3E2723;
+  --muted: #2a2a2a;
   --muted-foreground: #808080;
-  --popover: #000000;
+  --popover: #1a1a1a;
   --popover-foreground: #FFFFFF;
-  --card: #3E2723;
+  --card: #2a2a2a;
   --card-foreground: #FFFFFF;
-  --border: #3E2723;
-  --input: #3E2723;
-  --primary: #FFD700;
+  --border: #3a3a3a;
+  --input: #2a2a2a;
+  --primary: #F59E0B;
   --primary-foreground: #000000;
-  --secondary: #3E2723;
+  --secondary: #2a2a2a;
   --secondary-foreground: #FFFFFF;
-  --accent: #FFD700;
+  --accent: #F59E0B;
   --accent-foreground: #000000;
-  --destructive: #FF4444;
+  --destructive: #EF4444;
   --destructive-foreground: #FFFFFF;
-  --ring: #FFD700;
+  --ring: #F59E0B;
   --radius: 0.5rem;
 
-  /* Core Brand Colors - STRICT ENFORCEMENT */
+  /* Core Brand Colors - Warmer Gold Theme */
   --primary-black: #000000;
-  --secondary-dark-brown: #3E2723;
-  --accent-gold: #FFD700;
+  --dark-bg: #1a1a1a;
+  --card-bg: #2a2a2a;
+  --accent-gold: #F59E0B;
+  --neutral-gray: #808080;
 }
 
 .dark {
-  /* DARK MODE - Same strict colors */
-  --background: #000000;
+  /* Dark mode - Same warmer colors */
+  --background: #1a1a1a;
   --foreground: #FFFFFF;
-  --muted: #3E2723;
+  --muted: #2a2a2a;
   --muted-foreground: #808080;
-  --popover: #000000;
+  --popover: #1a1a1a;
   --popover-foreground: #FFFFFF;
-  --card: #3E2723;
+  --card: #2a2a2a;
   --card-foreground: #FFFFFF;
-  --border: #3E2723;
-  --input: #3E2723;
-  --primary: #FFD700;
+  --border: #3a3a3a;
+  --input: #2a2a2a;
+  --primary: #F59E0B;
   --primary-foreground: #000000;
-  --secondary: #3E2723;
+  --secondary: #2a2a2a;
   --secondary-foreground: #FFFFFF;
-  --accent: #FFD700;
+  --accent: #F59E0B;
   --accent-foreground: #000000;
-  --destructive: #FF4444;
+  --destructive: #EF4444;
   --destructive-foreground: #FFFFFF;
-  --ring: #FFD700;
+  --ring: #F59E0B;
 }
 
 @layer base {
@@ -66,11 +68,19 @@
 }
 
 @layer utilities {
-  /* STRICT COLOR UTILITIES - Only Black (#000000), Dark Brown (#3E2723), Gold (#FFD700) */
+  /* Warmer Gold Theme Utilities */
   
-  /* Gold glow effects */
+  /* Updated background colors */
+  .bg-dark-bg { background-color: #1a1a1a; }
+  .bg-card-bg { background-color: #2a2a2a; }
+  .bg-accent-gold { background-color: #F59E0B; }
+  .text-accent-gold { color: #F59E0B; }
+  .text-neutral-gray { color: #808080; }
+  .border-accent-gold { border-color: #F59E0B; }
+  
+  /* Gold glow effects with warmer tone */
   .gold-glow {
-    box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+    box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
   }
   
   .gold-glow-hover:hover {

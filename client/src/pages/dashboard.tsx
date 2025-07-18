@@ -58,74 +58,75 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen bg-dark-bg">
-      {/* Dashboard Header */}
-      <header className="bg-card-bg border-b border-secondary-brown">
+      {/* Dashboard Header - Matches Reference Images */}
+      <header className="bg-dark-bg border-b border-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-4">
               <Bot className="text-accent-gold w-8 h-8" />
-              <span className="text-xl font-bold">Dashboard</span>
-              <Badge className="bg-rich-brown text-gold-trim border border-accent-gold font-semibold gold-glow">
+              <span className="text-xl font-bold text-white">Dashboard</span>
+              <Badge className="bg-accent-gold text-black px-3 py-1 rounded-full font-medium">
                 {userStatus?.isPremium ? "Pro Plan" : `Free Plan (${userStatus?.botCount || 0}/3 bots)`}
               </Badge>
             </div>
             <div className="flex items-center space-x-4">
-              <Button 
-                onClick={() => window.location.href = "/checkout"}
-                className="bg-rich-brown text-gold-trim border border-accent-gold font-semibold gold-glow-hover hover:bg-accent-gold hover:text-primary-black"
-              >
-                <Crown className="w-4 h-4 mr-2" />
-                Upgrade Pro
-              </Button>
+              {!userStatus?.isPremium && (
+                <StripeCheckout>
+                  <Button className="bg-accent-gold text-black hover:bg-yellow-500 font-medium px-4 py-2 rounded-lg">
+                    <Crown className="w-4 h-4 mr-2" />
+                    Upgrade Pro
+                  </Button>
+                </StripeCheckout>
+              )}
               <div className="w-8 h-8 bg-accent-gold rounded-full"></div>
             </div>
           </div>
         </div>
       </header>
 
-      {/* Tab Navigation */}
-      <div className="bg-card-bg border-b border-secondary-brown">
+      {/* Horizontal Tab Navigation - Matches Reference Images */}
+      <div className="bg-card-bg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="bg-transparent border-b border-secondary-brown h-auto p-0 space-x-8">
+            <TabsList className="bg-dark-bg rounded-lg p-1 h-auto flex space-x-1 w-fit">
               <TabsTrigger 
                 value="bots" 
-                className="data-[state=active]:border-b-2 data-[state=active]:border-accent-gold data-[state=active]:text-accent-gold text-neutral-gray py-4 px-2 font-semibold rounded-none bg-transparent"
+                className="data-[state=active]:bg-accent-gold data-[state=active]:text-black text-white px-4 py-2 rounded-md font-medium transition-all"
               >
                 <Bot className="w-4 h-4 mr-2" />
                 My Bots
               </TabsTrigger>
               <TabsTrigger 
                 value="analytics" 
-                className="data-[state=active]:border-b-2 data-[state=active]:border-accent-gold data-[state=active]:text-accent-gold text-neutral-gray py-4 px-2 font-semibold rounded-none bg-transparent"
+                className="data-[state=active]:bg-accent-gold data-[state=active]:text-black text-white px-4 py-2 rounded-md font-medium transition-all"
               >
                 <BarChart3 className="w-4 h-4 mr-2" />
                 Analytics
               </TabsTrigger>
               <TabsTrigger 
                 value="marketplace" 
-                className="data-[state=active]:border-b-2 data-[state=active]:border-accent-gold data-[state=active]:text-accent-gold text-neutral-gray py-4 px-2 font-semibold rounded-none bg-transparent"
+                className="data-[state=active]:bg-accent-gold data-[state=active]:text-black text-white px-4 py-2 rounded-md font-medium transition-all"
               >
                 <Store className="w-4 h-4 mr-2" />
                 Marketplace
               </TabsTrigger>
               <TabsTrigger 
                 value="scheduling" 
-                className="data-[state=active]:border-b-2 data-[state=active]:border-accent-gold data-[state=active]:text-accent-gold text-neutral-gray py-4 px-2 font-semibold rounded-none bg-transparent"
+                className="data-[state=active]:bg-accent-gold data-[state=active]:text-black text-white px-4 py-2 rounded-md font-medium transition-all"
               >
                 <Calendar className="w-4 h-4 mr-2" />
                 Scheduling
               </TabsTrigger>
               <TabsTrigger 
                 value="personality" 
-                className="data-[state=active]:border-b-2 data-[state=active]:border-accent-gold data-[state=active]:text-accent-gold text-neutral-gray py-4 px-2 font-semibold rounded-none bg-transparent"
+                className="data-[state=active]:bg-accent-gold data-[state=active]:text-black text-white px-4 py-2 rounded-md font-medium transition-all"
               >
                 <Users className="w-4 h-4 mr-2" />
                 Personality
               </TabsTrigger>
               <TabsTrigger 
                 value="integrations" 
-                className="data-[state=active]:border-b-2 data-[state=active]:border-accent-gold data-[state=active]:text-accent-gold text-neutral-gray py-4 px-2 font-semibold rounded-none bg-transparent"
+                className="data-[state=active]:bg-accent-gold data-[state=active]:text-black text-white px-4 py-2 rounded-md font-medium transition-all"
               >
                 <Zap className="w-4 h-4 mr-2" />
                 Integrations
@@ -133,7 +134,7 @@ export default function Dashboard() {
             </TabsList>
 
             {/* Tab Content */}
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 bg-dark-bg min-h-screen">
               <TabsContent value="bots" className="mt-0">
                 <div className="flex justify-between items-center mb-8">
                   <h2 className="text-3xl font-bold">My Bots</h2>
@@ -150,17 +151,16 @@ export default function Dashboard() {
                   
                   {/* Upgrade prompt card */}
                   {!userStatus?.isPremium && (
-                    <div className="bg-gradient-to-br from-accent-gold to-yellow-600 rounded-xl p-6 text-primary-black">
+                    <div className="bg-gradient-to-br from-accent-gold to-yellow-500 rounded-xl p-6 text-black">
                       <div className="text-center">
                         <Crown className="w-16 h-16 mx-auto mb-4" />
                         <h3 className="text-xl font-bold mb-2">Create More Bots</h3>
-                        <p className="mb-4 text-sm opacity-90">Upgrade to Pro for unlimited bot creation</p>
-                        <Button 
-                          onClick={() => window.location.href = "/checkout"}
-                          className="bg-primary-black text-accent-gold hover:bg-secondary-brown"
-                        >
-                          Unlock Now
-                        </Button>
+                        <p className="mb-4 text-sm opacity-80">Upgrade to Pro for unlimited bot creation</p>
+                        <StripeCheckout>
+                          <Button className="bg-black text-accent-gold hover:bg-gray-800 font-medium">
+                            Unlock Now - $49/mo
+                          </Button>
+                        </StripeCheckout>
                       </div>
                     </div>
                   )}
