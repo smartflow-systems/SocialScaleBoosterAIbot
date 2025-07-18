@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { ShoppingBag, Instagram, Edit, BarChart3, Play, Pause, Square } from "lucide-react";
 import { Bot } from "@shared/schema";
 import BotStatsDialog from "./bot-stats-dialog";
+import EditBotDialog from "./edit-bot-dialog";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
@@ -108,10 +109,12 @@ export default function BotCard({ bot }: BotCardProps) {
         </div>
 
         <div className="flex space-x-2">
-          <Button className="flex-1 bg-secondary-brown text-accent-gold hover:bg-accent-gold hover:text-primary-black transition-colors">
-            <Edit className="w-4 h-4 mr-1" />
-            Edit
-          </Button>
+          <EditBotDialog bot={bot}>
+            <Button className="flex-1 bg-secondary-brown text-accent-gold hover:bg-accent-gold hover:text-primary-black transition-colors">
+              <Edit className="w-4 h-4 mr-1" />
+              Edit
+            </Button>
+          </EditBotDialog>
           <BotStatsDialog botId={bot.id}>
             <Button className="flex-1 bg-accent-gold text-primary-black hover:opacity-90 transition-opacity">
               <BarChart3 className="w-4 h-4 mr-1" />
