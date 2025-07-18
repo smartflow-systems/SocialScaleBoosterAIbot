@@ -111,4 +111,38 @@
   .bg-card-bg {
     background-color: var(--card-bg);
   }
+
+  /* Premium animations */
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+
+  .shimmer-effect {
+    background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.4), transparent);
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+  }
+
+  /* Chart styling */
+  .chart-gold {
+    --chart-color: #FFD700;
+  }
+
+  /* Enhanced glow effects */
+  .premium-glow {
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.4), 0 0 40px rgba(255, 215, 0, 0.2);
+  }
+
+  /* Mobile tab responsiveness */
+  @media (max-width: 768px) {
+    .tab-scroll {
+      overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .tab-scroll::-webkit-scrollbar {
+      display: none;
+    }
+  }
 }

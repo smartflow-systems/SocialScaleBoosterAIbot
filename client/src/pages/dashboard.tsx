@@ -3,13 +3,18 @@ import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Crown, Bot, BarChart3, Store, File, Search } from "lucide-react";
+import { Crown, Bot, BarChart3, Store, File, Search, Calendar, Users, Zap, Settings } from "lucide-react";
 import BotCard from "@/components/bots/bot-card";
 import CreateBotDialog from "@/components/bots/create-bot-dialog";
 import TemplateCard from "@/components/marketplace/template-card";
 import AnalyticsCharts from "@/components/analytics/charts";
 import CategoryFilter from "@/components/marketplace/category-filter";
 import EngagementMetrics from "@/components/analytics/engagement-metrics";
+import AdvancedMetrics from "@/components/analytics/advanced-metrics";
+import SchedulerInterface from "@/components/scheduling/scheduler-interface";
+import PersonalityDesigner from "@/components/personality/personality-designer";
+import IntegrationWizard from "@/components/integrations/integration-wizard";
+import EnhancedMarketplace from "@/components/marketplace/enhanced-marketplace";
 import { analyticsService } from "@/services/analytics";
 
 export default function Dashboard() {
@@ -101,11 +106,25 @@ export default function Dashboard() {
                 Marketplace
               </TabsTrigger>
               <TabsTrigger 
-                value="templates" 
+                value="scheduling" 
                 className="data-[state=active]:border-b-2 data-[state=active]:border-accent-gold data-[state=active]:text-accent-gold text-neutral-gray py-4 px-2 font-semibold rounded-none bg-transparent"
               >
-                <File className="w-4 h-4 mr-2" />
-                Templates
+                <Calendar className="w-4 h-4 mr-2" />
+                Scheduling
+              </TabsTrigger>
+              <TabsTrigger 
+                value="personality" 
+                className="data-[state=active]:border-b-2 data-[state=active]:border-accent-gold data-[state=active]:text-accent-gold text-neutral-gray py-4 px-2 font-semibold rounded-none bg-transparent"
+              >
+                <Users className="w-4 h-4 mr-2" />
+                Personality
+              </TabsTrigger>
+              <TabsTrigger 
+                value="integrations" 
+                className="data-[state=active]:border-b-2 data-[state=active]:border-accent-gold data-[state=active]:text-accent-gold text-neutral-gray py-4 px-2 font-semibold rounded-none bg-transparent"
+              >
+                <Zap className="w-4 h-4 mr-2" />
+                Integrations
               </TabsTrigger>
             </TabsList>
 
@@ -145,54 +164,13 @@ export default function Dashboard() {
               </TabsContent>
 
               <TabsContent value="analytics" className="mt-0">
-                <h2 className="text-3xl font-bold mb-8">Analytics & ROI</h2>
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
-                  <div className="lg:col-span-2">
-                    <AnalyticsCharts metrics={analyticsMetrics} />
-                  </div>
-                  <div>
-                    <EngagementMetrics metrics={engagementMetrics || []} />
-                  </div>
-                </div>
+                <h2 className="text-3xl font-bold mb-8">Advanced Analytics & ROI</h2>
+                <AdvancedMetrics metrics={analyticsMetrics} />
               </TabsContent>
 
               <TabsContent value="marketplace" className="mt-0">
-                <div className="flex justify-between items-center mb-8">
-                  <h2 className="text-3xl font-bold">Bot Marketplace</h2>
-                  <div className="relative">
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-neutral-gray w-4 h-4" />
-                    <input 
-                      type="text" 
-                      placeholder="Search templates..." 
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      className="bg-card-bg border border-secondary-brown rounded-lg pl-10 pr-4 py-2 text-white focus:border-accent-gold focus:outline-none w-80"
-                    />
-                  </div>
-                </div>
-
-                <CategoryFilter 
-                  selectedCategory={selectedCategory}
-                  onCategoryChange={setSelectedCategory}
-                />
-
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {filteredTemplates?.map((template: any) => (
-                    <TemplateCard key={template.id} template={template} />
-                  ))}
-                  
-                  {filteredTemplates?.length === 0 && (
-                    <div className="col-span-full text-center py-12">
-                      <p className="text-neutral-gray text-lg">No templates found matching your criteria.</p>
-                      <Button 
-                        onClick={() => { setSelectedCategory("all"); setSearchQuery(""); }}
-                        className="mt-4 bg-secondary-brown text-accent-gold hover:bg-accent-gold hover:text-primary-black"
-                      >
-                        Clear Filters
-                      </Button>
-                    </div>
-                  )}
-                </div>
+                <h2 className="text-3xl font-bold mb-8">Premium Bot Marketplace</h2>
+                <EnhancedMarketplace userStatus={userStatus} />
               </TabsContent>
 
               <TabsContent value="templates" className="mt-0">
@@ -295,6 +273,21 @@ export default function Dashboard() {
                     </CreateBotDialog>
                   </div>
                 </div>
+              </TabsContent>
+
+              <TabsContent value="scheduling" className="mt-0">
+                <h2 className="text-3xl font-bold mb-8">Smart Scheduling & Automation</h2>
+                <SchedulerInterface />
+              </TabsContent>
+
+              <TabsContent value="personality" className="mt-0">
+                <h2 className="text-3xl font-bold mb-8">Bot Personality Designer</h2>
+                <PersonalityDesigner />
+              </TabsContent>
+
+              <TabsContent value="integrations" className="mt-0">
+                <h2 className="text-3xl font-bold mb-8">Platform Integrations</h2>
+                <IntegrationWizard />
               </TabsContent>
             </div>
           </Tabs>
