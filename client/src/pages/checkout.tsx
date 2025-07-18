@@ -43,7 +43,7 @@ const CheckoutForm = () => {
     } else {
       toast({
         title: "Payment Successful",
-        description: "Welcome to FlowScale AI Pro!",
+        description: "Welcome to SmartFlow AI Pro!",
       });
     }
   };
@@ -102,7 +102,7 @@ export default function Checkout() {
     <div className="min-h-screen bg-dark-bg py-12">
       <div className="max-w-2xl mx-auto px-4">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-accent-gold mb-2">Upgrade to FlowScale Pro</h1>
+          <h1 className="text-3xl font-bold text-accent-gold mb-2">Upgrade to SmartFlow Pro</h1>
           <p className="text-neutral-gray">Unlock unlimited AI bot creation and premium e-commerce features</p>
         </div>
 
@@ -110,7 +110,7 @@ export default function Checkout() {
           <CardHeader>
             <CardTitle className="text-xl font-bold flex items-center">
               <Crown className="text-accent-gold w-6 h-6 mr-2" />
-              FlowScale AI Pro - $29/month
+              SmartFlow AI Pro - $29/month
             </CardTitle>
           </CardHeader>
           <CardContent>

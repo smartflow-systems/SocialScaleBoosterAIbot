@@ -19,10 +19,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FlowScale AI - 10x E-Com Sales with AI Bots | Premium Automation Platform</title>
-  <meta name="description" content="FlowScale AI: 10x E-Com Sales with AI Bots. Premium no-code platform for e-commerce automation. Boost revenue, engagement, and conversions across all social platforms." />
-  <meta name="keywords" content="FlowScale AI, e-commerce automation, AI sales bots, social media automation, no-code platform" />
-  <meta property="og:title" content="FlowScale AI - 10x E-Com Sales with AI Bots" />
+  <title>SmartFlow AI - 10x E-Com Sales with AI Bots | Premium Automation Platform</title>
+  <meta name="description" content="SmartFlow AI: 10x E-Com Sales with AI Bots. Premium no-code platform for e-commerce automation. Boost revenue, engagement, and conversions across all social platforms." />
+  <meta name="keywords" content="SmartFlow AI, e-commerce automation, AI sales bots, social media automation, no-code platform" />
+  <meta property="og:title" content="SmartFlow AI - 10x E-Com Sales with AI Bots" />
   <meta property="og:description" content="Premium AI-powered e-commerce automation platform. 10x your sales with intelligent social media bots." />
   <meta property="og:type" content="website" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -105,7 +105,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 <body>
   <div class="hero">
     <div>
-      <h1>FlowScale AI: 10x E-Com Sales with AI Bots</h1>
+      <h1>SmartFlow AI: 10x E-Com Sales with AI Bots</h1>
       <p>Premium no-code platform for e-commerce automation. Boost revenue, engagement, and conversions across all social platforms with intelligent AI-powered bots.</p>
       <button class="cta" onclick="window.location.href='/dashboard'">Start Free Trial</button>
       

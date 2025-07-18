@@ -25,7 +25,7 @@ export default function Landing() {
         
         <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-            <span className="text-accent-gold">FlowScale AI:</span><br />
+            <span className="text-accent-gold">SmartFlow AI:</span><br />
             <span className="text-white">10x E-Com Sales</span><br />
             <span className="text-accent-gold">with AI Bots</span>
           </h1>

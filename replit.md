@@ -1,8 +1,8 @@
-# FlowScale AI - AI E-Commerce Social Media Bot Platform
+# SmartFlow AI - AI E-Commerce Social Media Bot Platform
 
 ## Overview
 
-FlowScale AI is a premium no-code AI platform designed to automate e-commerce social media sales through intelligent bot builders. The application allows users to create, manage, and deploy social media automation bots across platforms like TikTok, Instagram, Facebook, Twitter, and YouTube to increase engagement and drive revenue. Now features a complete SEO-optimized landing page, advanced analytics dashboard, comprehensive marketplace, and Stripe payment integration.
+SmartFlow AI is a premium no-code AI platform designed to automate e-commerce social media sales through intelligent bot builders. The application allows users to create, manage, and deploy social media automation bots across platforms like TikTok, Instagram, Facebook, Twitter, and YouTube to increase engagement and drive revenue. Now features a complete SEO-optimized landing page, advanced analytics dashboard, comprehensive marketplace, and Stripe payment integration.
 
 ## User Preferences
 
@@ -10,7 +10,7 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Updates (January 2025)
 
-✓ **Brand Rebrand to FlowScale AI**: Updated all branding from SFS ScaleBots to FlowScale AI with refined messaging
+✓ **Brand Rebrand to SmartFlow AI**: Updated all branding from SFS ScaleBots to SmartFlow AI with refined messaging
 ✓ **Server-Side Rendered Landing Page**: Implemented Express SSR route for crawlable landing page with static HTML content, proper meta tags, and SEO optimization
 ✓ **Analytics Dashboard**: Added Chart.js integration with real-time e-commerce metrics, engagement tracking, ROI calculations, and platform performance analytics  
 ✓ **Enhanced Marketplace**: Created comprehensive bot template marketplace with category filtering, search functionality, and premium template system

@@ -73,7 +73,7 @@ export default function CreateBotDialog({ isPremium, botCount, children }: Creat
       queryClient.invalidateQueries({ queryKey: ["/api/user/status"] });
       toast.toastSuccess(
         "🤖 Bot Created Successfully!",
-        "Your new FlowScale AI bot is ready to start generating sales!"
+        "Your new SmartFlow AI bot is ready to start generating sales!"
       );
       setOpen(false);
       setFormData({ name: "", description: "", platform: "", preset: "" });
@@ -93,7 +93,7 @@ export default function CreateBotDialog({ isPremium, botCount, children }: Creat
     // Check bot limits for free users
     if (!isPremium && botCount >= 3) {
       toast.toastPremium(
-        "👑 Upgrade to FlowScale Pro",
+        "👑 Upgrade to SmartFlow Pro",
         "Free plan is limited to 3 bots. Upgrade to Pro for unlimited AI automation!"
       );
       return;
