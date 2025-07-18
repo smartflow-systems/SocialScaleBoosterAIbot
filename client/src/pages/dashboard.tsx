@@ -205,9 +205,14 @@ export default function Dashboard() {
                     </div>
                     <h3 className="text-xl font-bold mb-2">Product Showcase Bot</h3>
                     <p className="text-neutral-gray mb-4">Highlight product features with engaging visuals and automatic hashtag optimization</p>
-                    <Button className="w-full bg-secondary-brown text-accent-gold hover:bg-accent-gold hover:text-primary-black">
-                      Create Bot
-                    </Button>
+                    <CreateBotDialog 
+                      isPremium={userStatus?.isPremium || false}
+                      botCount={userStatus?.botCount || 0}
+                    >
+                      <Button className="w-full bg-secondary-brown text-accent-gold hover:bg-accent-gold hover:text-primary-black">
+                        Create Bot
+                      </Button>
+                    </CreateBotDialog>
                   </div>
 
                   <div className="bg-card-bg border border-secondary-brown rounded-xl p-6 hover:border-accent-gold transition-colors">
@@ -216,9 +221,14 @@ export default function Dashboard() {
                     </div>
                     <h3 className="text-xl font-bold mb-2">Flash Sale Announcer</h3>
                     <p className="text-neutral-gray mb-4">Create urgency with flash sales, countdown timers, and limited-time offers</p>
-                    <Button className="w-full bg-secondary-brown text-accent-gold hover:bg-accent-gold hover:text-primary-black">
-                      Create Bot
-                    </Button>
+                    <CreateBotDialog 
+                      isPremium={userStatus?.isPremium || false}
+                      botCount={userStatus?.botCount || 0}
+                    >
+                      <Button className="w-full bg-secondary-brown text-accent-gold hover:bg-accent-gold hover:text-primary-black">
+                        Create Bot
+                      </Button>
+                    </CreateBotDialog>
                   </div>
 
                   <div className="bg-card-bg border border-secondary-brown rounded-xl p-6 hover:border-accent-gold transition-colors">
@@ -227,9 +237,14 @@ export default function Dashboard() {
                     </div>
                     <h3 className="text-xl font-bold mb-2">Customer Testimonial Bot</h3>
                     <p className="text-neutral-gray mb-4">Share authentic customer reviews and success stories to build social proof</p>
-                    <Button className="w-full bg-secondary-brown text-accent-gold hover:bg-accent-gold hover:text-primary-black">
-                      Create Bot
-                    </Button>
+                    <CreateBotDialog 
+                      isPremium={userStatus?.isPremium || false}
+                      botCount={userStatus?.botCount || 0}
+                    >
+                      <Button className="w-full bg-secondary-brown text-accent-gold hover:bg-accent-gold hover:text-primary-black">
+                        Create Bot
+                      </Button>
+                    </CreateBotDialog>
                   </div>
 
                   <div className="bg-card-bg border border-secondary-brown rounded-xl p-6 hover:border-accent-gold transition-colors">
@@ -238,9 +253,14 @@ export default function Dashboard() {
                     </div>
                     <h3 className="text-xl font-bold mb-2">Behind the Scenes Bot</h3>
                     <p className="text-neutral-gray mb-4">Show product creation process and company culture to build authentic connections</p>
-                    <Button className="w-full bg-secondary-brown text-accent-gold hover:bg-accent-gold hover:text-primary-black">
-                      Create Bot
-                    </Button>
+                    <CreateBotDialog 
+                      isPremium={userStatus?.isPremium || false}
+                      botCount={userStatus?.botCount || 0}
+                    >
+                      <Button className="w-full bg-secondary-brown text-accent-gold hover:bg-accent-gold hover:text-primary-black">
+                        Create Bot
+                      </Button>
+                    </CreateBotDialog>
                   </div>
 
                   <div className="bg-card-bg border border-secondary-brown rounded-xl p-6 hover:border-accent-gold transition-colors">
@@ -249,9 +269,14 @@ export default function Dashboard() {
                     </div>
                     <h3 className="text-xl font-bold mb-2">Trend Tracker Bot</h3>
                     <p className="text-neutral-gray mb-4">AI-powered trend analysis to create viral content that drives maximum engagement</p>
-                    <Button className="w-full bg-secondary-brown text-accent-gold hover:bg-accent-gold hover:text-primary-black">
-                      Create Bot
-                    </Button>
+                    <CreateBotDialog 
+                      isPremium={userStatus?.isPremium || false}
+                      botCount={userStatus?.botCount || 0}
+                    >
+                      <Button className="w-full bg-secondary-brown text-accent-gold hover:bg-accent-gold hover:text-primary-black">
+                        Create Bot
+                      </Button>
+                    </CreateBotDialog>
                   </div>
 
                   <div className="bg-card-bg border border-secondary-brown rounded-xl p-6 hover:border-accent-gold transition-colors">
@@ -260,9 +285,14 @@ export default function Dashboard() {
                     </div>
                     <h3 className="text-xl font-bold mb-2">Multi-Platform Scheduler</h3>
                     <p className="text-neutral-gray mb-4">Coordinate campaigns across TikTok, Instagram, Facebook, and Twitter simultaneously</p>
-                    <Button className="w-full bg-secondary-brown text-accent-gold hover:bg-accent-gold hover:text-primary-black">
-                      Create Bot
-                    </Button>
+                    <CreateBotDialog 
+                      isPremium={userStatus?.isPremium || false}
+                      botCount={userStatus?.botCount || 0}
+                    >
+                      <Button className="w-full bg-secondary-brown text-accent-gold hover:bg-accent-gold hover:text-primary-black">
+                        Create Bot
+                      </Button>
+                    </CreateBotDialog>
                   </div>
                 </div>
               </TabsContent>

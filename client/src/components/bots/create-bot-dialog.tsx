@@ -14,6 +14,7 @@ import { insertBotSchema } from "@shared/schema";
 interface CreateBotDialogProps {
   isPremium: boolean;
   botCount: number;
+  children?: React.ReactNode;
 }
 
 const platforms = [
@@ -51,7 +52,7 @@ const ecommercePresets = [
   }
 ];
 
-export default function CreateBotDialog({ isPremium, botCount }: CreateBotDialogProps) {
+export default function CreateBotDialog({ isPremium, botCount, children }: CreateBotDialogProps) {
   const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -125,13 +126,15 @@ export default function CreateBotDialog({ isPremium, botCount }: CreateBotDialog
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button 
-          className="bg-accent-gold text-primary-black font-semibold gold-glow-hover"
-          disabled={!canCreateBot}
-        >
-          <Bot className="w-4 h-4 mr-2" />
-          Create New Bot
-        </Button>
+        {children || (
+          <Button 
+            className="bg-accent-gold text-primary-black font-semibold gold-glow-hover"
+            disabled={!canCreateBot}
+          >
+            <Bot className="w-4 h-4 mr-2" />
+            Create New Bot
+          </Button>
+        )}
       </DialogTrigger>
       <DialogContent className="bg-card-bg border-secondary-brown max-w-2xl">
         <DialogHeader>
