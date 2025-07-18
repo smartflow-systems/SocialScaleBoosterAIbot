@@ -61,14 +61,14 @@ export default function Dashboard() {
             <div className="flex items-center space-x-4">
               <Bot className="text-accent-gold w-8 h-8" />
               <span className="text-xl font-bold">Dashboard</span>
-              <Badge className="bg-accent-gold text-primary-black font-semibold">
+              <Badge className="bg-rich-brown text-gold-trim border border-accent-gold font-semibold gold-glow">
                 {userStatus?.isPremium ? "Pro Plan" : `Free Plan (${userStatus?.botCount || 0}/3 bots)`}
               </Badge>
             </div>
             <div className="flex items-center space-x-4">
               <Button 
                 onClick={() => window.location.href = "/checkout"}
-                className="bg-accent-gold text-primary-black font-semibold gold-glow-hover"
+                className="bg-rich-brown text-gold-trim border border-accent-gold font-semibold gold-glow-hover hover:bg-accent-gold hover:text-primary-black"
               >
                 <Crown className="w-4 h-4 mr-2" />
                 Upgrade Pro
