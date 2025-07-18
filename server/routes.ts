@@ -356,6 +356,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const paymentIntent = await stripe.paymentIntents.create({
         amount: Math.round(amount * 100), // Convert to cents
         currency: "usd",
+        automatic_payment_methods: {
+          enabled: true,
+        },
       });
       res.json({ clientSecret: paymentIntent.client_secret });
     } catch (error: any) {
@@ -368,6 +371,139 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const userId = 1; // Mock user ID
       await storage.updateUserPremiumStatus(userId, true);
       res.json({ success: true, message: "Account upgraded to premium" });
+    } catch (error: any) {
+      res.status(500).json({ message: error.message });
+    }
+  });
+
+  // Create subscription endpoint
+  app.post("/api/create-subscription", async (req, res) => {
+    if (!stripe) {
+      return res.status(500).json({ message: "Stripe not configured" });
+    }
+
+    try {
+      const userId = 1; // Mock user ID
+      let user = await storage.getUser(userId);
+      
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+
+      // Check if user already has a subscription
+      if (user.stripeSubscriptionId) {
+        const subscription = await stripe.subscriptions.retrieve(user.stripeSubscriptionId);
+        
+        if (subscription.status === 'active') {
+          return res.json({
+            subscriptionId: subscription.id,
+            clientSecret: subscription.latest_invoice?.payment_intent?.client_secret,
+            status: 'already_subscribed'
+          });
+        }
+      }
+
+      // Create Stripe customer if not exists
+      let stripeCustomerId = user.stripeCustomerId;
+      if (!stripeCustomerId) {
+        const customer = await stripe.customers.create({
+          email: user.email || `user${userId}@smartflowai.com`,
+          name: user.username,
+          metadata: {
+            userId: userId.toString(),
+          },
+        });
+        stripeCustomerId = customer.id;
+        user = await storage.updateUserStripeInfo(userId, stripeCustomerId, "");
+      }
+
+      // Create subscription
+      const subscription = await stripe.subscriptions.create({
+        customer: stripeCustomerId,
+        items: [{
+          price_data: {
+            currency: 'usd',
+            product_data: {
+              name: 'SmartFlow AI Pro Plan',
+              description: 'Unlimited bots, premium features, and advanced analytics',
+            },
+            unit_amount: 4900, // $49.00
+            recurring: {
+              interval: 'month',
+            },
+          },
+        }],
+        payment_behavior: 'default_incomplete',
+        payment_settings: {
+          save_default_payment_method: 'on_subscription',
+        },
+        expand: ['latest_invoice.payment_intent'],
+      });
+
+      // Update user with subscription ID
+      await storage.updateUserStripeInfo(userId, stripeCustomerId, subscription.id);
+
+      res.json({
+        subscriptionId: subscription.id,
+        clientSecret: subscription.latest_invoice?.payment_intent?.client_secret,
+      });
+    } catch (error: any) {
+      console.error('Subscription creation error:', error);
+      res.status(400).json({ message: error.message });
+    }
+  });
+
+  // Get subscription status
+  app.get("/api/subscription-status", async (req, res) => {
+    if (!stripe) {
+      return res.status(500).json({ message: "Stripe not configured" });
+    }
+
+    try {
+      const userId = 1; // Mock user ID
+      const user = await storage.getUser(userId);
+      
+      if (!user || !user.stripeSubscriptionId) {
+        return res.json({ status: 'no_subscription', isPremium: user?.isPremium || false });
+      }
+
+      const subscription = await stripe.subscriptions.retrieve(user.stripeSubscriptionId);
+      
+      res.json({
+        status: subscription.status,
+        isPremium: user.isPremium,
+        subscriptionId: subscription.id,
+        currentPeriodEnd: subscription.current_period_end,
+        cancelAtPeriodEnd: subscription.cancel_at_period_end,
+      });
+    } catch (error: any) {
+      res.status(500).json({ message: error.message });
+    }
+  });
+
+  // Cancel subscription
+  app.post("/api/cancel-subscription", async (req, res) => {
+    if (!stripe) {
+      return res.status(500).json({ message: "Stripe not configured" });
+    }
+
+    try {
+      const userId = 1; // Mock user ID
+      const user = await storage.getUser(userId);
+      
+      if (!user || !user.stripeSubscriptionId) {
+        return res.status(404).json({ message: "No active subscription found" });
+      }
+
+      const subscription = await stripe.subscriptions.update(user.stripeSubscriptionId, {
+        cancel_at_period_end: true,
+      });
+
+      res.json({
+        message: "Subscription will be cancelled at the end of the billing period",
+        cancelAtPeriodEnd: subscription.cancel_at_period_end,
+        currentPeriodEnd: subscription.current_period_end,
+      });
     } catch (error: any) {
       res.status(500).json({ message: error.message });
     }

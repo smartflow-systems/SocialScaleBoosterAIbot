@@ -16,12 +16,36 @@ import SchedulerInterface from "@/components/scheduling/scheduler-interface";
 import PersonalityDesigner from "@/components/personality/personality-designer";
 import IntegrationWizard from "@/components/integrations/integration-wizard";
 import EnhancedMarketplace from "@/components/marketplace/enhanced-marketplace";
+import UpgradeCard from "@/components/subscription/upgrade-card";
+import SubscriptionStatus from "@/components/subscription/subscription-status";
+import PaymentSuccess from "@/components/subscription/payment-success";
 import { analyticsService } from "@/services/analytics";
 
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState("bots");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [successType, setSuccessType] = useState<"subscription" | "payment">("subscription");
+
+  // Check for success parameters
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const upgradeSuccess = urlParams.get('upgrade');
+    const paymentSuccess = urlParams.get('payment');
+    
+    if (upgradeSuccess === 'success') {
+      setSuccessType('subscription');
+      setShowSuccess(true);
+      // Clean up URL
+      window.history.replaceState({}, '', '/dashboard');
+    } else if (paymentSuccess === 'success') {
+      setSuccessType('payment');
+      setShowSuccess(true);
+      // Clean up URL
+      window.history.replaceState({}, '', '/dashboard');
+    }
+  }, []);
 
   const { data: userStatus } = useQuery({
     queryKey: ["/api/user/status"],
@@ -53,6 +77,16 @@ export default function Dashboard() {
     return matchesCategory && matchesSearch;
   });
 
+  // Show success modal if needed
+  if (showSuccess) {
+    return (
+      <PaymentSuccess 
+        type={successType}
+        onContinue={() => setShowSuccess(false)}
+      />
+    );
+  }
+
   return (
     <div className="min-h-screen bg-dark-bg">
       {/* Dashboard Header */}
@@ -68,7 +102,7 @@ export default function Dashboard() {
             </div>
             <div className="flex items-center space-x-4">
               <Button 
-                onClick={() => window.location.href = "/checkout"}
+                onClick={() => window.location.href = "/subscribe"}
                 className="bg-rich-brown text-gold-trim border border-accent-gold font-semibold gold-glow-hover hover:bg-accent-gold hover:text-primary-black"
               >
                 <Crown className="w-4 h-4 mr-2" />
@@ -153,7 +187,7 @@ export default function Dashboard() {
                         <h3 className="text-xl font-bold mb-2">Create More Bots</h3>
                         <p className="mb-4 text-sm opacity-90">Upgrade to Pro for unlimited bot creation</p>
                         <Button 
-                          onClick={() => window.location.href = "/checkout"}
+                          onClick={() => window.location.href = "/subscribe"}
                           className="bg-primary-black text-accent-gold hover:bg-secondary-brown"
                         >
                           Unlock Now
@@ -161,6 +195,12 @@ export default function Dashboard() {
                       </div>
                     </div>
                   )}
+                </div>
+
+                {/* Subscription Cards */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
+                  <UpgradeCard />
+                  <SubscriptionStatus />
                 </div>
               </TabsContent>
 
