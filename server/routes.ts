@@ -417,19 +417,22 @@ export async function registerRoutes(app: Express): Promise<Server> {
         user = await storage.updateUserStripeInfo(userId, stripeCustomerId, "");
       }
 
+      // Create a price first
+      const price = await stripe.prices.create({
+        unit_amount: 4900, // $49.00
+        currency: 'usd',
+        recurring: { interval: 'month' },
+        product_data: {
+          name: 'SmartFlow AI Pro',
+        },
+      });
+
       // Create subscription
       const subscription = await stripe.subscriptions.create({
         customer: stripeCustomerId,
-        line_items: [
+        items: [
           {
-            price_data: {
-              currency: 'usd',
-              product: 'SmartFlow AI Pro',
-              unit_amount: 4900, // $49.00
-              recurring: {
-                interval: 'month',
-              },
-            },
+            price: price.id,
             quantity: 1,
           },
         ],
