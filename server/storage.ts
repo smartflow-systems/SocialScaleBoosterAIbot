@@ -17,6 +17,7 @@ export interface IStorage {
   getBot(id: number): Promise<Bot | undefined>;
   createBot(bot: InsertBot): Promise<Bot>;
   updateBot(id: number, updates: Partial<Bot>): Promise<Bot>;
+  updateBotStatus(id: number, status: string): Promise<Bot>;
   deleteBot(id: number): Promise<void>;
 
   // Bot Template methods
@@ -107,6 +108,11 @@ export class DatabaseStorage implements IStorage {
       .set(updates)
       .where(eq(bots.id, id))
       .returning();
+    return bot;
+  }
+
+  async updateBotStatus(id: number, status: string): Promise<Bot> {
+    const [bot] = await db.update(bots).set({ status }).where(eq(bots.id, id)).returning();
     return bot;
   }
 
@@ -421,6 +427,14 @@ export class MemStorage implements IStorage {
     const bot = this.bots.get(id);
     if (!bot) throw new Error("Bot not found");
     const updatedBot = { ...bot, ...updates };
+    this.bots.set(id, updatedBot);
+    return updatedBot;
+  }
+
+  async updateBotStatus(id: number, status: string): Promise<Bot> {
+    const bot = this.bots.get(id);
+    if (!bot) throw new Error("Bot not found");
+    const updatedBot = { ...bot, status };
     this.bots.set(id, updatedBot);
     return updatedBot;
   }

@@ -6,6 +6,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Crown, Bot, BarChart3, Store, File, Search, Calendar, Users, Zap, Settings } from "lucide-react";
 import BotCard from "@/components/bots/bot-card";
 import CreateBotDialog from "@/components/bots/create-bot-dialog";
+import BotStatsDialog from "@/components/bots/bot-stats-dialog";
 import TemplateCard from "@/components/marketplace/template-card";
 import AnalyticsCharts from "@/components/analytics/charts";
 import CategoryFilter from "@/components/marketplace/category-filter";

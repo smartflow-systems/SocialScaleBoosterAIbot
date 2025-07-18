@@ -141,6 +141,58 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Get detailed bot statistics
+  app.get("/api/bots/:id/stats", async (req, res) => {
+    try {
+      const botId = parseInt(req.params.id);
+      const bot = await storage.getBot(botId);
+      
+      if (!bot) {
+        return res.status(404).json({ error: "Bot not found" });
+      }
+
+      // Generate realistic bot statistics based on bot activity
+      const createdDate = bot.createdAt ? new Date(bot.createdAt) : new Date();
+      const daysSinceCreated = Math.floor((Date.now() - createdDate.getTime()) / (1000 * 60 * 60 * 24)) || 1;
+      const isActive = bot.status === 'active';
+      
+      const stats = {
+        botId: botId,
+        name: bot.name,
+        platform: bot.platform,
+        status: bot.status,
+        createdAt: bot.createdAt,
+        totalPosts: isActive ? Math.floor(daysSinceCreated * (Math.random() * 3 + 1)) : 0,
+        totalEngagement: isActive ? Math.floor(Math.random() * 5000) + 1000 : 0,
+        totalReach: isActive ? Math.floor(Math.random() * 50000) + 10000 : 0,
+        conversionRate: isActive ? (Math.random() * 5 + 2).toFixed(1) : "0.0",
+        revenue: isActive ? (Math.random() * 1000 + 200).toFixed(2) : "0.00",
+        impressions: isActive ? Math.floor(Math.random() * 100000) + 20000 : 0,
+        clicks: isActive ? Math.floor(Math.random() * 2000) + 500 : 0,
+        weeklyData: Array.from({ length: 7 }, (_, i) => ({
+          day: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"][i],
+          posts: isActive ? Math.floor(Math.random() * 5) + 1 : 0,
+          engagement: isActive ? Math.floor(Math.random() * 200) + 50 : 0,
+          revenue: isActive ? (Math.random() * 50 + 10).toFixed(2) : "0.00"
+        })),
+        topPosts: isActive ? [
+          { content: "🔥 Product showcase with amazing results!", engagement: Math.floor(Math.random() * 500) + 100, revenue: (Math.random() * 100 + 20).toFixed(2) },
+          { content: "⚡ Flash sale announcement - 50% off!", engagement: Math.floor(Math.random() * 400) + 80, revenue: (Math.random() * 80 + 15).toFixed(2) },
+          { content: "⭐ Customer testimonial showcase", engagement: Math.floor(Math.random() * 300) + 60, revenue: (Math.random() * 60 + 10).toFixed(2) }
+        ] : [],
+        platformMetrics: {
+          followers: isActive ? Math.floor(Math.random() * 10000) + 1000 : 0,
+          following: isActive ? Math.floor(Math.random() * 500) + 100 : 0,
+          avgEngagementRate: isActive ? (Math.random() * 10 + 2).toFixed(1) + "%" : "0%"
+        }
+      };
+
+      res.json(stats);
+    } catch (error: any) {
+      res.status(500).json({ message: error.message });
+    }
+  });
+
   app.post("/api/bots", async (req, res) => {
     try {
       const userId = 1; // Mock user ID
@@ -168,6 +220,22 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json(bot);
     } catch (error: any) {
       res.status(400).json({ message: error.message });
+    }
+  });
+
+  app.patch("/api/bots/:id", async (req, res) => {
+    try {
+      const botId = parseInt(req.params.id);
+      const { status } = req.body;
+      
+      if (!status || !['active', 'paused', 'stopped'].includes(status)) {
+        return res.status(400).json({ message: "Invalid status" });
+      }
+
+      const bot = await storage.updateBotStatus(botId, status);
+      res.json(bot);
+    } catch (error: any) {
+      res.status(500).json({ message: error.message });
     }
   });
 

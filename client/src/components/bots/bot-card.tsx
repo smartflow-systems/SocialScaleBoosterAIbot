@@ -1,14 +1,41 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ShoppingBag, Instagram, Edit, BarChart3 } from "lucide-react";
+import { ShoppingBag, Instagram, Edit, BarChart3, Play, Pause, Square } from "lucide-react";
 import { Bot } from "@shared/schema";
+import BotStatsDialog from "./bot-stats-dialog";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { apiRequest } from "@/lib/queryClient";
+import { useToast } from "@/hooks/use-toast";
 
 interface BotCardProps {
   bot: Bot;
 }
 
 export default function BotCard({ bot }: BotCardProps) {
+  const { toast } = useToast();
+  const queryClient = useQueryClient();
+
+  const updateStatusMutation = useMutation({
+    mutationFn: async (newStatus: string) => {
+      return apiRequest("PATCH", `/api/bots/${bot.id}`, { status: newStatus });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/bots"] });
+      toast({
+        title: "Bot Updated",
+        description: `Bot status changed to ${bot.status}`,
+      });
+    },
+    onError: () => {
+      toast({
+        title: "Error",
+        description: "Failed to update bot status",
+        variant: "destructive",
+      });
+    },
+  });
+
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'active': return 'bg-green-500';
@@ -16,6 +43,11 @@ export default function BotCard({ bot }: BotCardProps) {
       case 'stopped': return 'bg-red-500';
       default: return 'bg-gray-500';
     }
+  };
+
+  const handleStatusToggle = () => {
+    const newStatus = bot.status === 'active' ? 'paused' : 'active';
+    updateStatusMutation.mutate(newStatus);
   };
 
   const getPlatformIcon = (platform: string) => {
@@ -48,15 +80,44 @@ export default function BotCard({ bot }: BotCardProps) {
           <span className="text-green-400 font-semibold">+{metrics.engagement}% engagement</span>
         </div>
         
+        <div className="flex space-x-2 mb-4">
+          <Button 
+            onClick={handleStatusToggle}
+            disabled={updateStatusMutation.isPending}
+            className={`flex-1 ${bot.status === 'active' ? 'bg-yellow-600 hover:bg-yellow-700' : 'bg-green-600 hover:bg-green-700'} text-white transition-colors`}
+          >
+            {bot.status === 'active' ? (
+              <>
+                <Pause className="w-4 h-4 mr-1" />
+                Pause
+              </>
+            ) : (
+              <>
+                <Play className="w-4 h-4 mr-1" />
+                Start
+              </>
+            )}
+          </Button>
+          <Button 
+            onClick={() => updateStatusMutation.mutate('stopped')}
+            disabled={updateStatusMutation.isPending}
+            className="bg-red-600 hover:bg-red-700 text-white"
+          >
+            <Square className="w-4 h-4" />
+          </Button>
+        </div>
+
         <div className="flex space-x-2">
           <Button className="flex-1 bg-secondary-brown text-accent-gold hover:bg-accent-gold hover:text-primary-black transition-colors">
             <Edit className="w-4 h-4 mr-1" />
             Edit
           </Button>
-          <Button className="flex-1 bg-accent-gold text-primary-black hover:opacity-90 transition-opacity">
-            <BarChart3 className="w-4 h-4 mr-1" />
-            Stats
-          </Button>
+          <BotStatsDialog botId={bot.id}>
+            <Button className="flex-1 bg-accent-gold text-primary-black hover:opacity-90 transition-opacity">
+              <BarChart3 className="w-4 h-4 mr-1" />
+              Stats
+            </Button>
+          </BotStatsDialog>
         </div>
       </CardContent>
     </Card>
