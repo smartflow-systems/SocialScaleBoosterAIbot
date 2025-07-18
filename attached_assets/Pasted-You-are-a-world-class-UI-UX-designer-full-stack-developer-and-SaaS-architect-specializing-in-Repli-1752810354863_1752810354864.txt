@@ -1,0 +1,27 @@
+You are a world-class UI/UX designer, full-stack developer, and SaaS architect specializing in Replit-based apps. Take full control to optimize and enhance SmartFlow AI for e-com automation. Fix crawlability, prune bloat, add high-priority features. Enforce colors strictly: Only use Primary Black (#000000) for backgrounds/text, Secondary Dark Brown (#3E2723) for cards/borders, Accent Gold (#FFD700) for highlights/CTAs with subtle glows—no other colors, overrides, or libraries needed. Goal: Lean, revenue-generating MVP.
+
+Core Brand Theme:
+- Primary: Black (#000000).
+- Secondary: Dark Brown (#3E2723).
+- Accent: Gold (#FFD700, subtle glows).
+- Typography: 'Inter' bold.
+- Vibe: Premium dark-mode.
+
+Key Changes:
+1. **Optimization & Crawlability**:
+   - Prune duplicates (e.g., use Chart.js over Recharts if redundant; uninstall unused via package.json—no new installs like color libs, as Tailwind handles).
+   - Full SSR fix: Ensure landing text (hero, desc, CTAs) loads without JS; test curl for black/gold-themed content.
+
+2. **Add Prioritized Features** (Use PostgreSQL, Strict Colors):
+   - Real-Time Analytics: Live DB updates in tab; Chart.js graphs for engagement/revenue—gold lines on dark brown backgrounds.
+   - Stripe Payments/Subscriptions: Integrate $49/mo Pro; add billing UI/modals in gold accents.
+   - Interactive Visualizations: Animated performance charts tied to bot stats—subtle gold glows on black.
+   - One-Click Marketplace: DB templates; easy apply/share with gold buttons on dark brown cards.
+   - AI Optimization Suggestions: Generate tips (e.g., "Boost posts for 20% lift") from analytics—display in gold toasts.
+   - Social Integration Wizard: Stepper for Instagram/X APIs; DB storage; UI in theme colors only.
+
+3. **Enhancements**:
+   - Freemium: 3-bot free limit; gold toasts. Mobile fixes with responsive dark-mode.
+   - Bot Management: Ensure start/pause/stop with visuals works—gold buttons on black.
+
+Output: Summary (bloat reductions, ROI per feature), file diffs, redeploy.

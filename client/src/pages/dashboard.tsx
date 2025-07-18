@@ -16,6 +16,9 @@ import SchedulerInterface from "@/components/scheduling/scheduler-interface";
 import PersonalityDesigner from "@/components/personality/personality-designer";
 import IntegrationWizard from "@/components/integrations/integration-wizard";
 import EnhancedMarketplace from "@/components/marketplace/enhanced-marketplace";
+import RealTimeDashboard from "@/components/analytics/real-time-dashboard";
+import StripeCheckout from "@/components/billing/stripe-checkout";
+import SocialIntegrationWizard from "@/components/integrations/social-integration-wizard";
 import { analyticsService } from "@/services/analytics";
 
 export default function Dashboard() {
@@ -165,7 +168,13 @@ export default function Dashboard() {
               </TabsContent>
 
               <TabsContent value="analytics" className="mt-0">
-                <h2 className="text-3xl font-bold mb-8">Advanced Analytics & ROI</h2>
+                <div className="flex justify-between items-center mb-8">
+                  <h2 className="text-3xl font-bold text-accent-gold">Real-Time Analytics</h2>
+                  <Badge className="bg-accent-gold text-primary-black px-3 py-1 font-bold pulse-gold">
+                    LIVE DATA
+                  </Badge>
+                </div>
+                <RealTimeDashboard />
                 <AdvancedMetrics metrics={analyticsMetrics} />
               </TabsContent>
 
@@ -287,8 +296,13 @@ export default function Dashboard() {
               </TabsContent>
 
               <TabsContent value="integrations" className="mt-0">
-                <h2 className="text-3xl font-bold mb-8">Platform Integrations</h2>
-                <IntegrationWizard />
+                <div className="flex justify-between items-center mb-8">
+                  <h2 className="text-3xl font-bold text-accent-gold">Social Media Integrations</h2>
+                  <Badge className="bg-accent-gold text-primary-black px-3 py-1 font-bold">
+                    Secure API Management
+                  </Badge>
+                </div>
+                <SocialIntegrationWizard />
               </TabsContent>
             </div>
           </Tabs>

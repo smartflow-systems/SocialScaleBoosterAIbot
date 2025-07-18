@@ -3,59 +3,55 @@
 @tailwind utilities;
 
 :root {
-  --background: hsl(0, 0%, 0%);
-  --foreground: hsl(0, 0%, 100%);
-  --muted: hsl(25, 8%, 15%);
-  --muted-foreground: hsl(0, 0%, 50.2%);
-  --popover: hsl(25, 8%, 6%);
-  --popover-foreground: hsl(0, 0%, 100%);
-  --card: hsl(25, 8%, 10%);
-  --card-foreground: hsl(0, 0%, 100%);
-  --border: hsl(25, 8%, 14%);
-  --input: hsl(25, 8%, 14%);
-  --primary: hsl(43, 70%, 52%);
-  --primary-foreground: hsl(0, 0%, 0%);
-  --secondary: hsl(25, 40%, 12%);
-  --secondary-foreground: hsl(0, 0%, 100%);
-  --accent: hsl(43, 70%, 52%);
-  --accent-foreground: hsl(0, 0%, 0%);
-  --destructive: hsl(0, 84.2%, 60.2%);
-  --destructive-foreground: hsl(60, 9.1%, 97.8%);
-  --ring: hsl(43, 70%, 52%);
+  /* STRICT COLOR ENFORCEMENT - Only Primary Black, Secondary Dark Brown, Accent Gold */
+  --background: #000000;
+  --foreground: #FFFFFF;
+  --muted: #3E2723;
+  --muted-foreground: #808080;
+  --popover: #000000;
+  --popover-foreground: #FFFFFF;
+  --card: #3E2723;
+  --card-foreground: #FFFFFF;
+  --border: #3E2723;
+  --input: #3E2723;
+  --primary: #FFD700;
+  --primary-foreground: #000000;
+  --secondary: #3E2723;
+  --secondary-foreground: #FFFFFF;
+  --accent: #FFD700;
+  --accent-foreground: #000000;
+  --destructive: #FF4444;
+  --destructive-foreground: #FFFFFF;
+  --ring: #FFD700;
   --radius: 0.5rem;
 
-  /* Custom SmartFlow AI colors - Brown with Gold Trim */
-  --primary-black: hsl(0, 0%, 0%);
-  --secondary-brown: hsl(25, 40%, 12%);
-  --rich-brown: hsl(25, 30%, 25%);
-  --dark-brown: hsl(25, 20%, 8%);
-  --accent-gold: hsl(43, 70%, 52%);
-  --gold-trim: hsl(51, 100%, 65%);
-  --neutral-gray: hsl(0, 0%, 50%);
-  --dark-bg: hsl(25, 20%, 4%);
-  --card-bg: hsl(25, 25%, 10%);
+  /* Core Brand Colors - STRICT ENFORCEMENT */
+  --primary-black: #000000;
+  --secondary-dark-brown: #3E2723;
+  --accent-gold: #FFD700;
 }
 
 .dark {
-  --background: hsl(0, 0%, 0%);
-  --foreground: hsl(0, 0%, 100%);
-  --muted: hsl(25, 8%, 15%);
-  --muted-foreground: hsl(0, 0%, 50.2%);
-  --popover: hsl(25, 8%, 6%);
-  --popover-foreground: hsl(0, 0%, 100%);
-  --card: hsl(25, 8%, 10%);
-  --card-foreground: hsl(0, 0%, 100%);
-  --border: hsl(25, 8%, 14%);
-  --input: hsl(25, 8%, 14%);
-  --primary: hsl(43, 70%, 52%);
-  --primary-foreground: hsl(0, 0%, 0%);
-  --secondary: hsl(25, 40%, 12%);
-  --secondary-foreground: hsl(0, 0%, 100%);
-  --accent: hsl(43, 70%, 52%);
-  --accent-foreground: hsl(0, 0%, 0%);
-  --destructive: hsl(0, 62.8%, 30.6%);
-  --destructive-foreground: hsl(0, 0%, 98%);
-  --ring: hsl(43, 70%, 52%);
+  /* DARK MODE - Same strict colors */
+  --background: #000000;
+  --foreground: #FFFFFF;
+  --muted: #3E2723;
+  --muted-foreground: #808080;
+  --popover: #000000;
+  --popover-foreground: #FFFFFF;
+  --card: #3E2723;
+  --card-foreground: #FFFFFF;
+  --border: #3E2723;
+  --input: #3E2723;
+  --primary: #FFD700;
+  --primary-foreground: #000000;
+  --secondary: #3E2723;
+  --secondary-foreground: #FFFFFF;
+  --accent: #FFD700;
+  --accent-foreground: #000000;
+  --destructive: #FF4444;
+  --destructive-foreground: #FFFFFF;
+  --ring: #FFD700;
 }
 
 @layer base {
@@ -70,6 +66,9 @@
 }
 
 @layer utilities {
+  /* STRICT COLOR UTILITIES - Only Black (#000000), Dark Brown (#3E2723), Gold (#FFD700) */
+  
+  /* Gold glow effects */
   .gold-glow {
     box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
   }
@@ -77,94 +76,68 @@
   .gold-glow-hover:hover {
     box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
   }
-  
-  .glass-effect {
-    backdrop-filter: blur(10px);
-    background: rgba(26, 26, 26, 0.8);
-  }
 
-  .text-accent-gold {
-    color: var(--accent-gold);
-  }
+  /* Primary Black utilities */
+  .bg-primary-black { background-color: #000000; }
+  .text-primary-black { color: #000000; }
+  .border-primary-black { border-color: #000000; }
 
-  .bg-accent-gold {
-    background-color: var(--accent-gold);
-  }
+  /* Secondary Dark Brown utilities */
+  .bg-secondary-brown { background-color: #3E2723; }
+  .text-secondary-brown { color: #3E2723; }
+  .border-secondary-brown { border-color: #3E2723; }
 
-  .border-accent-gold {
-    border-color: var(--accent-gold);
-  }
+  /* Accent Gold utilities */
+  .bg-accent-gold { background-color: #FFD700; }
+  .text-accent-gold { color: #FFD700; }
+  .border-accent-gold { border-color: #FFD700; }
 
-  .bg-primary-black {
-    background-color: var(--primary-black);
-  }
+  /* White text utility */
+  .text-white { color: #FFFFFF; }
 
-  .bg-secondary-brown {
-    background-color: var(--secondary-brown);
-  }
+  /* Subtle gray for secondary text only */
+  .text-gray { color: #808080; }
 
-  .bg-rich-brown {
-    background-color: var(--rich-brown);
-  }
-
-  .bg-dark-brown {
-    background-color: var(--dark-brown);
-  }
-
-  .text-gold-trim {
-    color: var(--gold-trim);
-  }
-
-  .border-gold-trim {
-    border-color: var(--gold-trim);
-  }
-
-  .bg-gold-trim {
-    background-color: var(--gold-trim);
-  }
-
-  .text-neutral-gray {
-    color: var(--neutral-gray);
-  }
-
-  .bg-dark-bg {
-    background-color: var(--dark-bg);
-  }
-
-  .bg-card-bg {
-    background-color: var(--card-bg);
-  }
-
-  /* Premium animations */
+  /* Premium animations with strict colors */
   @keyframes shimmer {
     0% { background-position: -200% 0; }
     100% { background-position: 200% 0; }
   }
 
-  .shimmer-effect {
+  .shimmer-gold {
     background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.4), transparent);
     background-size: 200% 100%;
     animation: shimmer 2s infinite;
   }
 
-  /* Chart styling */
+  /* Chart styling - Gold only */
   .chart-gold {
     --chart-color: #FFD700;
   }
 
-  /* Enhanced glow effects */
+  /* Premium glow effects */
   .premium-glow {
     box-shadow: 0 0 20px rgba(255, 215, 0, 0.4), 0 0 40px rgba(255, 215, 0, 0.2);
   }
 
-  /* Mobile tab responsiveness */
+  /* Real-time pulse animation for live data */
+  @keyframes pulse-gold {
+    0%, 100% { box-shadow: 0 0 10px rgba(255, 215, 0, 0.3); }
+    50% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.6); }
+  }
+
+  .pulse-gold {
+    animation: pulse-gold 2s infinite;
+  }
+
+  /* Mobile responsiveness */
   @media (max-width: 768px) {
-    .tab-scroll {
+    .mobile-scroll {
       overflow-x: auto;
       scrollbar-width: none;
       -ms-overflow-style: none;
     }
-    .tab-scroll::-webkit-scrollbar {
+    .mobile-scroll::-webkit-scrollbar {
       display: none;
     }
   }
