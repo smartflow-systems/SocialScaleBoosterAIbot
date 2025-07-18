@@ -19,9 +19,9 @@ export default function Navigation() {
             <a href="#marketplace" className="text-neutral-gray hover:text-accent-gold transition-colors">Marketplace</a>
             <Button 
               onClick={() => setLocation("/dashboard")}
-              className="bg-accent-gold text-primary-black font-semibold hover:shadow-lg gold-glow-hover transition-all"
+              className="bg-rich-brown text-gold-trim border border-accent-gold font-semibold hover:bg-accent-gold hover:text-primary-black transition-all"
             >
-              Sign In
+              Dashboard
             </Button>
           </div>
           <div className="md:hidden">
