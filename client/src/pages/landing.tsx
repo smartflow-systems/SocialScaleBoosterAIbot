@@ -169,7 +169,7 @@ export default function Landing() {
               <CardContent className="p-8 text-center">
                 <h3 className="text-2xl font-bold mb-4 text-primary-black">Pro Plan</h3>
                 <div className="mb-6">
-                  <span className="text-4xl font-bold text-primary-black">$49</span>
+                  <span className="text-4xl font-bold text-primary-black">£49</span>
                   <span className="text-primary-black/80">/month</span>
                 </div>
                 <ul className="text-left space-y-3 mb-8 text-primary-black">
