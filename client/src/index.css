@@ -142,6 +142,31 @@
     color: var(--primary-black) !important;
   }
 
+  /* Mobile navigation improvements */
+  @media (max-width: 640px) {
+    .overflow-x-auto {
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none; /* Internet Explorer 10+ */
+    }
+    
+    .overflow-x-auto::-webkit-scrollbar { /* WebKit */
+      display: none;
+    }
+  }
+
+  /* Ensure tabs don't wrap on mobile */
+  [role="tablist"] {
+    flex-wrap: nowrap;
+    min-width: max-content;
+  }
+
+  @media (max-width: 640px) {
+    [role="tablist"] {
+      gap: 0.5rem;
+      padding-bottom: 0.5rem;
+    }
+  }
+
   .text-neutral-gray {
     color: var(--neutral-gray);
   }
