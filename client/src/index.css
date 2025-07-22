@@ -152,28 +152,35 @@
     display: none;
   }
 
-  /* Mobile navigation layout fixes */
+  /* Mobile navigation grid layout */
   @media (max-width: 640px) {
     [role="tablist"] {
-      flex-wrap: nowrap !important;
-      min-width: max-content !important;
-      padding-left: 0.25rem;
-      padding-right: 0.25rem;
+      display: grid !important;
+      grid-template-columns: repeat(3, 1fr) !important;
+      grid-template-rows: repeat(2, 1fr) !important;
+      gap: 0.25rem !important;
+      width: 100% !important;
+      min-height: 120px !important;
     }
 
-    /* Ensure tabs have minimum spacing */
+    /* Mobile tab styling */
     [role="tab"] {
-      min-width: fit-content !important;
-      flex-shrink: 0 !important;
+      min-height: 60px !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      justify-content: center !important;
+      padding: 0.5rem 0.25rem !important;
       font-size: 0.75rem !important;
+      line-height: 1 !important;
     }
   }
 
-  /* Fix mobile container overflow */
-  @media (max-width: 640px) {
-    .max-w-7xl {
-      padding-left: 0.5rem;
-      padding-right: 0.5rem;
+  /* Desktop and tablet layout */
+  @media (min-width: 641px) {
+    [role="tablist"] {
+      display: flex !important;
+      gap: 2rem !important;
     }
   }
 

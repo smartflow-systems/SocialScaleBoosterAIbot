@@ -122,55 +122,58 @@ export default function Dashboard() {
       </header>
 
       {/* Tab Navigation */}
-      <div className="bg-card-bg border-b border-secondary-brown overflow-hidden">
+      <div className="bg-card-bg border-b border-secondary-brown">
         <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <div className="overflow-x-auto scrollbar-hide">
-              <TabsList className="bg-transparent h-auto p-0 flex gap-1 sm:gap-2 lg:gap-6 justify-start items-center min-w-max pb-0">
-                <TabsTrigger 
-                  value="bots" 
-                  className="data-[state=active]:border-b-2 data-[state=active]:border-accent-gold data-[state=active]:text-accent-gold text-neutral-gray py-3 px-1.5 sm:px-3 font-semibold rounded-none bg-transparent text-xs sm:text-base whitespace-nowrap flex-shrink-0 min-w-fit"
-                >
-                  <Bot className="w-4 h-4 mr-1 sm:mr-2" />
-                  <span className="hidden sm:inline">My </span>Bots
-                </TabsTrigger>
-                <TabsTrigger 
-                  value="analytics" 
-                  className="data-[state=active]:border-b-2 data-[state=active]:border-accent-gold data-[state=active]:text-accent-gold text-neutral-gray py-3 px-1.5 sm:px-3 font-semibold rounded-none bg-transparent text-xs sm:text-base whitespace-nowrap flex-shrink-0 min-w-fit"
-                >
-                  <BarChart3 className="w-4 h-4 mr-1 sm:mr-2" />
-                  Analytics
-                </TabsTrigger>
-                <TabsTrigger 
-                  value="marketplace" 
-                  className="data-[state=active]:border-b-2 data-[state=active]:border-accent-gold data-[state=active]:text-accent-gold text-neutral-gray py-3 px-1.5 sm:px-3 font-semibold rounded-none bg-transparent text-xs sm:text-base whitespace-nowrap flex-shrink-0 min-w-fit"
-                >
-                  <Store className="w-4 h-4 mr-1 sm:mr-2" />
-                  <span className="hidden sm:inline">Marketplace</span><span className="sm:hidden">Store</span>
-                </TabsTrigger>
-                <TabsTrigger 
-                  value="scheduling" 
-                  className="data-[state=active]:border-b-2 data-[state=active]:border-accent-gold data-[state=active]:text-accent-gold text-neutral-gray py-3 px-1.5 sm:px-3 font-semibold rounded-none bg-transparent text-xs sm:text-base whitespace-nowrap flex-shrink-0 min-w-fit"
-                >
-                  <Calendar className="w-4 h-4 mr-1 sm:mr-2" />
-                  <span className="hidden sm:inline">Scheduling</span><span className="sm:hidden">Schedule</span>
-                </TabsTrigger>
-                <TabsTrigger 
-                  value="personality" 
-                  className="data-[state=active]:border-b-2 data-[state=active]:border-accent-gold data-[state=active]:text-accent-gold text-neutral-gray py-3 px-1.5 sm:px-3 font-semibold rounded-none bg-transparent text-xs sm:text-base whitespace-nowrap flex-shrink-0 min-w-fit"
-                >
-                  <Users className="w-4 h-4 mr-1 sm:mr-2" />
-                  <span className="hidden sm:inline">Personality</span><span className="sm:hidden">Profile</span>
-                </TabsTrigger>
-                <TabsTrigger 
-                  value="integrations" 
-                  className="data-[state=active]:border-b-2 data-[state=active]:border-accent-gold data-[state=active]:text-accent-gold text-neutral-gray py-3 px-1.5 sm:px-3 font-semibold rounded-none bg-transparent text-xs sm:text-base whitespace-nowrap flex-shrink-0 min-w-fit"
-                >
-                  <Zap className="w-4 h-4 mr-1 sm:mr-2" />
-                  <span className="hidden sm:inline">Integrations</span><span className="sm:hidden">Connect</span>
-                </TabsTrigger>
-              </TabsList>
-            </div>
+            <TabsList className="bg-transparent h-auto p-2 grid grid-cols-3 sm:flex sm:gap-4 lg:gap-8 w-full">
+              <TabsTrigger 
+                value="bots" 
+                className="data-[state=active]:border-b-2 data-[state=active]:border-accent-gold data-[state=active]:text-accent-gold text-neutral-gray py-3 px-1 sm:px-3 font-semibold rounded-none bg-transparent text-xs sm:text-base flex flex-col sm:flex-row items-center justify-center"
+              >
+                <Bot className="w-4 h-4 mb-1 sm:mb-0 sm:mr-2" />
+                <span className="sm:hidden">Bots</span>
+                <span className="hidden sm:inline">My Bots</span>
+              </TabsTrigger>
+              <TabsTrigger 
+                value="analytics" 
+                className="data-[state=active]:border-b-2 data-[state=active]:border-accent-gold data-[state=active]:text-accent-gold text-neutral-gray py-3 px-1 sm:px-3 font-semibold rounded-none bg-transparent text-xs sm:text-base flex flex-col sm:flex-row items-center justify-center"
+              >
+                <BarChart3 className="w-4 h-4 mb-1 sm:mb-0 sm:mr-2" />
+                Analytics
+              </TabsTrigger>
+              <TabsTrigger 
+                value="marketplace" 
+                className="data-[state=active]:border-b-2 data-[state=active]:border-accent-gold data-[state=active]:text-accent-gold text-neutral-gray py-3 px-1 sm:px-3 font-semibold rounded-none bg-transparent text-xs sm:text-base flex flex-col sm:flex-row items-center justify-center"
+              >
+                <Store className="w-4 h-4 mb-1 sm:mb-0 sm:mr-2" />
+                <span className="sm:hidden">Store</span>
+                <span className="hidden sm:inline">Marketplace</span>
+              </TabsTrigger>
+              <TabsTrigger 
+                value="scheduling" 
+                className="data-[state=active]:border-b-2 data-[state=active]:border-accent-gold data-[state=active]:text-accent-gold text-neutral-gray py-3 px-1 sm:px-3 font-semibold rounded-none bg-transparent text-xs sm:text-base flex flex-col sm:flex-row items-center justify-center"
+              >
+                <Calendar className="w-4 h-4 mb-1 sm:mb-0 sm:mr-2" />
+                <span className="sm:hidden">Time</span>
+                <span className="hidden sm:inline">Scheduling</span>
+              </TabsTrigger>
+              <TabsTrigger 
+                value="personality" 
+                className="data-[state=active]:border-b-2 data-[state=active]:border-accent-gold data-[state=active]:text-accent-gold text-neutral-gray py-3 px-1 sm:px-3 font-semibold rounded-none bg-transparent text-xs sm:text-base flex flex-col sm:flex-row items-center justify-center"
+              >
+                <Users className="w-4 h-4 mb-1 sm:mb-0 sm:mr-2" />
+                <span className="sm:hidden">Style</span>
+                <span className="hidden sm:inline">Personality</span>
+              </TabsTrigger>
+              <TabsTrigger 
+                value="integrations" 
+                className="data-[state=active]:border-b-2 data-[state=active]:border-accent-gold data-[state=active]:text-accent-gold text-neutral-gray py-3 px-1 sm:px-3 font-semibold rounded-none bg-transparent text-xs sm:text-base flex flex-col sm:flex-row items-center justify-center"
+              >
+                <Zap className="w-4 h-4 mb-1 sm:mb-0 sm:mr-2" />
+                <span className="sm:hidden">Apps</span>
+                <span className="hidden sm:inline">Integrations</span>
+              </TabsTrigger>
+            </TabsList>
 
             {/* Tab Content */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
