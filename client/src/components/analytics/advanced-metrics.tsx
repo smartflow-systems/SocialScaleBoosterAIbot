@@ -36,7 +36,7 @@ export default function AdvancedMetrics({ metrics }: AdvancedMetricsProps) {
     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
     datasets: [
       {
-        label: 'Revenue ($)',
+        label: 'Revenue (£)',
         data: [2850, 3200, 3950, 4100, 4300, 4550],
         borderColor: '#D4AF37',
         backgroundColor: 'rgba(212, 175, 55, 0.1)',

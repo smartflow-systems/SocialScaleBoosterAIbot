@@ -159,7 +159,7 @@ export default function Subscribe() {
                   Pro Plan
                 </CardTitle>
                 <div className="text-3xl font-bold text-white">
-                  $49<span className="text-lg text-neutral-gray">/month</span>
+                  £49<span className="text-lg text-neutral-gray">/month</span>
                 </div>
               </CardHeader>
               <CardContent className="space-y-4">
