@@ -205,7 +205,7 @@ export default function EnhancedMarketplace({ userStatus }: EnhancedMarketplaceP
                 </div>
                 <div className="text-right">
                   <div className="text-accent-gold font-bold text-lg">
-                    {template.isPremium ? `$${template.price}` : 'Free'}
+                    {template.isPremium ? `£${template.price}` : 'Free'}
                   </div>
                   <div className="flex items-center">
                     <Star className="w-3 h-3 text-accent-gold fill-current mr-1" />
