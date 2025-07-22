@@ -233,19 +233,19 @@ export default function EnhancedMarketplace({ userStatus }: EnhancedMarketplaceP
               {/* Action Buttons */}
               <div className="flex space-x-2">
                 <Button 
-                  className="flex-1 bg-accent-gold text-primary-black hover:bg-yellow-500 font-semibold gold-glow-hover"
+                  className="flex-1 bg-accent-gold text-primary-black hover:bg-yellow-500 font-semibold"
                   onClick={() => applyTemplate(template)}
                   disabled={template.isPremium && !userStatus?.isPremium}
                 >
                   {template.isPremium && !userStatus?.isPremium ? (
                     <>
-                      <Lock className="w-4 h-4 mr-2" />
-                      Premium
+                      <Lock className="w-4 h-4 mr-2" style={{color: '#000000'}} />
+                      <span style={{color: '#000000', fontWeight: 'bold'}}>Premium</span>
                     </>
                   ) : (
                     <>
-                      <Zap className="w-4 h-4 mr-2" />
-                      Apply Template
+                      <Zap className="w-4 h-4 mr-2" style={{color: '#000000'}} />
+                      <span style={{color: '#000000', fontWeight: 'bold'}}>Apply Template</span>
                     </>
                   )}
                 </Button>

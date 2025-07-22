@@ -129,16 +129,16 @@ export default function PremiumTemplateCard({ template }: PremiumTemplateCardPro
           >
             {!canAccess ? (
               <>
-                <Lock className="w-4 h-4 mr-2" />
-                Locked
+                <Lock className="w-4 h-4 mr-2" style={{color: '#000000'}} />
+                <span style={{color: '#000000', fontWeight: 'bold'}}>Locked</span>
               </>
             ) : template.price > 0 ? (
               <>
-                <Crown className="w-4 h-4 mr-2" />
-                Purchase
+                <Crown className="w-4 h-4 mr-2" style={{color: '#000000'}} />
+                <span style={{color: '#000000', fontWeight: 'bold'}}>Purchase</span>
               </>
             ) : (
-              "Apply Template"
+              <span style={{color: '#000000', fontWeight: 'bold'}}>Apply Template</span>
             )}
           </Button>
         </div>
@@ -153,7 +153,7 @@ export default function PremiumTemplateCard({ template }: PremiumTemplateCardPro
               onClick={() => window.location.href = "/subscribe"}
               className="bg-accent-gold text-primary-black hover:opacity-90 text-xs mt-2 h-8"
             >
-              Upgrade Now
+              <span style={{color: '#000000', fontWeight: 'bold'}}>Upgrade Now</span>
             </Button>
           </div>
         )}

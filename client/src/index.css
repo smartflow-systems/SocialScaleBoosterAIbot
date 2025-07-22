@@ -123,6 +123,25 @@
     background-color: var(--gold-trim);
   }
 
+  /* Ensure button text visibility */
+  .bg-accent-gold {
+    background-color: var(--accent-gold) !important;
+    color: var(--primary-black) !important;
+  }
+
+  .bg-accent-gold * {
+    color: var(--primary-black) !important;
+  }
+
+  .bg-accent-gold:hover {
+    background-color: hsl(43, 70%, 45%) !important;
+    color: var(--primary-black) !important;
+  }
+
+  .bg-accent-gold:hover * {
+    color: var(--primary-black) !important;
+  }
+
   .text-neutral-gray {
     color: var(--neutral-gray);
   }
