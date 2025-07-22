@@ -83,7 +83,7 @@ export default function AdvancedMetrics({ metrics }: AdvancedMetricsProps) {
       legend: {
         labels: {
           color: '#FFFFFF',
-          font: { family: 'Inter', weight: 'bold' }
+          font: { family: 'Inter', weight: 'bold' as const }
         }
       }
     },
@@ -107,7 +107,7 @@ export default function AdvancedMetrics({ metrics }: AdvancedMetricsProps) {
         position: 'bottom' as const,
         labels: {
           color: '#FFFFFF',
-          font: { family: 'Inter', weight: 'bold' },
+          font: { family: 'Inter', weight: 'bold' as const },
           padding: 20
         }
       }

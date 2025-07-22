@@ -1,6 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import Stripe from "stripe";
+import { AnalyticsWebSocketServer } from "./websocket";
 import { storage } from "./storage";
 import { insertBotSchema, insertBotTemplateSchema, insertAnalyticsSchema } from "@shared/schema";
 
@@ -419,8 +420,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       // Create a price first
       const price = await stripe.prices.create({
-        unit_amount: 4900, // $49.00
-        currency: 'usd',
+        unit_amount: 4900, // £49.00
+        currency: 'gbp',
         recurring: { interval: 'month' },
         product_data: {
           name: 'SmartFlow AI Pro',
@@ -513,5 +514,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   const httpServer = createServer(app);
+  
+  // Initialize WebSocket server for real-time analytics
+  const analyticsWS = new AnalyticsWebSocketServer(httpServer);
+  
+  // Handle server shutdown
+  process.on('SIGTERM', () => {
+    analyticsWS.close();
+  });
+
   return httpServer;
 }

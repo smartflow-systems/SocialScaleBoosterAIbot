@@ -12,6 +12,7 @@ import AnalyticsCharts from "@/components/analytics/charts";
 import CategoryFilter from "@/components/marketplace/category-filter";
 import EngagementMetrics from "@/components/analytics/engagement-metrics";
 import AdvancedMetrics from "@/components/analytics/advanced-metrics";
+import RealtimeDashboard from "@/components/analytics/realtime-dashboard";
 import SchedulerInterface from "@/components/scheduling/scheduler-interface";
 import PersonalityDesigner from "@/components/personality/personality-designer";
 import IntegrationWizard from "@/components/integrations/integration-wizard";
@@ -211,8 +212,11 @@ export default function Dashboard() {
               </TabsContent>
 
               <TabsContent value="analytics" className="mt-0">
-                <h2 className="text-3xl font-bold mb-8">Advanced Analytics & ROI</h2>
-                <AdvancedMetrics metrics={analyticsMetrics} />
+                <h2 className="text-3xl font-bold mb-8">Real-Time Analytics & ROI</h2>
+                <div className="space-y-8">
+                  <RealtimeDashboard />
+                  <AdvancedMetrics metrics={analyticsMetrics} />
+                </div>
               </TabsContent>
 
               <TabsContent value="marketplace" className="mt-0">
