@@ -142,28 +142,38 @@
     color: var(--primary-black) !important;
   }
 
-  /* Mobile navigation improvements */
-  @media (max-width: 640px) {
-    .overflow-x-auto {
-      scrollbar-width: none; /* Firefox */
-      -ms-overflow-style: none; /* Internet Explorer 10+ */
-    }
-    
-    .overflow-x-auto::-webkit-scrollbar { /* WebKit */
-      display: none;
-    }
+  /* Scrollbar hiding for mobile navigation */
+  .scrollbar-hide {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar { /* WebKit */
+    display: none;
   }
 
-  /* Ensure tabs don't wrap on mobile */
-  [role="tablist"] {
-    flex-wrap: nowrap;
-    min-width: max-content;
-  }
-
+  /* Mobile navigation layout fixes */
   @media (max-width: 640px) {
     [role="tablist"] {
-      gap: 0.5rem;
-      padding-bottom: 0.5rem;
+      flex-wrap: nowrap !important;
+      min-width: max-content !important;
+      padding-left: 0.25rem;
+      padding-right: 0.25rem;
+    }
+
+    /* Ensure tabs have minimum spacing */
+    [role="tab"] {
+      min-width: fit-content !important;
+      flex-shrink: 0 !important;
+      font-size: 0.75rem !important;
+    }
+  }
+
+  /* Fix mobile container overflow */
+  @media (max-width: 640px) {
+    .max-w-7xl {
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
     }
   }
 
