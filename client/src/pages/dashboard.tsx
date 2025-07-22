@@ -94,13 +94,19 @@ export default function Dashboard() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-4">
-              <Bot className="text-accent-gold w-8 h-8" />
+              <Bot className="text-accent-gold w-8 h-8 cursor-pointer hover:scale-110 transition-transform" onClick={() => window.location.href = "/"} />
               <span className="text-xl font-bold">Dashboard</span>
               <Badge className="bg-rich-brown text-gold-trim border border-accent-gold font-semibold gold-glow">
                 {userStatus?.isPremium ? "Pro Plan" : `Free Plan (${userStatus?.botCount || 0}/3 bots)`}
               </Badge>
             </div>
             <div className="flex items-center space-x-4">
+              <Button 
+                onClick={() => window.location.href = "/"}
+                className="bg-card-bg text-accent-gold border border-accent-gold font-semibold hover:bg-accent-gold hover:text-primary-black"
+              >
+                ← Home
+              </Button>
               <Button 
                 onClick={() => window.location.href = "/subscribe"}
                 className="bg-rich-brown text-gold-trim border border-accent-gold font-semibold gold-glow-hover hover:bg-accent-gold hover:text-primary-black"

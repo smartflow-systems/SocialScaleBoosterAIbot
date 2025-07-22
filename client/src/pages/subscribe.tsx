@@ -112,7 +112,13 @@ export default function Subscribe() {
     <div className="min-h-screen bg-primary-black">
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
-        <div className="text-center mb-8">
+        <div className="text-center mb-8 relative">
+          <Button 
+            onClick={() => window.location.href = "/"}
+            className="absolute left-0 top-0 bg-card-bg text-accent-gold border border-accent-gold hover:bg-accent-gold hover:text-primary-black"
+          >
+            ← Home
+          </Button>
           <h1 className="text-4xl font-bold text-white mb-4">
             Upgrade to <span className="text-accent-gold">SmartFlow AI Pro</span>
           </h1>
