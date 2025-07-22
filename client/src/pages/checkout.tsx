@@ -140,12 +140,12 @@ export default function Checkout() {
             <CardContent>
               <div className="flex justify-between items-center mb-4">
                 <span className="text-neutral-gray">Premium Bot Template</span>
-                <span className="text-white font-bold">${(amount / 100).toFixed(2)}</span>
+                <span className="text-white font-bold">£{(amount / 100).toFixed(2)}</span>
               </div>
               <div className="border-t border-secondary-brown pt-4">
                 <div className="flex justify-between items-center">
                   <span className="text-lg font-semibold text-white">Total</span>
-                  <span className="text-xl font-bold text-accent-gold">${(amount / 100).toFixed(2)}</span>
+                  <span className="text-xl font-bold text-accent-gold">£{(amount / 100).toFixed(2)}</span>
                 </div>
               </div>
             </CardContent>

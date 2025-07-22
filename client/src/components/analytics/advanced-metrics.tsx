@@ -124,7 +124,7 @@ export default function AdvancedMetrics({ metrics }: AdvancedMetricsProps) {
             <DollarSign className="h-4 w-4 text-accent-gold" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-accent-gold">${metrics?.totalRevenue || '4,550.50'}</div>
+            <div className="text-2xl font-bold text-accent-gold">£{metrics?.totalRevenue || '4,550.50'}</div>
             <div className="flex items-center text-xs text-green-400">
               <TrendingUp className="h-3 w-3 mr-1" />
               +{metrics?.monthlyGrowth || 25.5}% from last month

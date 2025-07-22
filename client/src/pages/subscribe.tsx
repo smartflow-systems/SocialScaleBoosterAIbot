@@ -57,7 +57,7 @@ const SubscribeForm = () => {
         className="w-full bg-accent-gold text-primary-black hover:opacity-90 font-bold text-lg py-6"
       >
         <Crown className="w-5 h-5 mr-2" />
-        Subscribe to Pro Plan - $49/month
+        Subscribe to Pro Plan - £49/month
       </Button>
     </form>
   );

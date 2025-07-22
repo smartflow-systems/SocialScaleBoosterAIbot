@@ -77,7 +77,7 @@ export default function SubscriptionStatus() {
               <CreditCard className="w-4 h-4 text-accent-gold" />
               <span className="text-sm text-neutral-gray">Amount</span>
             </div>
-            <p className="text-white font-medium">$49.00/month</p>
+            <p className="text-white font-medium">£49.00/month</p>
           </div>
         </div>
         

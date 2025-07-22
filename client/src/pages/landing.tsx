@@ -139,7 +139,7 @@ export default function Landing() {
               <CardContent className="p-8 text-center">
                 <h3 className="text-2xl font-bold mb-4">Free Plan</h3>
                 <div className="mb-6">
-                  <span className="text-4xl font-bold text-accent-gold">$0</span>
+                  <span className="text-4xl font-bold text-accent-gold">£0</span>
                   <span className="text-neutral-gray">/month</span>
                 </div>
                 <ul className="text-left space-y-3 mb-8">

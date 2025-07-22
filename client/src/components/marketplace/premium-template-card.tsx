@@ -106,7 +106,7 @@ export default function PremiumTemplateCard({ template }: PremiumTemplateCardPro
           <div className="flex flex-col">
             {template.price > 0 ? (
               <span className="text-lg font-bold text-accent-gold">
-                ${template.price.toFixed(2)}
+                £{template.price.toFixed(2)}
               </span>
             ) : (
               <span className="text-lg font-bold text-green-500">Free</span>
