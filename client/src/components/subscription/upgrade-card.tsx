@@ -31,7 +31,7 @@ export default function UpgradeCard() {
           Unlock Pro Features
         </CardTitle>
         <div className="text-2xl font-bold text-white">
-          $49<span className="text-lg text-neutral-gray">/month</span>
+          £49<span className="text-lg text-neutral-gray">/month</span>
         </div>
       </CardHeader>
       

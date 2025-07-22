@@ -31,7 +31,7 @@ export default function TemplateCard({ template }: TemplateCardProps) {
         
         <div className="flex justify-between items-center mb-4">
           <span className={`font-bold text-lg ${template.isPremium ? 'text-accent-gold' : 'text-green-400'}`}>
-            {template.isPremium ? `$${template.price}/month` : 'Free'}
+            {template.isPremium ? `£${template.price}/month` : 'Free'}
           </span>
           <div className="flex items-center space-x-1">
             <Star className="text-accent-gold w-4 h-4 fill-current" />

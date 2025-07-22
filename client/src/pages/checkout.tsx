@@ -65,7 +65,7 @@ const CheckoutForm = () => {
 export default function Checkout() {
   const [clientSecret, setClientSecret] = useState("");
   const [loading, setLoading] = useState(true);
-  const [amount, setAmount] = useState(2999); // Default amount $29.99
+  const [amount, setAmount] = useState(2999); // Default amount £29.99
 
   useEffect(() => {
     // Get amount from URL params if available

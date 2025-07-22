@@ -149,7 +149,7 @@ export default function BotStatsDialog({ botId, children }: BotStatsDialogProps)
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-sm text-neutral-gray">Revenue</p>
-                      <p className="text-2xl font-bold text-accent-gold">${stats?.revenue || '0.00'}</p>
+                      <p className="text-2xl font-bold text-accent-gold">£{stats?.revenue || '0.00'}</p>
                     </div>
                     <DollarSign className="w-8 h-8 text-accent-gold" />
                   </div>

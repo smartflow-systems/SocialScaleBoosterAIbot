@@ -115,7 +115,7 @@ export default function AnalyticsCharts({ metrics }: AnalyticsChartsProps) {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-neutral-gray text-sm">Total Revenue</p>
-                <p className="text-2xl font-bold text-accent-gold">${metrics.totalRevenue.toLocaleString()}</p>
+                <p className="text-2xl font-bold text-accent-gold">£{metrics.totalRevenue.toLocaleString()}</p>
                 <p className="text-green-400 text-sm">+{metrics.monthlyGrowth}% vs last month</p>
               </div>
               <DollarSign className="text-accent-gold w-8 h-8" />

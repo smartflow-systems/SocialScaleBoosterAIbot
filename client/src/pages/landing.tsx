@@ -191,7 +191,7 @@ export default function Landing() {
                   </li>
                 </ul>
                 <Button 
-                  onClick={() => setLocation("/checkout")}
+                  onClick={() => setLocation("/subscribe")}
                   className="w-full bg-primary-black text-accent-gold hover:bg-primary-black/90"
                 >
                   Upgrade to Pro
