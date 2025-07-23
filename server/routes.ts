@@ -626,11 +626,39 @@ export async function registerRoutes(app: Express): Promise<Server> {
       padding: 20px;
       margin-bottom: 20px;
       transition: transform 0.2s ease;
+      position: relative;
     }
     
     .post-card:hover {
       transform: translateY(-2px);
       border-color: #FFD700;
+    }
+    
+    .copy-btn {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+      color: #000000;
+      border: none;
+      border-radius: 6px;
+      padding: 8px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      opacity: 0.8;
+    }
+    
+    .copy-btn:hover {
+      opacity: 1;
+      transform: scale(1.05);
+      box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+    }
+    
+    .copy-btn.copied {
+      background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+      color: white;
     }
     
     .post-number {
@@ -764,13 +792,54 @@ export async function registerRoutes(app: Express): Promise<Server> {
         
         html += 
           '<div class="post-card">' +
+            '<button class="copy-btn" onclick="copyToClipboard(' + index + ', this)">Copy</button>' +
             '<div class="post-number">Post #' + (index + 1) + '</div>' +
-            '<div class="post-content">' + post + '</div>' +
+            '<div class="post-content" id="post-' + index + '">' + post + '</div>' +
             '<div class="char-count ' + (isOverLimit ? 'over-limit' : '') + '">' + charCount + '/280 characters</div>' +
           '</div>';
       });
       
       resultsDiv.innerHTML = html;
+    }
+    
+    // Copy to clipboard function
+    async function copyToClipboard(postIndex, button) {
+      const postElement = document.getElementById('post-' + postIndex);
+      const text = postElement.textContent;
+      
+      try {
+        await navigator.clipboard.writeText(text);
+        
+        // Visual feedback
+        const originalText = button.textContent;
+        button.textContent = 'Copied!';
+        button.classList.add('copied');
+        
+        // Reset after 2 seconds
+        setTimeout(() => {
+          button.textContent = originalText;
+          button.classList.remove('copied');
+        }, 2000);
+        
+      } catch (err) {
+        // Fallback for older browsers
+        const textArea = document.createElement('textarea');
+        textArea.value = text;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        
+        // Visual feedback
+        const originalText = button.textContent;
+        button.textContent = 'Copied!';
+        button.classList.add('copied');
+        
+        setTimeout(() => {
+          button.textContent = originalText;
+          button.classList.remove('copied');
+        }, 2000);
+      }
     }
   </script>
 </body>
