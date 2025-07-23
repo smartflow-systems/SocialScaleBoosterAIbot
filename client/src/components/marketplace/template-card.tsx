@@ -10,9 +10,9 @@ interface TemplateCardProps {
 
 export default function TemplateCard({ template }: TemplateCardProps) {
   return (
-    <Card className={`bg-card-bg border-secondary-brown hover:border-accent-gold transition-colors relative overflow-hidden ${template.isPremium ? 'border-accent-gold' : ''}`}>
+    <Card className={`bg-cardBg border-secondaryBrown hover:border-accentGold transition-colors relative overflow-hidden ${template.isPremium ? 'border-accentGold' : ''}`}>
       {template.isPremium && (
-        <div className="absolute top-4 right-4 bg-accent-gold text-primary-black px-3 py-1 rounded-full text-xs font-bold z-10">
+        <div className="absolute top-4 right-4 bg-accentGold text-primaryBlack px-3 py-1 rounded-full text-xs font-bold z-10">
           PREMIUM
         </div>
       )}

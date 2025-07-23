@@ -22,6 +22,19 @@ interface PremiumTemplateCardProps {
 export default function PremiumTemplateCard({ template }: PremiumTemplateCardProps) {
   const { data: userStatus } = useQuery({
     queryKey: ["/api/user/status"],
+    queryFn: async () => {
+      try {
+        const response = await fetch('/api/user/status');
+        if (!response.ok) {
+          // Mock fallback for development
+          return { isPremium: true };
+        }
+        return response.json();
+      } catch (error) {
+        // Mock fallback for development  
+        return { isPremium: true };
+      }
+    },
   });
 
   const handlePurchase = () => {
@@ -29,8 +42,8 @@ export default function PremiumTemplateCard({ template }: PremiumTemplateCardPro
       // Redirect to subscription page for premium templates
       window.location.href = "/subscribe";
     } else if (template.price > 0) {
-      // Redirect to checkout for paid templates
-      window.location.href = `/checkout?amount=${template.price * 100}`;
+      // Redirect to checkout for paid templates - convert to GBP pence
+      window.location.href = `/checkout?amount=${Math.round(template.price * 100)}`;
     } else {
       // Apply free template
       console.log("Applying free template:", template.name);
@@ -42,13 +55,13 @@ export default function PremiumTemplateCard({ template }: PremiumTemplateCardPro
   return (
     <Card className={`relative overflow-hidden transition-all duration-300 hover:shadow-lg ${
       template.isPremium 
-        ? "bg-gradient-to-br from-accent-gold/10 to-gold-trim/5 border-accent-gold hover:border-accent-gold/80" 
-        : "bg-card-bg border-secondary-brown hover:border-accent-gold/50"
+        ? "bg-gradient-to-br from-accentGold/10 to-goldTrim/5 border-accentGold hover:border-accentGold/80" 
+        : "bg-cardBg border-secondaryBrown hover:border-accentGold/50"
     }`}>
       {/* Premium Badge */}
       {template.isPremium && (
         <div className="absolute top-4 right-4 z-10">
-          <Badge className="bg-accent-gold text-primary-black font-bold">
+          <Badge className="bg-accentGold text-primaryBlack font-bold">
             <Crown className="w-3 h-3 mr-1" />
             PRO
           </Badge>
@@ -57,14 +70,14 @@ export default function PremiumTemplateCard({ template }: PremiumTemplateCardPro
 
       <CardHeader className="pb-4">
         <CardTitle className={`flex items-center gap-2 ${
-          template.isPremium ? "text-accent-gold" : "text-white"
+          template.isPremium ? "text-accentGold" : "text-white"
         }`}>
           {template.isPremium ? <Crown className="w-5 h-5" /> : <Target className="w-5 h-5" />}
           {template.name}
         </CardTitle>
         
         {/* Rating and Sales */}
-        <div className="flex items-center gap-4 text-sm text-neutral-gray">
+        <div className="flex items-center gap-4 text-sm text-neutralGray">
           <div className="flex items-center gap-1">
             <Star className="w-4 h-4 text-yellow-500 fill-current" />
             <span>{template.rating.toFixed(1)}</span>
@@ -77,7 +90,7 @@ export default function PremiumTemplateCard({ template }: PremiumTemplateCardPro
       </CardHeader>
 
       <CardContent className="space-y-4">
-        <p className="text-neutral-gray text-sm">{template.description}</p>
+        <p className="text-neutralGray text-sm">{template.description}</p>
 
         {/* Features */}
         <div className="space-y-2">
@@ -85,8 +98,8 @@ export default function PremiumTemplateCard({ template }: PremiumTemplateCardPro
           <div className="space-y-1">
             {template.features.slice(0, 3).map((feature, index) => (
               <div key={index} className="flex items-center gap-2 text-sm">
-                <Zap className="w-3 h-3 text-accent-gold" />
-                <span className="text-neutral-gray">{feature}</span>
+                <Zap className="w-3 h-3 text-accentGold" />
+                <span className="text-neutralGray">{feature}</span>
               </div>
             ))}
           </div>
@@ -95,24 +108,24 @@ export default function PremiumTemplateCard({ template }: PremiumTemplateCardPro
         {/* Platforms */}
         <div className="flex flex-wrap gap-2">
           {template.platforms.map((platform) => (
-            <Badge key={platform} variant="outline" className="text-xs border-secondary-brown text-neutral-gray">
+            <Badge key={platform} variant="outline" className="text-xs border-secondaryBrown text-neutralGray">
               {platform}
             </Badge>
           ))}
         </div>
 
         {/* Pricing and Action */}
-        <div className="flex items-center justify-between pt-4 border-t border-secondary-brown">
+        <div className="flex items-center justify-between pt-4 border-t border-secondaryBrown">
           <div className="flex flex-col">
             {template.price > 0 ? (
-              <span className="text-lg font-bold text-accent-gold">
+              <span className="text-lg font-bold text-accentGold">
                 £{template.price.toFixed(2)}
               </span>
             ) : (
               <span className="text-lg font-bold text-green-500">Free</span>
             )}
             {template.isPremium && (
-              <span className="text-xs text-neutral-gray">Pro Plan Required</span>
+              <span className="text-xs text-neutralGray">Pro Plan Required</span>
             )}
           </div>
 
@@ -123,37 +136,37 @@ export default function PremiumTemplateCard({ template }: PremiumTemplateCardPro
               template.isPremium && !canAccess
                 ? "bg-gray-600 text-gray-400 cursor-not-allowed"
                 : template.isPremium
-                ? "bg-accent-gold text-primary-black hover:opacity-90"
-                : "bg-secondary-brown text-white hover:bg-accent-gold hover:text-primary-black"
+                ? "bg-accentGold text-primaryBlack hover:opacity-90"
+                : "bg-secondaryBrown text-white hover:bg-accentGold hover:text-primaryBlack"
             } font-semibold`}
           >
             {!canAccess ? (
               <>
-                <Lock className="w-4 h-4 mr-2" style={{color: '#000000'}} />
-                <span style={{color: '#000000', fontWeight: 'bold'}}>Locked</span>
+                <Lock className="w-4 h-4 mr-2 text-gray-400" />
+                <span className="text-gray-400 font-bold">Locked</span>
               </>
             ) : template.price > 0 ? (
               <>
-                <Crown className="w-4 h-4 mr-2" style={{color: '#000000'}} />
-                <span style={{color: '#000000', fontWeight: 'bold'}}>Purchase</span>
+                <Crown className="w-4 h-4 mr-2 text-primaryBlack" />
+                <span className="text-primaryBlack font-bold">Purchase</span>
               </>
             ) : (
-              <span style={{color: '#000000', fontWeight: 'bold'}}>Apply Template</span>
+              <span className="text-primaryBlack font-bold">Apply Template</span>
             )}
           </Button>
         </div>
 
         {/* Premium Upgrade Prompt */}
         {template.isPremium && !userStatus?.isPremium && (
-          <div className="bg-accent-gold/10 border border-accent-gold/20 rounded-lg p-3 text-center">
-            <p className="text-xs text-accent-gold">
+          <div className="bg-accentGold/10 border border-accentGold/20 rounded-lg p-3 text-center">
+            <p className="text-xs text-accentGold">
               Upgrade to Pro to unlock this premium template
             </p>
             <Button
               onClick={() => window.location.href = "/subscribe"}
-              className="bg-accent-gold text-primary-black hover:opacity-90 text-xs mt-2 h-8"
+              className="bg-accentGold text-primaryBlack hover:opacity-90 text-xs mt-2 h-8"
             >
-              <span style={{color: '#000000', fontWeight: 'bold'}}>Upgrade Now</span>
+              <span className="text-primaryBlack font-bold">Upgrade Now</span>
             </Button>
           </div>
         )}

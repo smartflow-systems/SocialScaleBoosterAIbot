@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Root variables for SmartFlow theme */
 :root {
   --background: hsl(0, 0%, 0%);
   --foreground: hsl(0, 0%, 100%);
@@ -24,7 +25,7 @@
   --ring: hsl(43, 70%, 52%);
   --radius: 0.5rem;
 
-  /* Custom SmartFlow AI colors - Brown with Gold Trim */
+  /* Custom SmartFlow AI colors */
   --primary-black: hsl(0, 0%, 0%);
   --secondary-brown: hsl(25, 40%, 12%);
   --rich-brown: hsl(25, 30%, 25%);
@@ -73,11 +74,11 @@
   .gold-glow {
     box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
   }
-  
+
   .gold-glow-hover:hover {
     box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
   }
-  
+
   .glass-effect {
     backdrop-filter: blur(10px);
     background: rgba(26, 26, 26, 0.8);
@@ -89,6 +90,7 @@
 
   .bg-accent-gold {
     background-color: var(--accent-gold);
+    color: var(--primary-black);
   }
 
   .border-accent-gold {
@@ -123,67 +125,6 @@
     background-color: var(--gold-trim);
   }
 
-  /* Ensure button text visibility */
-  .bg-accent-gold {
-    background-color: var(--accent-gold) !important;
-    color: var(--primary-black) !important;
-  }
-
-  .bg-accent-gold * {
-    color: var(--primary-black) !important;
-  }
-
-  .bg-accent-gold:hover {
-    background-color: hsl(43, 70%, 45%) !important;
-    color: var(--primary-black) !important;
-  }
-
-  .bg-accent-gold:hover * {
-    color: var(--primary-black) !important;
-  }
-
-  /* Scrollbar hiding for mobile navigation */
-  .scrollbar-hide {
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* Internet Explorer 10+ */
-  }
-  
-  .scrollbar-hide::-webkit-scrollbar { /* WebKit */
-    display: none;
-  }
-
-  /* Mobile navigation grid layout */
-  @media (max-width: 640px) {
-    [role="tablist"] {
-      display: grid !important;
-      grid-template-columns: repeat(3, 1fr) !important;
-      grid-template-rows: repeat(2, 1fr) !important;
-      gap: 0.25rem !important;
-      width: 100% !important;
-      min-height: 120px !important;
-    }
-
-    /* Mobile tab styling */
-    [role="tab"] {
-      min-height: 60px !important;
-      display: flex !important;
-      flex-direction: column !important;
-      align-items: center !important;
-      justify-content: center !important;
-      padding: 0.5rem 0.25rem !important;
-      font-size: 0.75rem !important;
-      line-height: 1 !important;
-    }
-  }
-
-  /* Desktop and tablet layout */
-  @media (min-width: 641px) {
-    [role="tablist"] {
-      display: flex !important;
-      gap: 2rem !important;
-    }
-  }
-
   .text-neutral-gray {
     color: var(--neutral-gray);
   }
@@ -196,37 +137,7 @@
     background-color: var(--card-bg);
   }
 
-  /* Premium animations */
-  @keyframes shimmer {
-    0% { background-position: -200% 0; }
-    100% { background-position: 200% 0; }
-  }
-
-  .shimmer-effect {
-    background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.4), transparent);
-    background-size: 200% 100%;
-    animation: shimmer 2s infinite;
-  }
-
-  /* Chart styling */
-  .chart-gold {
-    --chart-color: #FFD700;
-  }
-
-  /* Enhanced glow effects */
   .premium-glow {
     box-shadow: 0 0 20px rgba(255, 215, 0, 0.4), 0 0 40px rgba(255, 215, 0, 0.2);
-  }
-
-  /* Mobile tab responsiveness */
-  @media (max-width: 768px) {
-    .tab-scroll {
-      overflow-x: auto;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-    }
-    .tab-scroll::-webkit-scrollbar {
-      display: none;
-    }
   }
 }

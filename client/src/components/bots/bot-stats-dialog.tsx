@@ -104,9 +104,9 @@ export default function BotStatsDialog({ botId, children }: BotStatsDialogProps)
       <DialogTrigger asChild>
         {children}
       </DialogTrigger>
-      <DialogContent className="max-w-6xl max-h-[90vh] overflow-y-auto bg-card-bg border-secondary-brown">
+      <DialogContent className="max-w-6xl max-h-[90vh] overflow-y-auto bg-cardBg border-secondaryBrown">
         <DialogHeader>
-          <DialogTitle className="text-2xl font-bold text-accent-gold flex items-center gap-2">
+          <DialogTitle className="text-2xl font-bold text-accentGold flex items-center gap-2">
             <BarChart3 className="w-6 h-6" />
             {stats?.name || 'Bot'} Statistics
           </DialogTitle>
@@ -114,56 +114,56 @@ export default function BotStatsDialog({ botId, children }: BotStatsDialogProps)
 
         {isLoading ? (
           <div className="flex items-center justify-center h-64">
-            <div className="animate-spin w-8 h-8 border-4 border-accent-gold border-t-transparent rounded-full" />
+            <div className="animate-spin w-8 h-8 border-4 border-accentGold border-t-transparent rounded-full" />
           </div>
         ) : (
           <div className="space-y-6">
             {/* Overview Cards */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <Card className="bg-dark-brown border-secondary-brown">
+              <Card className="bg-darkBrown border-secondaryBrown">
                 <CardContent className="p-4">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-sm text-neutral-gray">Total Posts</p>
-                      <p className="text-2xl font-bold text-accent-gold">{stats?.totalPosts || 0}</p>
+                      <p className="text-sm text-neutralGray">Total Posts</p>
+                      <p className="text-2xl font-bold text-accentGold">{stats?.totalPosts || 0}</p>
                     </div>
-                    <BarChart3 className="w-8 h-8 text-accent-gold" />
+                    <BarChart3 className="w-8 h-8 text-accentGold" />
                   </div>
                 </CardContent>
               </Card>
 
-              <Card className="bg-dark-brown border-secondary-brown">
+              <Card className="bg-darkBrown border-secondaryBrown">
                 <CardContent className="p-4">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-sm text-neutral-gray">Engagement</p>
-                      <p className="text-2xl font-bold text-accent-gold">{stats?.totalEngagement?.toLocaleString() || 0}</p>
+                      <p className="text-sm text-neutralGray">Engagement</p>
+                      <p className="text-2xl font-bold text-accentGold">{stats?.totalEngagement?.toLocaleString() || 0}</p>
                     </div>
-                    <TrendingUp className="w-8 h-8 text-accent-gold" />
+                    <TrendingUp className="w-8 h-8 text-accentGold" />
                   </div>
                 </CardContent>
               </Card>
 
-              <Card className="bg-dark-brown border-secondary-brown">
+              <Card className="bg-darkBrown border-secondaryBrown">
                 <CardContent className="p-4">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-sm text-neutral-gray">Revenue</p>
-                      <p className="text-2xl font-bold text-accent-gold">£{stats?.revenue || '0.00'}</p>
+                      <p className="text-sm text-neutralGray">Revenue</p>
+                      <p className="text-2xl font-bold text-accentGold">£{stats?.revenue || '0.00'}</p>
                     </div>
-                    <DollarSign className="w-8 h-8 text-accent-gold" />
+                    <DollarSign className="w-8 h-8 text-accentGold" />
                   </div>
                 </CardContent>
               </Card>
 
-              <Card className="bg-dark-brown border-secondary-brown">
+              <Card className="bg-darkBrown border-secondaryBrown">
                 <CardContent className="p-4">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-sm text-neutral-gray">Conversion</p>
-                      <p className="text-2xl font-bold text-accent-gold">{stats?.conversionRate || '0.0'}%</p>
+                      <p className="text-sm text-neutralGray">Conversion</p>
+                      <p className="text-2xl font-bold text-accentGold">{stats?.conversionRate || '0.0'}%</p>
                     </div>
-                    <Users className="w-8 h-8 text-accent-gold" />
+                    <Users className="w-8 h-8 text-accentGold" />
                   </div>
                 </CardContent>
               </Card>
@@ -171,41 +171,41 @@ export default function BotStatsDialog({ botId, children }: BotStatsDialogProps)
 
             {/* Additional Metrics */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <Card className="bg-dark-brown border-secondary-brown">
+              <Card className="bg-darkBrown border-secondaryBrown">
                 <CardContent className="p-4">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-sm text-neutral-gray">Impressions</p>
+                      <p className="text-sm text-neutralGray">Impressions</p>
                       <p className="text-xl font-bold text-white">{stats?.impressions?.toLocaleString() || 0}</p>
                     </div>
-                    <Eye className="w-6 h-6 text-accent-gold" />
+                    <Eye className="w-6 h-6 text-accentGold" />
                   </div>
                 </CardContent>
               </Card>
 
-              <Card className="bg-dark-brown border-secondary-brown">
+              <Card className="bg-darkBrown border-secondaryBrown">
                 <CardContent className="p-4">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-sm text-neutral-gray">Clicks</p>
+                      <p className="text-sm text-neutralGray">Clicks</p>
                       <p className="text-xl font-bold text-white">{stats?.clicks?.toLocaleString() || 0}</p>
                     </div>
-                    <MousePointer className="w-6 h-6 text-accent-gold" />
+                    <MousePointer className="w-6 h-6 text-accentGold" />
                   </div>
                 </CardContent>
               </Card>
 
-              <Card className="bg-dark-brown border-secondary-brown">
+              <Card className="bg-darkBrown border-secondaryBrown">
                 <CardContent className="p-4">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-sm text-neutral-gray">Platform</p>
-                      <Badge className="bg-rich-brown text-gold-trim border border-accent-gold">
+                      <p className="text-sm text-neutralGray">Platform</p>
+                      <Badge className="bg-richBrown text-goldTrim border border-accentGold">
                         {stats?.platform?.toUpperCase() || 'Unknown'}
                       </Badge>
                     </div>
                     <div className="text-right">
-                      <p className="text-xs text-neutral-gray">Status</p>
+                      <p className="text-xs text-neutralGray">Status</p>
                       <Badge className={`${stats?.status === 'active' ? 'bg-green-600' : 'bg-red-600'} text-white`}>
                         {stats?.status || 'Unknown'}
                       </Badge>

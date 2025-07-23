@@ -128,7 +128,7 @@ export default function CreateBotDialog({ isPremium, botCount, children }: Creat
       <DialogTrigger asChild>
         {children || (
           <Button 
-            className="bg-accent-gold text-primary-black font-semibold gold-glow-hover"
+            className="bg-accentGold text-primaryBlack font-semibold gold-glow-hover"
             disabled={!canCreateBot}
           >
             <Bot className="w-4 h-4 mr-2" />
@@ -136,10 +136,10 @@ export default function CreateBotDialog({ isPremium, botCount, children }: Creat
           </Button>
         )}
       </DialogTrigger>
-      <DialogContent className="bg-card-bg border-secondary-brown max-w-2xl">
+      <DialogContent className="bg-cardBg border-secondaryBrown max-w-2xl">
         <DialogHeader>
           <DialogTitle className="text-xl font-bold flex items-center">
-            <Sparkles className="text-accent-gold w-6 h-6 mr-2" />
+            <Sparkles className="text-accentGold w-6 h-6 mr-2" />
             Create E-Commerce Bot
           </DialogTitle>
         </DialogHeader>
@@ -153,7 +153,7 @@ export default function CreateBotDialog({ isPremium, botCount, children }: Creat
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 placeholder="My Product Bot"
-                className="bg-secondary-brown border-secondary-brown focus:border-accent-gold"
+                className="bg-secondaryBrown border-secondaryBrown focus:border-accentGold"
                 required
               />
             </div>
@@ -182,7 +182,7 @@ export default function CreateBotDialog({ isPremium, botCount, children }: Creat
               value={formData.description}
               onChange={(e) => setFormData({ ...formData, description: e.target.value })}
               placeholder="Describe what this bot will do for your e-commerce business..."
-              className="bg-secondary-brown border-secondary-brown focus:border-accent-gold"
+              className="bg-secondaryBrown border-secondaryBrown focus:border-accentGold"
               rows={3}
             />
           </div>
@@ -197,12 +197,12 @@ export default function CreateBotDialog({ isPremium, botCount, children }: Creat
                   onClick={() => setFormData({ ...formData, preset: preset.id })}
                   className={`p-4 rounded-lg border text-left transition-all ${
                     formData.preset === preset.id
-                      ? 'border-accent-gold bg-accent-gold/10'
-                      : 'border-secondary-brown hover:border-accent-gold'
+                      ? 'border-accentGold bg-accentGold/10'
+                      : 'border-secondaryBrown hover:border-accentGold'
                   }`}
                 >
                   <h4 className="font-semibold text-sm mb-1">{preset.name}</h4>
-                  <p className="text-xs text-neutral-gray">{preset.description}</p>
+                  <p className="text-xs text-neutralGray">{preset.description}</p>
                 </button>
               ))}
             </div>
@@ -213,18 +213,18 @@ export default function CreateBotDialog({ isPremium, botCount, children }: Creat
               type="button"
               variant="outline"
               onClick={() => setOpen(false)}
-              className="flex-1 border-secondary-brown text-neutral-gray"
+              className="flex-1 border-secondaryBrown text-neutralGray"
             >
               Cancel
             </Button>
             <Button
               type="submit"
               disabled={createBotMutation.isPending}
-              className="flex-1 bg-accent-gold text-primary-black font-bold gold-glow-hover"
+              className="flex-1 bg-accentGold text-primaryBlack font-bold gold-glow-hover"
             >
               {createBotMutation.isPending ? (
                 <>
-                  <div className="animate-spin w-4 h-4 border-2 border-primary-black border-t-transparent rounded-full mr-2" />
+                  <div className="animate-spin w-4 h-4 border-2 border-primaryBlack border-t-transparent rounded-full mr-2" />
                   Creating...
                 </>
               ) : (

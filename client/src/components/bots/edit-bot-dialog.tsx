@@ -90,7 +90,7 @@ export default function EditBotDialog({ bot, children }: EditBotDialogProps) {
                     <Input
                       {...field}
                       placeholder="Enter bot name"
-                      className="bg-dark-brown border-secondary-brown text-white placeholder:text-neutral-gray focus:border-accent-gold"
+                      className="bg-darkBrown border-secondaryBrown text-white placeholder:text-neutralGray focus:border-accentGold"
                     />
                   </FormControl>
                   <FormMessage />
@@ -108,7 +108,7 @@ export default function EditBotDialog({ bot, children }: EditBotDialogProps) {
                     <Textarea
                       {...field}
                       placeholder="Describe what your bot does..."
-                      className="bg-dark-brown border-secondary-brown text-white placeholder:text-neutral-gray focus:border-accent-gold min-h-[100px]"
+                      className="bg-darkBrown border-secondaryBrown text-white placeholder:text-neutralGray focus:border-accentGold min-h-[100px]"
                     />
                   </FormControl>
                   <FormMessage />
@@ -124,24 +124,24 @@ export default function EditBotDialog({ bot, children }: EditBotDialogProps) {
                   <FormLabel className="text-white">Platform</FormLabel>
                   <Select onValueChange={field.onChange} defaultValue={field.value}>
                     <FormControl>
-                      <SelectTrigger className="bg-dark-brown border-secondary-brown text-white focus:border-accent-gold">
+                      <SelectTrigger className="bg-darkBrown border-secondaryBrown text-white focus:border-accentGold">
                         <SelectValue placeholder="Select a platform" />
                       </SelectTrigger>
                     </FormControl>
-                    <SelectContent className="bg-dark-brown border-secondary-brown">
-                      <SelectItem value="tiktok" className="text-white hover:bg-secondary-brown">
+                    <SelectContent className="bg-darkBrown border-secondaryBrown">
+                      <SelectItem value="tiktok" className="text-white hover:bg-secondaryBrown">
                         TikTok
                       </SelectItem>
-                      <SelectItem value="instagram" className="text-white hover:bg-secondary-brown">
+                      <SelectItem value="instagram" className="text-white hover:bg-secondaryBrown">
                         Instagram
                       </SelectItem>
-                      <SelectItem value="facebook" className="text-white hover:bg-secondary-brown">
+                      <SelectItem value="facebook" className="text-white hover:bg-secondaryBrown">
                         Facebook
                       </SelectItem>
-                      <SelectItem value="twitter" className="text-white hover:bg-secondary-brown">
+                      <SelectItem value="twitter" className="text-white hover:bg-secondaryBrown">
                         Twitter
                       </SelectItem>
-                      <SelectItem value="youtube" className="text-white hover:bg-secondary-brown">
+                      <SelectItem value="youtube" className="text-white hover:bg-secondaryBrown">
                         YouTube
                       </SelectItem>
                     </SelectContent>
@@ -156,14 +156,14 @@ export default function EditBotDialog({ bot, children }: EditBotDialogProps) {
                 type="button"
                 variant="outline"
                 onClick={() => setOpen(false)}
-                className="flex-1 border-secondary-brown text-neutral-gray hover:bg-secondary-brown hover:text-white"
+                className="flex-1 border-secondaryBrown text-neutralGray hover:bg-secondaryBrown hover:text-white"
               >
                 Cancel
               </Button>
               <Button
                 type="submit"
                 disabled={editBotMutation.isPending}
-                className="flex-1 bg-accent-gold text-primary-black hover:opacity-90 font-semibold"
+                className="flex-1 bg-accentGold text-primaryBlack hover:opacity-90 font-semibold"
               >
                 {editBotMutation.isPending ? "Updating..." : "Update Bot"}
               </Button>

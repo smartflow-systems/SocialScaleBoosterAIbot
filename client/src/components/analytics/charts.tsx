@@ -110,54 +110,54 @@ export default function AnalyticsCharts({ metrics }: AnalyticsChartsProps) {
     <div className="space-y-8">
       {/* Key Metrics */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <Card className="bg-card-bg border-secondary-brown">
+        <Card className="bg-cardBg border-secondaryBrown">
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-neutral-gray text-sm">Total Revenue</p>
-                <p className="text-2xl font-bold text-accent-gold">£{metrics.totalRevenue.toLocaleString()}</p>
+                <p className="text-neutralGray text-sm">Total Revenue</p>
+                <p className="text-2xl font-bold text-accentGold">£{metrics.totalRevenue.toLocaleString()}</p>
                 <p className="text-green-400 text-sm">+{metrics.monthlyGrowth}% vs last month</p>
               </div>
-              <DollarSign className="text-accent-gold w-8 h-8" />
+              <DollarSign className="text-accentGold w-8 h-8" />
             </div>
           </CardContent>
         </Card>
         
-        <Card className="bg-card-bg border-secondary-brown">
+        <Card className="bg-cardBg border-secondaryBrown">
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-neutral-gray text-sm">Engagement Rate</p>
-                <p className="text-2xl font-bold text-accent-gold">{metrics.engagementRate}%</p>
+                <p className="text-neutralGray text-sm">Engagement Rate</p>
+                <p className="text-2xl font-bold text-accentGold">{metrics.engagementRate}%</p>
                 <p className="text-green-400 text-sm">+0.8% vs last month</p>
               </div>
-              <Heart className="text-accent-gold w-8 h-8" />
+              <Heart className="text-accentGold w-8 h-8" />
             </div>
           </CardContent>
         </Card>
         
-        <Card className="bg-card-bg border-secondary-brown">
+        <Card className="bg-cardBg border-secondaryBrown">
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-neutral-gray text-sm">Posts Published</p>
-                <p className="text-2xl font-bold text-accent-gold">{metrics.totalPosts}</p>
+                <p className="text-neutralGray text-sm">Posts Published</p>
+                <p className="text-2xl font-bold text-accentGold">{metrics.totalPosts}</p>
                 <p className="text-green-400 text-sm">This month</p>
               </div>
-              <Share className="text-accent-gold w-8 h-8" />
+              <Share className="text-accentGold w-8 h-8" />
             </div>
           </CardContent>
         </Card>
         
-        <Card className="bg-card-bg border-secondary-brown">
+        <Card className="bg-cardBg border-secondaryBrown">
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-neutral-gray text-sm">ROI</p>
-                <p className="text-2xl font-bold text-accent-gold">{metrics.roi}%</p>
+                <p className="text-neutralGray text-sm">ROI</p>
+                <p className="text-2xl font-bold text-accentGold">{metrics.roi}%</p>
                 <p className="text-green-400 text-sm">Average return</p>
               </div>
-              <TrendingUp className="text-accent-gold w-8 h-8" />
+              <TrendingUp className="text-accentGold w-8 h-8" />
             </div>
           </CardContent>
         </Card>
@@ -165,7 +165,7 @@ export default function AnalyticsCharts({ metrics }: AnalyticsChartsProps) {
 
       {/* Charts */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <Card className="bg-card-bg border-secondary-brown">
+        <Card className="bg-cardBg border-secondaryBrown">
           <CardHeader>
             <CardTitle className="text-xl font-bold">Revenue Trends</CardTitle>
           </CardHeader>
@@ -174,7 +174,7 @@ export default function AnalyticsCharts({ metrics }: AnalyticsChartsProps) {
           </CardContent>
         </Card>
         
-        <Card className="bg-card-bg border-secondary-brown">
+        <Card className="bg-cardBg border-secondaryBrown">
           <CardHeader>
             <CardTitle className="text-xl font-bold">Engagement by Platform</CardTitle>
           </CardHeader>

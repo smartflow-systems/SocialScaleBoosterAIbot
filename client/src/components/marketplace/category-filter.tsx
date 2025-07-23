@@ -41,7 +41,7 @@ export default function CategoryFilter({ selectedCategory, onCategoryChange }: C
                 <div className="text-xs opacity-70">{category.count}</div>
               </div>
               {isSelected && (
-                <Badge className="bg-primary-black text-accent-gold text-xs">
+                <Badge className="bg-primaryBlack text-accentGold text-xs">
                   <Zap className="w-3 h-3 mr-1" />
                   Active
                 </Badge>

@@ -7,6 +7,17 @@ import { useQuery } from "@tanstack/react-query";
 export default function UpgradeCard() {
   const { data: userStatus } = useQuery({
     queryKey: ["/api/user/status"],
+    queryFn: async () => {
+      try {
+        const response = await fetch('/api/user/status');
+        if (!response.ok) {
+          return { isPremium: false };
+        }
+        return response.json();
+      } catch (error) {
+        return { isPremium: false };
+      }
+    },
   });
 
   if (userStatus?.isPremium) {
@@ -18,9 +29,9 @@ export default function UpgradeCard() {
   };
 
   return (
-    <Card className="bg-gradient-to-br from-accent-gold/10 to-gold-trim/5 border-accent-gold relative overflow-hidden">
+    <Card className="bg-gradient-to-br from-accentGold/10 to-goldTrim/5 border-accentGold relative overflow-hidden">
       <div className="absolute top-4 right-4">
-        <Badge className="bg-accent-gold text-primary-black font-bold">
+        <Badge className="bg-accentGold text-primaryBlack font-bold">
           UPGRADE
         </Badge>
       </div>
