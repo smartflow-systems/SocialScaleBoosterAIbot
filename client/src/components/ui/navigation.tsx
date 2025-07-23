@@ -119,6 +119,52 @@ export default function Navigation() {
               >
                 Marketplace
               </button>
+              
+              {/* New Options */}
+              <div className="border-t border-secondaryBrown my-2 pt-2">
+                <button 
+                  onClick={() => {
+                    setLocation("/subscribe");
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="block w-full text-left px-3 py-2 text-accentGold hover:text-goldTrim transition-colors rounded-md hover:bg-secondaryBrown font-medium"
+                >
+                  🆓 Start Free Trial
+                </button>
+                <button 
+                  onClick={() => {
+                    const element = document.getElementById('pricing');
+                    if (element) {
+                      element.scrollIntoView({ behavior: 'smooth' });
+                    } else {
+                      setLocation("/#pricing");
+                    }
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="block w-full text-left px-3 py-2 text-neutralGray hover:text-accentGold transition-colors rounded-md hover:bg-secondaryBrown"
+                >
+                  💎 View Packages
+                </button>
+                <button 
+                  onClick={() => {
+                    window.open("https://docs.smartflow.ai", "_blank");
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="block w-full text-left px-3 py-2 text-neutralGray hover:text-accentGold transition-colors rounded-md hover:bg-secondaryBrown"
+                >
+                  📚 Documentation
+                </button>
+                <button 
+                  onClick={() => {
+                    window.open("https://support.smartflow.ai", "_blank");
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="block w-full text-left px-3 py-2 text-neutralGray hover:text-accentGold transition-colors rounded-md hover:bg-secondaryBrown"
+                >
+                  🎧 Support
+                </button>
+              </div>
+              
               <Button 
                 onClick={() => {
                   setLocation("/dashboard");
