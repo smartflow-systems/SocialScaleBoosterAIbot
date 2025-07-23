@@ -399,12 +399,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       // Check if user already has a subscription
       if (user.stripeSubscriptionId) {
-        const subscription = await stripe.subscriptions.retrieve(user.stripeSubscriptionId);
+        const subscription = await stripe.subscriptions.retrieve(user.stripeSubscriptionId, {
+          expand: ['latest_invoice.payment_intent']
+        });
 
         if (subscription.status === 'active') {
+          const latestInvoice = subscription.latest_invoice as any;
+          const clientSecret = latestInvoice?.payment_intent?.client_secret;
+          
           return res.json({
             subscriptionId: subscription.id,
-            clientSecret: subscription.latest_invoice?.payment_intent?.client_secret,
+            clientSecret,
             status: 'already_subscribed'
           });
         }
@@ -453,9 +458,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Update user with subscription ID
       await storage.updateUserStripeInfo(userId, stripeCustomerId, subscription.id);
 
+      const latestInvoice = subscription.latest_invoice as any;
+      const clientSecret = latestInvoice?.payment_intent?.client_secret;
+
       res.json({
         subscriptionId: subscription.id,
-        clientSecret: subscription.latest_invoice?.payment_intent?.client_secret,
+        clientSecret,
       });
     } catch (error: any) {
       console.error('Subscription creation error:', error);
@@ -483,8 +491,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
         status: subscription.status,
         isPremium: user.isPremium,
         subscriptionId: subscription.id,
-        currentPeriodEnd: subscription.current_period_end,
-        cancelAtPeriodEnd: subscription.cancel_at_period_end,
+        currentPeriodEnd: new Date((subscription as any).current_period_end * 1000).toISOString(),
+        cancelAtPeriodEnd: (subscription as any).cancel_at_period_end,
       });
     } catch (error: any) {
       res.status(500).json({ message: error.message });
@@ -511,8 +519,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       res.json({
         message: "Subscription will be cancelled at the end of the billing period",
-        cancelAtPeriodEnd: subscription.cancel_at_period_end,
-        currentPeriodEnd: subscription.current_period_end,
+        cancelAtPeriodEnd: (subscription as any).cancel_at_period_end,
+        currentPeriodEnd: new Date((subscription as any).current_period_end * 1000).toISOString(),
       });
     } catch (error: any) {
       res.status(500).json({ message: error.message });
