@@ -14,9 +14,45 @@ export default function Navigation() {
             <span className="text-xl font-bold text-accent-gold">SmartFlow AI</span>
           </div>
           <div className="hidden md:flex items-center space-x-8">
-            <a href="#features" className="text-neutral-gray hover:text-accent-gold transition-colors">Features</a>
-            <a href="#pricing" className="text-neutral-gray hover:text-accent-gold transition-colors">Pricing</a>
-            <a href="#marketplace" className="text-neutral-gray hover:text-accent-gold transition-colors">Marketplace</a>
+            <button 
+              onClick={() => {
+                const element = document.getElementById('features');
+                if (element) {
+                  element.scrollIntoView({ behavior: 'smooth' });
+                } else {
+                  setLocation("/#features");
+                }
+              }}
+              className="text-neutral-gray hover:text-accent-gold transition-colors bg-transparent border-none cursor-pointer"
+            >
+              Features
+            </button>
+            <button 
+              onClick={() => {
+                const element = document.getElementById('pricing');
+                if (element) {
+                  element.scrollIntoView({ behavior: 'smooth' });
+                } else {
+                  setLocation("/#pricing");
+                }
+              }}
+              className="text-neutral-gray hover:text-accent-gold transition-colors bg-transparent border-none cursor-pointer"
+            >
+              Pricing
+            </button>
+            <button 
+              onClick={() => {
+                const element = document.getElementById('marketplace');
+                if (element) {
+                  element.scrollIntoView({ behavior: 'smooth' });
+                } else {
+                  setLocation("/#marketplace");
+                }
+              }}
+              className="text-neutral-gray hover:text-accent-gold transition-colors bg-transparent border-none cursor-pointer"
+            >
+              Marketplace
+            </button>
             <Button 
               onClick={() => setLocation("/dashboard")}
               className="bg-rich-brown text-gold-trim border border-accent-gold font-semibold hover:bg-accent-gold hover:text-primary-black transition-all"
