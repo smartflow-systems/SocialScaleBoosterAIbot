@@ -1,6 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import Stripe from "stripe";
+import OpenAI from "openai";
 import { AnalyticsWebSocketServer } from "./websocket";
 import { storage } from "./storage";
 import { insertBotSchema, insertBotTemplateSchema, insertAnalyticsSchema } from "@shared/schema";
@@ -10,6 +11,11 @@ let stripe: Stripe | null = null;
 if (process.env.STRIPE_SECRET_KEY) {
   stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 }
+
+// Initialize OpenAI
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Server-side rendered landing page for SEO crawlability
@@ -510,6 +516,337 @@ export async function registerRoutes(app: Express): Promise<Server> {
       });
     } catch (error: any) {
       res.status(500).json({ message: error.message });
+    }
+  });
+
+  // Social Media Post Generator Routes
+  // HTML Interface for the Social Media Post Generator
+  app.get("/post-generator", (req, res) => {
+    const html = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Social Media Post Generator</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+      color: #ffffff;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: rgba(42, 42, 42, 0.9);
+      border-radius: 16px;
+      padding: 40px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 215, 0, 0.2);
+    }
+    
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #FFD700;
+      font-size: 2.5rem;
+      font-weight: 700;
+    }
+    
+    .form-group {
+      margin-bottom: 25px;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #FFD700;
+      font-weight: 600;
+    }
+    
+    input, textarea, select {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid rgba(255, 215, 0, 0.3);
+      border-radius: 8px;
+      background: rgba(26, 26, 26, 0.8);
+      color: #ffffff;
+      font-size: 16px;
+      transition: border-color 0.3s ease;
+    }
+    
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: #FFD700;
+      box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+    }
+    
+    .generate-btn {
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+      color: #000000;
+      border: none;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    
+    .generate-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
+    }
+    
+    .generate-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+    
+    .results {
+      margin-top: 40px;
+    }
+    
+    .post-card {
+      background: rgba(26, 26, 26, 0.8);
+      border: 1px solid rgba(255, 215, 0, 0.3);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      transition: transform 0.2s ease;
+    }
+    
+    .post-card:hover {
+      transform: translateY(-2px);
+      border-color: #FFD700;
+    }
+    
+    .post-number {
+      color: #FFD700;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    
+    .post-content {
+      font-size: 16px;
+      line-height: 1.5;
+      margin-bottom: 10px;
+    }
+    
+    .char-count {
+      font-size: 12px;
+      color: #888;
+      text-align: right;
+    }
+    
+    .char-count.over-limit {
+      color: #ff6b6b;
+    }
+    
+    .loading {
+      text-align: center;
+      color: #FFD700;
+      font-size: 18px;
+      margin: 20px 0;
+    }
+    
+    .error {
+      background: rgba(255, 107, 107, 0.1);
+      border: 1px solid rgba(255, 107, 107, 0.3);
+      color: #ff6b6b;
+      padding: 15px;
+      border-radius: 8px;
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🚀 Social Media Post Generator</h1>
+    
+    <form id="postForm">
+      <div class="form-group">
+        <label for="topic">Topic/Theme:</label>
+        <input type="text" id="topic" name="topic" placeholder="e.g., sustainable fashion, AI technology, fitness tips" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="tone">Tone:</label>
+        <select id="tone" name="tone">
+          <option value="professional">Professional</option>
+          <option value="casual">Casual</option>
+          <option value="funny">Funny</option>
+          <option value="inspirational">Inspirational</option>
+          <option value="educational">Educational</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label for="platform">Platform:</label>
+        <select id="platform" name="platform">
+          <option value="twitter">Twitter</option>
+          <option value="instagram">Instagram</option>
+          <option value="linkedin">LinkedIn</option>
+          <option value="facebook">Facebook</option>
+          <option value="general">General</option>
+        </select>
+      </div>
+      
+      <button type="submit" class="generate-btn" id="generateBtn">
+        Generate 3 Post Ideas
+      </button>
+    </form>
+    
+    <div id="results" class="results" style="display: none;"></div>
+  </div>
+
+  <script>
+    document.getElementById('postForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const generateBtn = document.getElementById('generateBtn');
+      const resultsDiv = document.getElementById('results');
+      
+      // Get form data
+      const formData = new FormData(e.target);
+      const data = Object.fromEntries(formData);
+      
+      // Show loading state
+      generateBtn.disabled = true;
+      generateBtn.textContent = 'Generating...';
+      resultsDiv.style.display = 'block';
+      resultsDiv.innerHTML = '<div class="loading">🤖 AI is crafting your posts...</div>';
+      
+      try {
+        const response = await fetch('/api/generate-posts', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+        
+        if (!response.ok) {
+          throw new Error('Failed to generate posts');
+        }
+        
+        const result = await response.json();
+        displayResults(result.posts);
+        
+      } catch (error) {
+        resultsDiv.innerHTML = '<div class="error">❌ Error: ' + error.message + '</div>';
+      } finally {
+        generateBtn.disabled = false;
+        generateBtn.textContent = 'Generate 3 Post Ideas';
+      }
+    });
+    
+    function displayResults(posts) {
+      const resultsDiv = document.getElementById('results');
+      
+      let html = '<h2 style="color: #FFD700; margin-bottom: 20px;">✨ Your Generated Posts:</h2>';
+      
+      posts.forEach((post, index) => {
+        const charCount = post.length;
+        const isOverLimit = charCount > 280;
+        
+        html += 
+          '<div class="post-card">' +
+            '<div class="post-number">Post #' + (index + 1) + '</div>' +
+            '<div class="post-content">' + post + '</div>' +
+            '<div class="char-count ' + (isOverLimit ? 'over-limit' : '') + '">' + charCount + '/280 characters</div>' +
+          '</div>';
+      });
+      
+      resultsDiv.innerHTML = html;
+    }
+  </script>
+</body>
+</html>
+    `;
+    
+    res.send(html);
+  });
+
+  // API endpoint to generate social media posts
+  app.post("/api/generate-posts", async (req, res) => {
+    try {
+      const { topic, tone, platform } = req.body;
+      
+      if (!topic) {
+        return res.status(400).json({ error: "Topic is required" });
+      }
+
+      const prompt = `Generate 3 unique social media posts about "${topic}" with a ${tone} tone for ${platform}. 
+      
+      Requirements:
+      - Each post must be under 280 characters
+      - Make them engaging and platform-appropriate
+      - Include relevant hashtags where appropriate
+      - Vary the style and approach for each post
+      - Make them actionable or thought-provoking
+      
+      Return only the 3 posts, separated by "---" with no additional text or explanations.`;
+
+      const completion = await openai.chat.completions.create({
+        model: "gpt-4o", // the newest OpenAI model is "gpt-4o" which was released May 13, 2024. do not change this unless explicitly requested by the user
+        messages: [
+          {
+            role: "system",
+            content: "You are a creative social media expert who creates engaging, concise posts that drive engagement and conversions."
+          },
+          {
+            role: "user",
+            content: prompt
+          }
+        ],
+        max_tokens: 500,
+        temperature: 0.8,
+      });
+
+      const generatedContent = completion.choices[0].message.content;
+      
+      if (!generatedContent) {
+        throw new Error("No content generated");
+      }
+
+      // Split the posts by "---" and clean them up
+      const posts = generatedContent
+        .split("---")
+        .map(post => post.trim())
+        .filter(post => post.length > 0)
+        .slice(0, 3); // Ensure we only get 3 posts
+
+      // Ensure we have exactly 3 posts
+      if (posts.length < 3) {
+        throw new Error("Not enough posts generated");
+      }
+
+      res.json({ 
+        posts: posts,
+        topic: topic,
+        tone: tone,
+        platform: platform
+      });
+
+    } catch (error: any) {
+      console.error('Post generation error:', error);
+      res.status(500).json({ 
+        error: "Failed to generate posts", 
+        details: error.message 
+      });
     }
   });
 
