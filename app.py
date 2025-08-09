@@ -136,10 +136,6 @@ def api_boost():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-@app.get("/health")
-def health():
-    return {"ok": True}
-
 import os
 if __name__ == "__main__":
     port = int(os.getenv("PORT", "3000"))
