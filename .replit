@@ -1,0 +1,15 @@
+modules = ["python-3.11"]
+run = "python3 app.py"
+
+[nix]
+channel = "stable-24_05"
+
+[[ports]]
+localPort = 3000
+externalPort = 3000
+
+[env]
+PORT = "3000"
+
+[agent]
+integrations = ["javascript_database==1.0.0", "javascript_openai==1.0.0"]
