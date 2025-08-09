@@ -1,4 +1,3 @@
-
 #!/usr/bin/env python3
 """
 SocialScaleBooster - A social media post enhancement bot
@@ -161,7 +160,7 @@ if __name__ == "__main__":
         result = booster.boost_post(post, tone)
         vibe = booster.vibe_detector(post)
         
-        print(f"\n✨ Boosted Post:")
+        print("\n✨ Boosted Post:")
         print(f"{result['final_post']}")
         print(f"\n{vibe}")
         print("-" * 50)
