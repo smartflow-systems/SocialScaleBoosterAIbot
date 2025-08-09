@@ -10,6 +10,10 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Updates (January 2025)
 
+✓ **Dual-Mode Application Architecture**: Successfully implemented Python Flask + Node.js dual-mode system on unified port 3000
+✓ **OpenAI Social Media Post Generator**: Complete Flask API with 3-post generation, hashtag enhancement, tone adjustment, and vibe detection
+✓ **Unified Port Configuration**: Both Python Flask and Node.js applications configured for port 3000 with HOST 0.0.0.0
+✓ **Dual Mode Management System**: Created toggle scripts and web interface for switching between Python Flask (AI post generator) and Node.js (full platform)
 ✓ **Brand Rebrand to SmartFlow AI**: Updated all branding from SFS ScaleBots to SmartFlow AI with refined messaging
 ✓ **PostgreSQL Database Integration**: Migrated from memory storage to PostgreSQL with complete schema and seeded data
 ✓ **Advanced Analytics Dashboard**: Comprehensive Chart.js integration with revenue tracking ($4,550.50), ROI metrics (340%), engagement rates, and platform performance analytics
@@ -19,14 +23,28 @@ Preferred communication style: Simple, everyday language.
 ✓ **Platform Integration Wizard**: Multi-step integration setup for Instagram, TikTok, Facebook, Twitter, YouTube with secure API key management
 ✓ **Premium Monetization**: Freemium model with 3-bot limit for free users, $49/mo Pro plan upgrade flow, premium template locks
 ✓ **Server-Side Rendered Landing Page**: Implemented Express SSR route for crawlable landing page with static HTML content, proper meta tags, and SEO optimization
-✓ **Analytics Dashboard**: Added Chart.js integration with real-time e-commerce metrics, engagement tracking, ROI calculations, and platform performance analytics  
-✓ **Enhanced Marketplace**: Created comprehensive bot template marketplace with category filtering, search functionality, and premium template system
-✓ **Stripe Payment Integration**: Implemented secure payment processing for premium subscriptions with checkout flow and upgrade functionality
-✓ **E-commerce Bot Presets**: Added specialized bot creation templates for product showcases, flash sales, testimonials, and trend tracking
-✓ **Premium Brown & Gold Theme**: Transformed color scheme from yellow to sophisticated brown with gold trimmings for luxury aesthetic
-✓ **Premium Theme Implementation**: Applied consistent dark brown base with gold accents and subtle gold glows throughout
 ✓ **Complete Stripe Payment Integration**: Implemented comprehensive payment processing with $49/month Pro plan subscriptions, one-time purchases, subscription management, premium template access controls, payment success notifications, and webhook support for subscription lifecycle events
 ✓ **Enhanced Mobile Navigation**: Fixed hamburger menu functionality with dropdown, added Free Trial, Packages, Documentation, and Support links with premium gold styling
+
+## Dual-Mode Architecture
+
+SmartFlow AI now supports dual-mode operation on unified port 3000:
+
+### Mode 1: Python Flask (AI Post Generator)
+- **File**: `demo_app.py` (demo) / `app.py` (full OpenAI version)
+- **Features**: AI social media post generation, hashtag enhancement, tone adjustment
+- **Endpoints**: `/api/boost`, `/health`
+- **Use Case**: Standalone AI content creation service
+
+### Mode 2: Node.js Platform (Full SmartFlow AI)
+- **File**: `server/index.ts`
+- **Features**: Complete platform with analytics, bot management, marketplace, Stripe integration
+- **Use Case**: Full-featured e-commerce automation platform
+
+### Toggle System
+- **Script**: `./toggle_mode.sh [python|node]`
+- **Manager**: `mode_manager.py` (web interface on port 8000)
+- **Configuration**: Both applications unified on port 3000
 
 ## System Architecture
 

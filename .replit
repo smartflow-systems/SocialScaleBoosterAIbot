@@ -3,6 +3,7 @@ run = "python3 app.py"
 
 [nix]
 channel = "stable-24_05"
+packages = ["python311Packages.openai", "python311Packages.flask", "python311Packages.flask-cors", "python311Packages.requests"]
 
 [[ports]]
 localPort = 3000
