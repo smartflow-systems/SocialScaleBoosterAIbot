@@ -1,3 +1,4 @@
+
 #!/usr/bin/env python3
 """
 Demo script to showcase SocialScaleBooster features
@@ -23,17 +24,18 @@ def run_demo():
     
     for i, (post, tone) in enumerate(demo_posts, 1):
         print(f"\n--- Demo {i} ---")
-        print(f"Input: '{post}' (tone: {tone})")
+        print(f"📝 Input: '{post}' (tone: {tone})")
         
         result = bot.boost_post(post, tone)
-        print(f"Output: {result['final_post']}")
+        print(f"✨ Output: {result['final_post']}")
         
         vibe = bot.vibe_detector(post)
-        print(f"Bonus - {vibe}")
+        print(f"🎯 {vibe}")
         print("-" * 30)
     
     print(f"\n✨ Demo completed! Your SocialScaleBooster is ready to use! ✨")
-    print("Run 'python main.py' for the interactive version.")
+    print("💡 Run 'python main.py' for the interactive version.")
+    print("🌐 Run 'python app.py' for the web interface.")
 
 if __name__ == "__main__":
     run_demo()
