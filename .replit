@@ -1,46 +1,14 @@
-modules = ["nodejs-20", "web", "postgresql-16", "python-3.11"]
-run = "npm run dev"
-hidden = [".config", ".git", "generated-icon.png", "node_modules", "dist"]
+modules = ["python-3.11"]
+
+# What the green Run button should do
+run = "python3 app.py"
 
 [nix]
 channel = "stable-24_05"
 
-[deployment]
-deploymentTarget = "autoscale"
-build = ["npm", "run", "build"]
-run = ["npm", "run", "start"]
-
-[[ports]]
-localPort = 81
-externalPort = 3000
-
-[[ports]]
-localPort = 5000
-externalPort = 80
-
+# Flask listens on 81 (matches app.run(..., port=81))
 [env]
-PORT = "5000"
+PORT = "81"
 
-[workflows]
-runButton = "Project"
-
-[[workflows.workflow]]
-name = "Project"
-mode = "parallel"
-author = "agent"
-
-[[workflows.workflow.tasks]]
-task = "workflow.run"
-args = "Start application"
-
-[[workflows.workflow]]
-name = "Start application"
-author = "agent"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "npm run dev"
-waitForPort = 5000
-
-[agent]
-integrations = ["javascript_database==1.0.0", "javascript_openai==1.0.0"]
+[ports]
+localPort = 81
