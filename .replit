@@ -10,5 +10,11 @@ build = ["bash","-lc","python3 -m venv venv && ./venv/bin/pip install --upgrade 
 run = ["bash","-lc","./venv/bin/gunicorn -w 2 -k gthread -b 0.0.0.0:$PORT app:app"]
 
 [[ports]]
+localPort = 3000
+externalPort = 3000
+
+[[ports]]
 localPort = 3001
 externalPort = 80
+
+[nix]
