@@ -1,20 +1,18 @@
-modules = ["python-3.11", "nodejs-20"]
+# .replit
 run = "python3 app.py"
-
-[nix]
-channel = "stable-24_05"
-packages = ["python311Packages.flask", "python311Packages.flask-cors", "python311Packages.openai", "python311Packages.requests"]
-
-[[ports]]
-localPort = 3000
-externalPort = 3000
-
-[[ports]]
-localPort = 5000
-externalPort = 80
+modules = ["python-3.11"]   # ensures Python is available in Autoscale
 
 [env]
 PORT = "3000"
 
-[agent]
-integrations = ["javascript_database==1.0.0", "javascript_openai==1.0.0"]
+[deployment]
+deploymentTarget = "autoscale"
+# Create a venv so pip can install packages (avoids Nix/system write errors)
+build = ["bash","-lc","python3 -m venv venv && source venv/bin/activate && pip install --upgrade pip && pip install -r requirements.txt"]
+run = ["bash","-lc","source venv/bin/activate && venv/bin/gunicorn -w 2 -k gthread -b 0.0.0.0:$PORT app:app"]
+
+[nix]
+
+[[ports]]
+localPort = 3000
+externalPort = 80
