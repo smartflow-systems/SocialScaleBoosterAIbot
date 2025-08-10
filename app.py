@@ -4,7 +4,7 @@ from flask_cors import CORS
 from main import SocialScaleBooster
 
 app = Flask(__name__)
-CORS(app)  # enables cross‑origin requests for /api endpoints
+CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 HTML_PAGE = """
 <!DOCTYPE html>
@@ -135,6 +135,10 @@ def api_boost():
         }), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
+@app.route("/health", methods=["GET"])
+def health():
+    return {"ok": True}, 200, {"Cache-Control": "no-store"}
 
 import os
 if __name__ == "__main__":

@@ -16,3 +16,7 @@ run = ["bash","-lc","source venv/bin/activate && venv/bin/gunicorn -w 2 -k gthre
 [[ports]]
 localPort = 3000
 externalPort = 80
+
+[[ports]]
+localPort = 3001
+externalPort = 3001

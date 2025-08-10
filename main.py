@@ -93,7 +93,7 @@ class SocialScaleBooster:
         pizzazz_text = f"{text} {' '.join(selected_emojis)}"
         return pizzazz_text
 
-    def boost_post(self, original_post: str, tone: str = 'friendly') -> Dict[str, str]:
+    def boost_post(self, original_post: str, tone: str = 'friendly') -> Dict[str, str | List[str]]:
         if tone not in ['friendly', 'professional']:
             tone = 'friendly'
 
