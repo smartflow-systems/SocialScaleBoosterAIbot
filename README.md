@@ -1,109 +1,152 @@
-# SocialScaleBooster 🚀
+# SmartFlow Systems Landing Page
 
-**A bot to supercharge social media posts with tone, hashtags, and flair!**
+Premium AI automation landing page built for small business growth. Features booking systems, ecommerce, social media bots, and websites.
 
-SocialScaleBooster is a Python-powered social media enhancement tool that transforms your ordinary posts into engaging, professional content. Whether you need a friendly tone for personal branding or a professional touch for business communications, this bot has you covered!
+## 🎯 Quick Start
 
-## ✨ Features
+1. **Replace placeholder images** in `/assets/` folder
+2. **Update contact email** in `app.js` (line 8)
+3. **Customize colors** in `styles.css` CSS variables
+4. **Edit pricing** in `index-smartflow.html` pricing section
+5. **Deploy** to your web hosting
 
-- **🎭 Tone Adjustment**: Choose between 'friendly' and 'professional' tones
-- **#️⃣ Smart Hashtags**: Automatically generates 3-5 relevant hashtags based on your content
-- **✨ Pizzazz Addition**: Adds appropriate emojis to make your posts pop
-- **🔮 Vibe Detector**: Bonus feature that analyzes post mood and suggests emojis
-- **🤖 Easy to Use**: Simple command-line interface for quick post enhancement
+## 📁 File Structure
 
-## 📋 How to Run
-
-### Prerequisites
-- Python 3.6 or higher
-- No external dependencies required (uses only built-in libraries)
-
-### Installation & Usage
-
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/boweazy/SocialScaleBooster.git
-   cd SocialScaleBooster
-   ```
-
-2. **Run the bot:**
-   ```bash
-   python main.py
-   ```
-
-3. **Follow the interactive prompts:**
-   - Enter your social media post
-   - Choose tone (friendly/professional)
-   - Get your boosted post with hashtags and emojis!
-
-### Example Usage
-
-**Input:**
 ```
-Post: "Check out my new product"
-Tone: friendly
+├── index-smartflow.html    # Main landing page
+├── styles.css             # All styling (black/gold theme)
+├── app.js                 # Interactions & form handling
+├── assets/                # Images and media files
+│   ├── logo.svg          # SmartFlow logo (editable)
+│   └── placeholder-images.txt
+└── README.md             # This guide
 ```
 
-**Output:**
+## 🎨 Customization Guide
+
+### Colors & Branding
+Edit CSS variables in `styles.css` (lines 7-20):
+```css
+:root {
+    --bg: #0b0b0b;           /* Dark background */
+    --brown: #1a120e;        /* Card backgrounds */
+    --gold: #d4af37;         /* Accent color */
+    --text: #e9e9e9;         /* Body text */
+    --muted: #9a9a9a;        /* Secondary text */
+}
 ```
-Hey! Check out my new product 😊 🚀 #ProductLaunch #NewRelease #Innovation #Awesome
+
+### Content & Copy
+Edit directly in `index-smartflow.html`:
+- **Hero title** (line 65): Main headline
+- **Systems descriptions** (lines 120-200): Service details
+- **Pricing** (lines 280-350): Plans and prices
+- **Case study** (lines 220-260): Success story
+- **FAQ** (lines 380-450): Common questions
+
+### Contact Form
+Choose your preferred method in `app.js` (line 8):
+
+**Option 1: Email (default)**
+```javascript
+CONTACT_METHOD: 'mailto'
+EMAIL: 'your-email@domain.com'
 ```
 
-## 🛠 Code Structure
+**Option 2: Formspree**
+```javascript
+CONTACT_METHOD: 'formspree'
+FORMSPREE_URL: 'https://formspree.io/f/your-form-id'
+```
 
-- `main.py` - Core bot functionality with SocialScaleBooster class
-- `SocialScaleBooster` class contains:
-  - `boost_post()` - Main enhancement function
-  - `add_tone_adjustment()` - Tone modification
-  - `generate_hashtags()` - Smart hashtag generation
-  - `add_pizzazz()` - Emoji addition
-  - `vibe_detector()` - Bonus mood analysis feature
+### Pricing Plans
+Update pricing in HTML (lines 280-350):
+```html
+<div class="pricing-price">
+    <span class="price-setup">£99 setup</span>
+    <span class="price-monthly">£29/mo</span>
+</div>
+```
 
-## 🎯 Future Enhancements
+## 📱 Responsive Design
 
-- Web interface for easier access
-- API integration for direct social media posting
-- Machine learning for better hashtag suggestions
-- Custom emoji sets for different industries
-- Bulk post processing
-- Analytics and performance tracking
+- **Mobile-first** approach (360px+ supported)
+- **Accessible** (WCAG 2.1 AA compliant)
+- **Fast loading** (lazy images, optimized CSS)
+- **SEO optimized** (meta tags, JSON-LD)
 
-## 🤝 Get Involved
+## 🖼️ Image Requirements
 
-We welcome contributions! Here's how you can help:
+Replace placeholder files in `/assets/`:
 
-1. **Fork the repository**
-2. **Create a feature branch**: `git checkout -b feature/amazing-feature`
-3. **Commit your changes**: `git commit -m 'Add amazing feature'`
-4. **Push to the branch**: `git push origin feature/amazing-feature`
-5. **Open a Pull Request**
+| File | Size | Purpose |
+|------|------|---------|
+| `favicon.png` | 32x32 | Browser tab icon |
+| `hero-bg.jpg` | 1920x1080 | Hero background |
+| `avatar.jpg` | 400x400 | Gareth's photo |
+| `case-study-video.jpg` | 1200x675 | Video thumbnail |
 
-### Ideas for Contributions:
-- Add support for more social media platforms
-- Implement sentiment analysis
-- Create a web dashboard
-- Add multi-language support
-- Improve hashtag generation algorithms
+**Company logos** (80x32 each):
+- `stripe-logo.svg`
+- `google-logo.svg` 
+- `buffer-logo.svg`
+- `shopify-logo.svg`
+- `twilio-logo.svg`
 
-## 📈 Business Potential
+## 🚀 Performance Checklist
 
-SocialScaleBooster has tremendous potential for growth:
-- **SaaS Model**: Subscription-based service for social media managers
-- **API Services**: Integrate with existing social media tools
-- **Enterprise Solutions**: Custom solutions for large businesses
-- **Mobile App**: iOS/Android app for on-the-go post enhancement
-- **AI Integration**: Advanced AI for personalized content suggestions
+Before going live:
+- [ ] Replace all placeholder images
+- [ ] Test contact form submission
+- [ ] Run Lighthouse audit (target: 90+ scores)
+- [ ] Test on mobile devices (360px width)
+- [ ] Verify all navigation links work
+- [ ] Check FAQ accordion functionality
+- [ ] Test form validation
 
-## 📄 License
+## 📊 Analytics Setup
 
-This project is open source and available under the [MIT License](LICENSE).
+Replace placeholder tracking in `app.js` (line 245):
+```javascript
+// Add Google Analytics
+gtag('config', 'GA_MEASUREMENT_ID');
+```
 
-## 🚀 About
+## 🔧 Technical Specs
 
-Created with ❤️ by [boweazy](https://github.com/boweazy)
+- **Framework**: Vanilla HTML/CSS/JS (no dependencies)
+- **Performance**: <50KB CSS, lazy-loaded images
+- **Browser support**: Chrome, Firefox, Safari, Edge
+- **Accessibility**: Semantic HTML, ARIA labels, keyboard navigation
+- **SEO**: Meta tags, OpenGraph, JSON-LD structured data
 
-Transform your social media presence, one post at a time!
+## 📞 Support & Contact
+
+- **Email**: garethbowers@hotmail.com
+- **WhatsApp**: +44 7123 456789 (update in HTML)
+- **Theme**: Smart, street-smart, futuristic
+- **Colors**: Black/brown backgrounds with shiny gold accents
+
+## 🎯 Conversion Optimization
+
+The page is designed for maximum conversions:
+- **Above-fold CTAs**: "Book a Demo" prominently placed
+- **Social proof**: Trusted integration logos
+- **Case study**: Real results with specific metrics
+- **FAQ section**: Addresses common objections
+- **Multiple contact methods**: Form, email, WhatsApp
+- **Premium design**: Black & gold theme builds trust
+
+## 📝 Content Strategy
+
+Focus on benefits over features:
+- **Speed**: "Days not weeks" delivery
+- **Smart**: "Niche presets" for specific industries
+- **Premium**: "Black & gold design that converts"
+
+Use "You get" language throughout copy to focus on customer benefits.
 
 ---
 
-**Ready to boost your social media game? Star this repo and let's grow together! ⭐**
+**Built for Gareth Bowers - SmartFlow Systems**
+*Premium AI automation for small business growth*
