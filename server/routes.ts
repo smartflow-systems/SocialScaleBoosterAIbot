@@ -18,6 +18,17 @@ const openai = new OpenAI({
 });
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Health check endpoint for deployment monitoring
+  app.get("/health", (req, res) => {
+    res.status(200).json({ 
+      status: "healthy", 
+      timestamp: new Date().toISOString(),
+      uptime: process.uptime(),
+      environment: process.env.NODE_ENV || "development",
+      port: process.env.PORT || "3000"
+    });
+  });
+
   // Server-side rendered landing page for SEO crawlability
   app.get("/landing-ssr", (req, res) => {
     const html = `
