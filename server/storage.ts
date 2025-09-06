@@ -143,6 +143,7 @@ export class MemStorage implements IStorage {
     const server: VpnServer = {
       ...insertServer,
       id,
+      ping: insertServer.ping ?? null,
       lastChecked: new Date()
     };
     this.vpnServers.set(id, server);
@@ -169,7 +170,10 @@ export class MemStorage implements IStorage {
     const id = randomUUID();
     const history: ConnectionHistory = {
       ...insertHistory,
-      id
+      id,
+      duration: insertHistory.duration ?? null,
+      serverId: insertHistory.serverId ?? null,
+      disconnectedAt: insertHistory.disconnectedAt ?? null
     };
     this.connectionHistory.set(id, history);
     return history;
@@ -202,6 +206,8 @@ export class MemStorage implements IStorage {
     const result: SpeedTestResult = {
       ...insertResult,
       id,
+      serverId: insertResult.serverId ?? null,
+      jitter: insertResult.jitter ?? null,
       testDate: new Date()
     };
     this.speedTestResults.set(id, result);
@@ -217,8 +223,13 @@ export class MemStorage implements IStorage {
   async createSecurityCheck(insertCheck: InsertSecurityCheck): Promise<SecurityCheck> {
     const id = randomUUID();
     const check: SecurityCheck = {
-      ...insertCheck,
       id,
+      dnsLeakStatus: insertCheck.dnsLeakStatus || "protected",
+      ipLeakStatus: insertCheck.ipLeakStatus || "protected",
+      webrtcStatus: insertCheck.webrtcStatus || "blocked",
+      realIp: insertCheck.realIp ?? null,
+      vpnIp: insertCheck.vpnIp ?? null,
+      dnsServers: insertCheck.dnsServers || null,
       checkedAt: new Date()
     };
     this.securityChecks.set(id, check);
