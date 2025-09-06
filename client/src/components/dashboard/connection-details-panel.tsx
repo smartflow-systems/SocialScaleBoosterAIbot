@@ -1,18 +1,28 @@
 import { Network } from "lucide-react";
 import { GlassPanel } from "@/components/ui/glass-panel";
 import { useEffect, useState } from "react";
+import { useConnectionState } from "@/hooks/use-connection-state";
 
 export function ConnectionDetailsPanel() {
-  const [connectionTime, setConnectionTime] = useState("2h 34m");
+  const { connectedServer } = useConnectionState();
+  const [connectionTime, setConnectionTime] = useState("0m");
+  const [connectionStartTime] = useState(Date.now());
   
   useEffect(() => {
     // Update connection time every minute
     const interval = setInterval(() => {
-      const startTime = Date.now() - (2 * 60 + 34) * 60 * 1000; // 2h 34m ago
-      const elapsed = Date.now() - startTime;
-      const hours = Math.floor(elapsed / (1000 * 60 * 60));
-      const minutes = Math.floor((elapsed % (1000 * 60 * 60)) / (1000 * 60));
-      setConnectionTime(`${hours}h ${minutes}m`);
+      if (connectedServer) {
+        const elapsed = Date.now() - connectionStartTime;
+        const hours = Math.floor(elapsed / (1000 * 60 * 60));
+        const minutes = Math.floor((elapsed % (1000 * 60 * 60)) / (1000 * 60));
+        if (hours > 0) {
+          setConnectionTime(`${hours}h ${minutes}m`);
+        } else {
+          setConnectionTime(`${minutes}m`);
+        }
+      } else {
+        setConnectionTime("0m");
+      }
     }, 60000);
     
     return () => clearInterval(interval);
@@ -26,8 +36,16 @@ export function ConnectionDetailsPanel() {
       </h3>
       <div className="space-y-3">
         <div className="flex justify-between">
+          <span className="text-muted-foreground">Server</span>
+          <span className="text-white" data-testid="text-server">
+            {connectedServer ? connectedServer.name : "Not connected"}
+          </span>
+        </div>
+        <div className="flex justify-between">
           <span className="text-muted-foreground">Protocol</span>
-          <span className="text-white" data-testid="text-protocol">OpenVPN</span>
+          <span className="text-white" data-testid="text-protocol">
+            {connectedServer ? connectedServer.protocol : "--"}
+          </span>
         </div>
         <div className="flex justify-between">
           <span className="text-muted-foreground">Encryption</span>
@@ -35,7 +53,9 @@ export function ConnectionDetailsPanel() {
         </div>
         <div className="flex justify-between">
           <span className="text-muted-foreground">Port</span>
-          <span className="text-white" data-testid="text-port">1194</span>
+          <span className="text-white" data-testid="text-port">
+            {connectedServer ? connectedServer.port : "--"}
+          </span>
         </div>
         <div className="flex justify-between">
           <span className="text-muted-foreground">Connected Time</span>
