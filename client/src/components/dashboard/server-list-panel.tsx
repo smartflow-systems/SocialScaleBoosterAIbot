@@ -1,8 +1,10 @@
-import { Server, CheckCircle } from "lucide-react";
+import { Server, CheckCircle, Loader2 } from "lucide-react";
 import { GlassPanel } from "@/components/ui/glass-panel";
 import { type VpnServer } from "@shared/schema";
 import { usePingTest } from "@/hooks/use-ping-test";
+import { useConnectionState } from "@/hooks/use-connection-state";
 import { Button } from "@/components/ui/button";
+import { useToast } from "@/hooks/use-toast";
 
 interface ServerListPanelProps {
   servers: VpnServer[];
@@ -10,6 +12,8 @@ interface ServerListPanelProps {
 
 export function ServerListPanel({ servers }: ServerListPanelProps) {
   const { pingServer, pings } = usePingTest();
+  const { connectedServer, isConnecting, connectToServer } = useConnectionState();
+  const { toast } = useToast();
 
   const getSignalBars = (ping: number | null | undefined) => {
     if (!ping) return 1;
@@ -29,6 +33,19 @@ export function ServerListPanel({ servers }: ServerListPanelProps) {
     return flags[countryCode] || "🌍";
   };
 
+  const handleServerClick = (server: VpnServer) => {
+    if (connectedServer?.id === server.id) {
+      // Already connected to this server
+      return;
+    }
+    
+    connectToServer(server);
+    toast({
+      title: `Connecting to ${server.name}`,
+      description: "Establishing secure connection...",
+    });
+  };
+
   return (
     <GlassPanel className="rounded-lg p-6">
       <h3 className="text-lg font-semibold text-primary mb-4 flex items-center">
@@ -36,16 +53,18 @@ export function ServerListPanel({ servers }: ServerListPanelProps) {
         Available Servers
       </h3>
       <div className="space-y-3">
-        {servers.map((server, index) => {
+        {servers.map((server) => {
           const currentPing = pings[server.id] || server.ping;
-          const isConnected = index === 1; // Mock connected server (London)
+          const isConnected = connectedServer?.id === server.id;
+          const isThisServerConnecting = isConnecting && connectedServer?.id === server.id;
           
           return (
             <div 
               key={server.id}
               className={`glass-panel rounded-lg p-4 hover:bg-primary/5 transition-colors cursor-pointer ${
-                isConnected ? 'border-primary/50' : ''
-              }`}
+                isConnected ? 'border-primary/50 bg-primary/5' : ''
+              } ${isThisServerConnecting ? 'border-primary/30 bg-primary/3' : ''}`}
+              onClick={() => handleServerClick(server)}
               data-testid={`server-item-${server.id}`}
             >
               <div className="flex items-center justify-between">
@@ -60,6 +79,9 @@ export function ServerListPanel({ servers }: ServerListPanelProps) {
                       </p>
                       {isConnected && (
                         <CheckCircle className="text-primary text-sm" data-testid={`icon-connected-${server.id}`} />
+                      )}
+                      {isThisServerConnecting && (
+                        <Loader2 className="text-primary text-sm animate-spin" data-testid={`icon-connecting-${server.id}`} />
                       )}
                     </div>
                     <p className="text-sm text-muted-foreground" data-testid={`text-server-load-${server.id}`}>

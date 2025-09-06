@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
+import { useConnectionState } from "./use-connection-state";
 
 interface SpeedTestResults {
   downloadSpeed: number;
@@ -17,9 +18,16 @@ export function useSpeedTest() {
   });
   
   const { toast } = useToast();
+  const { connectedServer } = useConnectionState();
 
   const speedTestMutation = useMutation({
-    mutationFn: () => apiRequest("POST", "/api/speed-test", {}),
+    mutationFn: () => apiRequest("POST", "/api/speed-test", {
+      serverId: connectedServer?.id || null,
+      downloadSpeed: 0,
+      uploadSpeed: 0,
+      ping: 0,
+      jitter: 0
+    }),
     onSuccess: async (response) => {
       const data = await response.json();
       

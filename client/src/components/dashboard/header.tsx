@@ -1,7 +1,10 @@
 import { Shield, Settings } from "lucide-react";
 import { GlassPanel } from "@/components/ui/glass-panel";
+import { useConnectionState } from "@/hooks/use-connection-state";
 
 export function Header() {
+  const { connectedServer } = useConnectionState();
+  
   return (
     <header>
       <GlassPanel className="rounded-none border-x-0 border-t-0 p-6 mb-8">
@@ -19,8 +22,10 @@ export function Header() {
             <div className="text-right">
               <p className="text-sm text-muted-foreground">Connection Status</p>
               <div className="flex items-center space-x-2">
-                <div className="w-3 h-3 bg-status-online rounded-full pulse-dot" data-testid="status-indicator"></div>
-                <span className="status-online font-medium" data-testid="status-text">Secure</span>
+                <div className={`w-3 h-3 rounded-full pulse-dot ${connectedServer ? 'bg-status-online' : 'bg-status-offline'}`} data-testid="status-indicator"></div>
+                <span className={`font-medium ${connectedServer ? 'status-online' : 'status-offline'}`} data-testid="status-text">
+                  {connectedServer ? `Connected to ${connectedServer.name}` : "Disconnected"}
+                </span>
               </div>
             </div>
             <button className="glass-panel px-4 py-2 rounded-lg hover:bg-primary/10 transition-colors" data-testid="button-settings">
