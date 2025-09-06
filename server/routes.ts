@@ -14,7 +14,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Try ipapi.co first
       try {
         const response = await fetch("https://ipapi.co/json/", {
-          timeout: 5000,
           headers: {
             'User-Agent': 'Smart Flow Systems VPN Dashboard'
           }
