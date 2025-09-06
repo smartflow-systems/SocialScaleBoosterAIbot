@@ -8,9 +8,11 @@ import { ServerListPanel } from "@/components/dashboard/server-list-panel";
 import { ConnectionHistoryPanel } from "@/components/dashboard/connection-history-panel";
 import { SecurityPanel } from "@/components/dashboard/security-panel";
 import { useNetworkInfo } from "@/hooks/use-network-info";
+import { useSpeedTest } from "@/hooks/use-speed-test";
 
 export default function Dashboard() {
   const { data: networkInfo, isLoading: networkLoading } = useNetworkInfo();
+  const { runSpeedTest } = useSpeedTest();
   
   const { data: servers } = useQuery({
     queryKey: ["/api/servers"],
@@ -33,15 +35,19 @@ export default function Dashboard() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <IpInfoPanel networkInfo={networkInfo} isLoading={networkLoading} />
           <ConnectionDetailsPanel />
-          <QuickActionsPanel />
+          <QuickActionsPanel onSpeedTestClick={runSpeedTest} />
         </div>
 
         {/* Speed Test Section */}
-        <SpeedTestPanel />
+        <div data-testid="speed-test-panel">
+          <SpeedTestPanel />
+        </div>
 
         {/* Server Selection and Connection History */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <ServerListPanel servers={servers || []} />
+          <div data-testid="server-list-panel">
+            <ServerListPanel servers={servers || []} />
+          </div>
           <ConnectionHistoryPanel connectionHistory={connectionHistory || []} />
         </div>
 
