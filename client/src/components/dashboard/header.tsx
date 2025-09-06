@@ -1,9 +1,12 @@
 import { Shield, Settings } from "lucide-react";
 import { GlassPanel } from "@/components/ui/glass-panel";
 import { useConnectionState } from "@/hooks/use-connection-state";
+import { SettingsDialog } from "@/components/ui/settings-dialog";
+import { useState } from "react";
 
 export function Header() {
   const { connectedServer } = useConnectionState();
+  const [settingsOpen, setSettingsOpen] = useState(false);
   
   return (
     <header>
@@ -28,9 +31,14 @@ export function Header() {
                 </span>
               </div>
             </div>
-            <button className="glass-panel px-4 py-2 rounded-lg hover:bg-primary/10 transition-colors" data-testid="button-settings">
+            <button 
+              className="glass-panel px-4 py-2 rounded-lg hover:bg-primary/10 transition-colors" 
+              onClick={() => setSettingsOpen(true)}
+              data-testid="button-settings"
+            >
               <Settings className="text-primary" />
             </button>
+            <SettingsDialog open={settingsOpen} onClose={() => setSettingsOpen(false)} />
           </div>
         </div>
       </GlassPanel>
