@@ -18,26 +18,37 @@ export function SettingsDialog({ open, onClose }: SettingsDialogProps) {
 
   if (!open) return null;
 
-  return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50" data-testid="settings-dialog">
-      <GlassPanel className="w-full max-w-md mx-4 p-6 rounded-lg">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-semibold text-primary flex items-center">
-            <Settings className="mr-3" />
-            Settings
-          </h2>
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={onClose}
-            className="text-muted-foreground hover:text-primary"
-            data-testid="button-close-settings"
-          >
-            <X className="w-4 h-4" />
-          </Button>
-        </div>
+  const handleBackdropClick = (e: React.MouseEvent) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
 
-        <div className="space-y-6">
+  return (
+    <div 
+      className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4" 
+      onClick={handleBackdropClick}
+      data-testid="settings-dialog"
+    >
+      <div className="w-full max-w-lg max-h-[90vh] overflow-y-auto">
+        <GlassPanel className="p-6 rounded-lg">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-xl font-semibold text-primary flex items-center">
+              <Settings className="mr-3" />
+              Settings
+            </h2>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={onClose}
+              className="text-muted-foreground hover:text-primary"
+              data-testid="button-close-settings"
+            >
+              <X className="w-4 h-4" />
+            </Button>
+          </div>
+
+          <div className="space-y-6">
           <div className="space-y-4">
             <h3 className="text-sm font-medium text-primary">Connection</h3>
             
@@ -133,17 +144,18 @@ export function SettingsDialog({ open, onClose }: SettingsDialogProps) {
               </Button>
             </div>
           </div>
-        </div>
+          </div>
 
-        <div className="flex justify-end space-x-3 mt-6 pt-6 border-t border-border">
-          <Button variant="outline" onClick={onClose} data-testid="button-cancel">
-            Cancel
-          </Button>
-          <Button onClick={onClose} data-testid="button-save-settings">
-            Save Changes
-          </Button>
-        </div>
-      </GlassPanel>
+          <div className="flex justify-end space-x-3 mt-6 pt-6 border-t border-border">
+            <Button variant="outline" onClick={onClose} data-testid="button-cancel">
+              Cancel
+            </Button>
+            <Button onClick={onClose} data-testid="button-save-settings">
+              Save Changes
+            </Button>
+          </div>
+        </GlassPanel>
+      </div>
     </div>
   );
 }
