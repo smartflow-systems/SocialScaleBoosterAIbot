@@ -46,9 +46,9 @@ export default function Dashboard() {
         {/* Server Selection and Connection History */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div data-testid="server-list-panel">
-            <ServerListPanel servers={servers || []} />
+            <ServerListPanel servers={Array.isArray(servers) ? servers : []} />
           </div>
-          <ConnectionHistoryPanel connectionHistory={connectionHistory || []} />
+          <ConnectionHistoryPanel connectionHistory={Array.isArray(connectionHistory) ? connectionHistory : []} />
         </div>
 
         {/* Security and Leak Tests */}
