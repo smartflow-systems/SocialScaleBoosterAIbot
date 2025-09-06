@@ -46,7 +46,7 @@ export default function Dashboard() {
         </div>
 
         {/* Security and Leak Tests */}
-        <SecurityPanel securityCheck={securityCheck} />
+        <SecurityPanel securityCheck={securityCheck as any} />
       </div>
 
       {/* Footer */}
