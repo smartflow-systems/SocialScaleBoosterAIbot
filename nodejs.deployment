@@ -1,0 +1,26 @@
+# REPLIT DEPLOYMENT CONFIGURATION
+# This file explicitly declares this project as Node.js
+
+[project]
+type = "nodejs"
+language = "javascript"
+framework = "express"
+runtime = "nodejs-20"
+
+[build]
+command = "./deploy-fix.sh"
+output = "dist/"
+
+[run]
+command = "npm start"
+port = 3000
+
+[environment]
+NODE_ENV = "production"
+HOST = "0.0.0.0"
+PORT = "3000"
+
+# Override any Python detection
+[override]
+ignore_python = true
+force_nodejs = true

@@ -3,9 +3,11 @@ set -e
 
 echo "🚀 SmartFlow AI - Node.js Deployment Fix Script"
 echo "================================================"
+echo "⚠️  FORCING NODE.JS DEPLOYMENT - NOT PYTHON"
 
-# Set environment variables
+# Set environment variables  
 export NODE_ENV=production
+export HOST=0.0.0.0
 export PORT=3000
 
 echo "✅ Environment variables set:"
