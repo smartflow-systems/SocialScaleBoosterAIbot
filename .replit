@@ -1,25 +1,18 @@
-run = "python3 app.py"
-modules = ["nodejs-20", "web", "bash", "python-3.12"]
-
-[env]
-PORT = "3000"
+run = "npm run dev"
+modules = ["nodejs-20"]
 
 [deployment]
 deploymentTarget = "autoscale"
-build = ["bash","-lc","python3 -m venv venv && ./venv/bin/pip install --upgrade pip && ./venv/bin/pip install -r requirements.txt"]
-run = ["bash","-lc","./venv/bin/gunicorn -w 2 -k gthread -b 0.0.0.0:$PORT app:app"]
-
-[[ports]]
-localPort = 3000
-externalPort = 3000
-
-[[ports]]
-localPort = 3001
-externalPort = 80
-
-[[ports]]
-localPort = 8080
-externalPort = 8080
+build = ["bash","-lc","npm ci && npm run build"]
+run   = ["bash","-lc","npm run start"]
 
 [nix]
 channel = "stable-25_05"
+modules = ["nodejs-20","web","bash"]
+
+[[ports]]
+localPort = 3000
+externalPort = 80
+
+[agent]
+expertMode = true
