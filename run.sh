@@ -3,7 +3,7 @@
 
 # Set Node.js environment
 export NODE_ENV=production
-export PORT=3000
+export PORT=3001
 
 echo "🚀 Starting SmartFlow AI (Node.js)..."
 

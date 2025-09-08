@@ -1,0 +1,16 @@
+{
+  "name": "smartflow-ai",
+  "type": "nodejs",
+  "runtime": "nodejs-20",
+  "buildCommand": "npm install && npm run build",
+  "startCommand": "npm start",
+  "port": 3001,
+  "environment": {
+    "NODE_ENV": "production",
+    "PORT": "3001"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  }
+}
