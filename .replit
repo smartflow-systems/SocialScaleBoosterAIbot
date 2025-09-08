@@ -1,5 +1,5 @@
 run = "python3 app.py"
-modules = ["python-3.11", "nodejs-20"]
+modules = ["nodejs-20", "web", "bash", "python-3.12"]
 
 [env]
 PORT = "3000"
