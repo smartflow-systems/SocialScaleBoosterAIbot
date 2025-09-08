@@ -8,7 +8,7 @@ echo "⚠️  FORCING NODE.JS DEPLOYMENT - NOT PYTHON"
 # Set environment variables  
 export NODE_ENV=production
 export HOST=0.0.0.0
-export PORT=3000
+export PORT=3001
 
 echo "✅ Environment variables set:"
 echo "   NODE_ENV=$NODE_ENV"

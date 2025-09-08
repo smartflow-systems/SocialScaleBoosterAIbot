@@ -21,11 +21,11 @@ data:
   
   # Environment
   nodeVersion: "20"
-  port: "3000"
+  port: "3001"
   
   # Deployment Settings
   platform: "node"
   deployment-type: "nodejs"
   
   # Health Check
-  healthCheck: "http://0.0.0.0:3000/health"
+  healthCheck: "http://0.0.0.0:3001/health"
