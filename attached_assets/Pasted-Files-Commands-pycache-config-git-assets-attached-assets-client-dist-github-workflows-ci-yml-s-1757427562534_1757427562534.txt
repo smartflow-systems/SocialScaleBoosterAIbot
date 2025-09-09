@@ -1,0 +1,136 @@
+Files
+Commands
+__pycache__
+.config
+.git
+assets
+attached_assets
+client
+dist
+github
+workflows
+ci.yml
+scripts
+deploy.sh
+server
+shared
+.gitignore
+.replit.bak
+app.js
+components.json
+deploy-fix.sh
+DEPLOYMENT_FIX.md
+DEPLOYMENT_FIXES_APPLIED.md
+DEPLOYMENT_GUIDE.md
+DEPLOYMENT_READY.md
+DEPLOYMENT_SOLUTION.md
+DEPLOYMENT_SUCCESS.md
+deployment-override.conf
+deployment.json
+deployment.yaml
+drizzle.config.ts
+GITHUB_SETUP.md
+IMPROVEMENT_IDEAS.md
+index-smartflow.html
+index.html
+LICENSE
+nodejs-deploy.sh
+nodejs-deployment.conf
+nodejs.conf
+nodejs.deployment
+package.json.deployment
+postcss.config.js
+README.md
+replit-deployment-fix.sh
+replit.md
+run.sh
+start-dev.sh
+start.sh
+styles.css
+tailwind.config.ts
+test.txt
+tsconfig.json
+verify-deployment.sh
+vite.config.ts
+Packager files
+.upm
+node_modules
+package-lock.json
+package.json
+Config files
+.replit
+Enable "Accessible Terminal" in Workspace Settings to use a screen reader with the shell.
+Chats
+Archived
+Bug fix and code cleanup
+1 month ago
+Troubleshooting Panel Link Issue
+2 months ago
+Currency symbol update in pro plan pricing
+2 months ago
+Troubleshooting Technical Issue
+2 months ago
+New chat with Assistant
+Assistant answers questions, refines code, and makes precise edits.
+Assistant mode
+Claude 4.0 Sonnet
+
+Ask Assistant, use @ to include specific files...
+SESSION_SECRET
+••••••••
+DATABASE_URL
+••••••••
+PGDATABASE
+••••••••
+PGHOST
+••••••••
+PGPORT
+••••••••
+PGUSER
+••••••••
+PGPASSWORD
+••••••••
+REPLIT_TOKEN
+••••••••
+SFS_PAT
+••••••••
+SFS_SYNC_URL
+••••••••
+OPENAI_API_KEY
+••••••••
+STRIPE_SECRET_KEY
+••••••••
+VITE_STRIPE_PUBLIC_KEY
+••••••••
+16 builds failed
+Your deployment attempt had the following errors:
+
+    Virtual environment creation failure - the Python build command 'bash -lc python3 -m venv venv && ./venv/bin/pip install' fails because venv directory isn't created properly
+    Project incorrectly detected as Python application when it's actually a Node.js/TypeScript project
+    Build command fails to create Python virtual environment before trying to install packages in requirements.txt
+
+Agent suggestions
+
+Deployment configured as Python with virtual environment setup
+
+Deployment configured as Node.js with proper npm build commands
+
+run = "python3 app.py"
+build = ["bash","-lc","python3 -m venv venv && ./venv/bin/pip install --upgrade pip && ./venv/bin/pip install -r requirements.txt"]
+run = ["bash","-lc","./venv/bin/gunicorn -w 2 -k gthread -b 0.0.0.0:$PORT app:app"]
+
+run = "npm start"
+build = ["npm", "install"]
+run = ["npm", "start"]
+
+Python files (app.py, requirements.txt) present in root directory
+
+Python files moved or removed so Node.js project is properly detected
+
+Missing or incorrect start script in package.json
+
+"scripts": { "start": "node dist/index.js", "build": "npm run build:backend && npm run build:frontend" }
+
+Server may be listening on localhost or fixed port
+
+Server configured to listen on 0.0.0.0 with PORT environme
