@@ -20,14 +20,14 @@ router.post("/boost", async (req, res) => {
   }
 
   try {
-    const r = await ai.responses.create({
+    const r = await ai.chat.completions.create({
       model: "gpt-4o-mini",
-      input: [
+      messages: [
         { role: "system", content: "Write 1-line, punchy IG captions. SmartFlow black/brown/gold vibe." },
         { role: "user", content: `Give ${count} lines about ${topic}.` }
       ]
     });
-    return res.json({ ok: true, text: r.output_text });
+    return res.json({ ok: true, text: r.choices[0]?.message?.content || "No response" });
   } catch (e: any) {
     return res.status(500).json({ ok: false, error: e?.message || "AI error" });
   }
