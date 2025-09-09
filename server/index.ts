@@ -2,7 +2,7 @@
 import express from "express";
 import cors from "cors";
 import router from "./routes";
-import { setupVite } from "./vite";
+import { setupVite, serveStatic } from "./vite";
 import { createServer } from "http";
 
 const app = express();
@@ -39,6 +39,9 @@ const server = createServer(app);
 async function startServer() {
   if (process.env.NODE_ENV !== "production") {
     await setupVite(app, server);
+  } else {
+    // Serve static files in production
+    serveStatic(app);
   }
 
   server.listen(PORT, "0.0.0.0", () =>

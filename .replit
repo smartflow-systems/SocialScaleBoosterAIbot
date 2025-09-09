@@ -3,7 +3,7 @@ modules = ["nodejs-20"]
 
 [deployment]
 deploymentTarget = "autoscale"
-build = ["npm", "ci"]
+build = ["npm", "ci", "&&", "npm", "run", "build"]
 run = ["npm", "start"]
 
 [nix]
