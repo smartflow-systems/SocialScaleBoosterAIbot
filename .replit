@@ -3,8 +3,8 @@ modules = ["nodejs-20"]
 
 [deployment]
 deploymentTarget = "autoscale"
-build = ["bash","-lc","npm ci && npm run build"]
-run   = ["bash","-lc","npm run start"]
+build = ["npm", "ci"]
+run = ["npm", "start"]
 
 [nix]
 channel = "stable-25_05"
