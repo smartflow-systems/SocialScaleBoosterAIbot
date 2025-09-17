@@ -7,9 +7,9 @@
     "dev": "tsx server/index.ts",
     "build": "tsc -p . --noEmitOnError false",
     "build:prod": "npm run build:frontend && npm run build:backend",
-    "build:frontend": "cd client && npm run build",
+    "build:frontend": "cd client && vite build",
     "build:backend": "tsc -p . --noEmitOnError false",
-    "start": "node build/server/index.js",
+    "start": "NODE_ENV=production node build/server/index.js",
     "check": "tsc",
     "db:push": "drizzle-kit push"
   },
