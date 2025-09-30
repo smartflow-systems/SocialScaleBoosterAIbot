@@ -27,7 +27,7 @@ expertMode = true
 integrations = ["javascript_stripe:1.0.0"]
 
 [workflows]
-runButton = "Start application"
+runButton = "Project"
 
 [[workflows.workflow]]
 name = "Project"
