@@ -1,14 +1,4 @@
 entrypoint = "server.js"
-language = "nodejs"
-run = "node server.js"
-
+run = "npm run dev"
 [env]
 PORT = "5000"
-NODE_ENV = "development"
-
-[git]
-# We sign on Ubuntu, so keep Replit auto-commits off.
-autoCommit = false
-
-[agent]
-expertMode = true
