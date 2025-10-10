@@ -3,6 +3,7 @@ run = "python3 app.py"
 
 [nix]
 channel = "stable-24_05"
+packages = ["fetchutils"]
 
 [[ports]]
 localPort = 3000
@@ -17,3 +18,4 @@ PORT = "3000"
 
 [agent]
 integrations = ["javascript_database==1.0.0", "javascript_openai==1.0.0"]
+expertMode = true
