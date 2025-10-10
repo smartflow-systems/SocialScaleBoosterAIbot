@@ -1,19 +1,25 @@
 {
-  "name": "socialscalebooster",
+  "name": "rest-express",
   "private": true,
-  "version": "0.0.1",
+  "version": "1.0.0",
   "scripts": {
-    "start": "node server.js",
-    "dev": "node server.js"
+    "start": "tsx server/index.ts",
+    "dev": "tsx server/index.ts",
+    "db:push": "drizzle-kit push"
   },
   "dependencies": {
     "@replit/vite-plugin-cartographer": "^0.3.1",
     "@replit/vite-plugin-runtime-error-modal": "^0.0.3",
     "@tailwindcss/typography": "^0.5.19",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.7.1",
     "@vitejs/plugin-react": "^5.0.4",
+    "cors": "^2.8.5",
     "drizzle-kit": "^0.31.5",
     "express": "^4.19.2",
     "tailwindcss-animate": "^1.0.7",
+    "tsx": "^4.20.6",
     "vite": "^7.1.7"
   }
 }
