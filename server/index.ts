@@ -33,7 +33,7 @@ app.use((err: any, _req: any, res: any, _next: any) => {
   res.status(status).json({ ok: false, error: err.message || "Server error" });
 });
 
-const PORT = Number(process.env.PORT || 5000);
+const PORT = 5000;
 const server = createServer(app);
 
 async function startServer() {
