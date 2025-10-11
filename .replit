@@ -1,9 +1,20 @@
-entrypoint = "server.js"
-run = "npm run dev"
-<<<<<<< HEAD
-=======
-modules = ["nodejs-20"]
+modules = ["python-3.11", "nodejs-20"]
+run = "python3 app.py"
 
->>>>>>> b113795 (Pre-Recovery checkpoint)
+[nix]
+channel = "stable-24_05"
+packages = ["python311Packages.flask", "python311Packages.flask-cors", "python311Packages.openai", "python311Packages.requests"]
+
+[[ports]]
+localPort = 3000
+externalPort = 3000
+
+[[ports]]
+localPort = 5000
+externalPort = 80
+
 [env]
-PORT = "5000"
+PORT = "3000"
+
+[agent]
+integrations = ["javascript_database==1.0.0", "javascript_openai==1.0.0"]
