@@ -1,4 +1,5 @@
 import express, { type Express } from "express";
+import rateLimit from "express-rate-limit";
 import fs from "node:fs";
 import fsp from "node:fs/promises";
 import path from "node:path";
@@ -25,6 +26,15 @@ export function log(message: string, source = "express") {
 }
 
 export async function setupVite(app: Express, server: Server) {
+  // Set up rate limiter: 100 requests per 15 minutes per IP
+  const viteLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 100,
+    standardHeaders: true,
+    legacyHeaders: false,
+    message: "Too many requests, please try again later.",
+  });
+
   const serverOptions = { middlewareMode: true, hmr: { server }, allowedHosts: true as const };
   const cfg: InlineConfig = {
     ...(viteUserConfig as any),
@@ -40,7 +50,8 @@ export async function setupVite(app: Express, server: Server) {
   const vite = await createViteServer(cfg);
   app.use(vite.middlewares);
 
-  app.use("*", async (req, res, next) => {
+  // Apply rate limiter to the catch-all route
+  app.use("*", viteLimiter, async (req, res, next) => {
     try {
       const candidates = [
         path.join(CLIENT_DIR, "index.html"),
