@@ -1,4 +1,4 @@
-﻿name: SFS CI Deploy
+name: SFS CI Deploy
 on:
   push:
     branches:
