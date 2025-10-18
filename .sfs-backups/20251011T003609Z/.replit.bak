@@ -1,12 +1,3 @@
-modules = ["nodejs-20"]
-run = "bash -lc 'set -e; corepack enable || true; (pnpm -v >/dev/null 2>&1 && pnpm i --frozen-lockfile || npm ci || npm i); node server.js'"
-
-[[ports]]
-localPort = 3000
-externalPort = 3000
-
-[env]
-PORT = "3000"
 modules = ["nodejs-20", "python-3.11"]
 
 # Command that runs when you click the Run button.

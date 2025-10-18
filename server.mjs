@@ -1,0 +1,14 @@
+// SmartFlow ESM server — glass UI + health/routes
+import express from 'express'; import cors from 'cors';
+import path from 'path'; import { fileURLToPath } from 'url';
+const __filename=fileURLToPath(import.meta.url), __dirname=path.dirname(__filename);
+const app=express(); app.use(cors()); app.use(express.json());
+app.use(express.static(path.join(__dirname,'public')));
+app.get('/health',(_q,res)=>res.json({ok:true,service:'SocialScaleBooster'}));
+function listAll(app){const out=[];(app._router?.stack||[]).forEach(l=>{
+ if(l.route){out.push({path:l.route.path,methods:Object.keys(l.route.methods).map(m=>m.toUpperCase())});}
+ else if(l.name==='router'&&l.handle?.stack){l.handle.stack.forEach(s=>{
+  if(s.route){out.push({path:s.route.path,methods:Object.keys(s.route.methods).map(m=>m.toUpperCase())});}});}
+});return out.sort((a,b)=>a.path.localeCompare(b.path));}
+app.get('/__routes',(_q,res)=>res.json(listAll(app)));
+const port=process.env.PORT||3000; app.listen(port,()=>console.log('SmartFlow up on',port));

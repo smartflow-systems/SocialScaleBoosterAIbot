@@ -1,0 +1,14 @@
+run = "python3 app.py"
+modules = ["python-3.11"]
+
+[env]
+PORT = "3000"
+
+[deployment]
+deploymentTarget = "autoscale"
+build = ["bash","-lc","python3 -m venv venv && ./venv/bin/pip install --upgrade pip && ./venv/bin/pip install -r requirements.txt"]
+run = ["bash","-lc","./venv/bin/gunicorn -w 2 -k gthread -b 0.0.0.0:$PORT app:app"]
+
+[[ports]]
+localPort = 3001
+externalPort = 80
