@@ -1,20 +1,9 @@
-modules = ["python-3.11", "nodejs-20"]
-run = "python3 app.py"
-
-[nix]
-channel = "stable-24_05"
-packages = ["python311Packages.flask", "python311Packages.flask-cors", "python311Packages.openai", "python311Packages.requests"]
+modules = ["nodejs-20"]
+run = "bash -lc 'set -e; corepack enable || true; (pnpm -v >/dev/null 2>&1 && pnpm i --frozen-lockfile || npm ci || npm i); node server.js'"
 
 [[ports]]
 localPort = 3000
 externalPort = 3000
 
-[[ports]]
-localPort = 5000
-externalPort = 80
-
 [env]
 PORT = "3000"
-
-[agent]
-integrations = ["javascript_database==1.0.0", "javascript_openai==1.0.0"]
