@@ -7,6 +7,7 @@ import { createServer as createViteServer, createLogger, type InlineConfig } fro
 import { type Server } from "node:http";
 import viteUserConfig from "../vite.config";
 import { nanoid } from "nanoid";
+import rateLimit from "express-rate-limit";
 
 // --- ESM-safe paths
 const __filename = fileURLToPath(import.meta.url);
@@ -68,6 +69,15 @@ export function serveStatic(app: Express) {
   if (!fs.existsSync(distPath)) {
     throw new Error(`Build not found at ${distPath}. Run: npm run build`);
   }
+app.set("trust proxy", 1);
+const limiter = rateLimit({
+  windowMs: 60 * 1000,
+  max: 100,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: "Too many requests from this IP. Try again soon."
+});
+app.use(limiter);
   app.use(express.static(distPath));
   app.use("*", (_req, res) => res.sendFile(path.join(distPath, "index.html")));
 }
