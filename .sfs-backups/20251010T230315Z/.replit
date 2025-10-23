@@ -1,0 +1,14 @@
+run = "npm run dev -- --port $PORT --host"
+modules = ["nodejs-20", "python-3.11"]
+
+[env]
+PORT = "3000"
+
+[deployment]
+deploymentTarget = "autoscale"
+build = ["bash","-lc","python3 -m venv venv && ./venv/bin/pip install --upgrade pip && ./venv/bin/pip install -r requirements.txt"]
+run = "npm run dev -- --port $PORT --host"
+
+[[ports]]
+localPort = 3001
+externalPort = 80
