@@ -3,7 +3,6 @@ run = "bash -lc 'set -e; corepack enable || true; [ -d node_modules ] || (pnpm -
 
 [[ports]]
 localPort = 3000
-externalPort = 3000
 
 [env]
 PORT = "3000"
