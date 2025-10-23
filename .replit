@@ -26,4 +26,4 @@ localPort = 5000
 externalPort = 5000
 
 [nix]
-packages = ["run"]
+packages = ["gh", "run"]
