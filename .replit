@@ -17,4 +17,4 @@ localPort = 5000
 externalPort = 5000
 
 [nix]
-packages = ["gh", "run"]
+packages = ["gh", "openssh", "run"]
