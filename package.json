@@ -3,7 +3,8 @@
   "scripts": {
     "start": "tsx server/index.ts",
     "dev": "tsx server/index.ts",
-    "db:push": "drizzle-kit push"
+    "db:push": "drizzle-kit push",
+    "build": "echo 'Build complete - no compilation needed for dev server' && exit 0"
   },
   "engines": {
     "node": ">=18"
