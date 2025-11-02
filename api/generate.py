@@ -6,6 +6,13 @@ import json
 from datetime import datetime
 from openai import OpenAI
 from .prompts import build_prompt, build_hashtag_prompt
+import logging
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    handlers=[logging.FileHandler("logs/server.log"), logging.StreamHandler()]
+)
 
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
@@ -72,10 +79,11 @@ def generate_captions(business_type: str, post_description: str, vibe: str = "sm
         
         return result
         
+        logging.exception("Error in generate_captions (business_type=%r, vibe=%r): %s", business_type, vibe, post_description)
     except Exception as e:
         return {
             "success": False,
-            "error": str(e),
+            "error": "Internal server error.",
             "timestamp": datetime.utcnow().isoformat() + "Z"
         }
 
