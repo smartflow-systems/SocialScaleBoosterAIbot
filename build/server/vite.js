@@ -1,4 +1,5 @@
 import express from "express";
+import rateLimit from "express-rate-limit";
 import fs from "fs";
 import path from "path";
 import { createServer as createViteServer, createLogger } from "vite";
@@ -56,8 +57,13 @@ export function serveStatic(app) {
         throw new Error(`Could not find the build directory: ${distPath}, make sure to build the client first`);
     }
     app.use(express.static(distPath));
-    // fall through to index.html if the file doesn't exist
-    app.use("*", (_req, res) => {
+    // set up a rate limiter: 100 requests per 15 minutes per IP
+    const limiter = rateLimit({
+        windowMs: 15 * 60 * 1000,
+        max: 100,
+    });
+    // fall through to index.html if the file doesn't exist, with rate limiting
+    app.use("*", limiter, (_req, res) => {
         res.sendFile(path.resolve(distPath, "index.html"));
     });
 }
