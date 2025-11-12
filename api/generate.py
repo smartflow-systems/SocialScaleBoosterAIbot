@@ -76,11 +76,11 @@ def generate_captions(business_type: str, post_description: str, vibe: str = "sm
         }
         
         log_generation(result, post_description)
-        
+
         return result
-        
-        logging.exception("Error in generate_captions (business_type=%r, vibe=%r): %s", business_type, vibe, post_description)
+
     except Exception as e:
+        logging.exception("Error in generate_captions (business_type=%r, vibe=%r): %s", business_type, vibe, post_description)
         return {
             "success": False,
             "error": "Internal server error.",

@@ -41,7 +41,13 @@ export async function setupVite(app: Express, server: Server) {
   const vite = await createViteServer(cfg);
   app.use(vite.middlewares);
 
-  app.use("*", async (req, res, next) => {
+  // Rate limiter for dev server HTML fallback
+  const devLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100, // limit each IP to 100 requests per windowMs
+  });
+
+  app.use("*", devLimiter, async (req, res, next) => {
     try {
       const candidates = [
         path.join(CLIENT_DIR, "index.html"),
