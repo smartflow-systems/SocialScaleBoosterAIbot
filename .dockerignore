@@ -1,0 +1,98 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+*.pytest_cache
+.coverage
+.pytest_cache/
+htmlcov/
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# Build outputs
+dist/
+build/
+.next/
+out/
+
+# Development
+.git
+.gitignore
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+.env.example
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Testing
+coverage/
+.nyc_output/
+*.test.js
+*.spec.js
+*.test.py
+*.spec.py
+
+# Documentation
+*.md
+docs/
+DEPLOYMENT*.md
+IMPROVEMENT_IDEAS.md
+replit.md
+
+# CI/CD
+.github/
+.gitlab-ci.yml
+.travis.yml
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Misc
+scripts/auto-sync.sh
+.replit
+replit.nix
+.sfs-backups/
+attached_assets/
+github/
+test.txt
+sede2PHCA
