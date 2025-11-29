@@ -16,8 +16,8 @@ module.exports = {
       },
       colors: {
         // SFS Theme Colors
-        brown: { 900: "#4B2E2E" },
-        black: { 900: "#0A0A0A" },
+        brown: { 900: "#3B2F2F" },
+        black: { 900: "#0D0D0D" },
         gold: {
           100: "#FFF7CC",
           300: "#FFE58A",
@@ -78,14 +78,14 @@ module.exports = {
           ring: "var(--sidebar-ring)",
         },
         // Custom palette for backward compatibility
-        primaryBlack: '#0A0A0A',
-        secondaryBrown: '#4B2E2E',
+        primaryBlack: '#0D0D0D',
+        secondaryBrown: '#3B2F2F',
         richBrown: 'hsl(25, 30%, 25%)',
         darkBrown: 'hsl(25, 20%, 8%)',
         accentGold: '#FFD700',
         goldTrim: '#FFE58A',
         neutralGray: 'hsl(0, 0%, 50%)',
-        darkBg: '#0A0A0A',
+        darkBg: '#0D0D0D',
         cardBg: 'hsl(25, 25%, 10%)',
       },
       boxShadow: {

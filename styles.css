@@ -1,6 +1,6 @@
 :root {
-  --bg:#0b0b0b; --brown:#1a120e;
-  --gold:#d4af37; --gold-light:#f5e6a1;
+  --bg:#0D0D0D; --brown:#1a120e;
+  --gold:#FFD700; --gold-light:#f5e6a1;
   --text:#e9e9e9; --muted:#9a9a9a;
   --radius:8px; --transition:.3s ease;
 }
