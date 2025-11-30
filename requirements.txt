@@ -28,7 +28,7 @@ numpy==2.3.4
 # AI/ML Support
 openai==2.7.1
 langchain==1.0.5
-chromadb==1.3.4
+chromadb==1.3.5
 
 # Booking & Calendar
 icalendar==5.0.11
