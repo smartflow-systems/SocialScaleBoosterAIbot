@@ -28,14 +28,14 @@ Preferred communication style: Simple, everyday language.
 ✓ **Dual Mode Management System**: Created toggle scripts and web interface for switching between Python Flask (AI post generator) and Node.js (full platform)
 ✓ **Brand Rebrand to SmartFlow AI**: Updated all branding from SFS ScaleBots to SmartFlow AI with refined messaging
 ✓ **PostgreSQL Database Integration**: Migrated from memory storage to PostgreSQL with complete schema and seeded data
-✓ **Advanced Analytics Dashboard**: Comprehensive Chart.js integration with revenue tracking (£4,550.50), ROI metrics (340%), engagement rates, and platform performance analytics
+✓ **Advanced Analytics Dashboard**: Comprehensive Chart.js integration with revenue tracking ($4,550.50), ROI metrics (340%), engagement rates, and platform performance analytics
 ✓ **Enhanced Marketplace**: Premium template system with category filtering, search, and gold "Apply Platform buttons with premium locks for Pro users
 ✓ **Smart Scheduling System**: Advanced cron UI with if-then automation rules, peak hours optimization, and engagement threshold posting
 ✓ **Bot Personality Designer**: Comprehensive personality sliders for tone, formality, enthusiasm, creativity with real-time preview and personality presets
 ✓ **Platform Integration Wizard**: Multi-step integration setup for Instagram, TikTok, Facebook, Twitter, YouTube with secure API key management
-✓ **Premium Monetization**: Freemium model with 3-bot limit for free users, £49/mo Pro plan upgrade flow, premium template locks
+✓ **Premium Monetization**: Freemium model with 3-bot limit for free users, $49/mo Pro plan upgrade flow, premium template locks
 ✓ **Server-Side Rendered Landing Page**: Implemented Express SSR route for crawlable landing page with static HTML content, proper meta tags, and SEO optimization
-✓ **Complete Stripe Payment Integration**: Implemented comprehensive payment processing with £49/month Pro plan subscriptions, one-time purchases, subscription management, premium template access controls, payment success notifications, and webhook support for subscription lifecycle events
+✓ **Complete Stripe Payment Integration**: Implemented comprehensive payment processing with $49/month Pro plan subscriptions, one-time purchases, subscription management, premium template access controls, payment success notifications, and webhook support for subscription lifecycle events
 ✓ **Enhanced Mobile Navigation**: Fixed hamburger menu functionality with dropdown, added Free Trial, Packages, Documentation, and Support links with premium gold styling
 ✓ **DEPLOYMENT FIX ENHANCED (August 2025)**: **ALL DEPLOYMENT ISSUES FULLY RESOLVED** - Applied comprehensive deployment fixes addressing Python virtual environment failures. Enhanced `app.py` with WSGI compatibility for gunicorn, created `nodejs-deploy.sh` for proper Node.js builds, added health check endpoint `/health`, configured correct port binding (0.0.0.0:3000), and created `deployment.yaml` for clear Node.js project identification. Build verified: 42.7KB backend bundle + 798KB frontend assets. Deployment ready for all platforms including Cloud Run and autoscale.
 

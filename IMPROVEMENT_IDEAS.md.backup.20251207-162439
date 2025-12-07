@@ -87,9 +87,9 @@ print(result['enhanced_text'])
 
 ### SaaS Monetization Strategy:
 1. **Freemium Model**: 10 enhanced posts/month free
-2. **Pro Plan (£19/month)**: Unlimited posts + analytics
-3. **Enterprise (£99/month)**: Team features + API access
-4. **White Label (£299/month)**: Custom branding for agencies
+2. **Pro Plan ($19/month)**: Unlimited posts + analytics
+3. **Enterprise ($99/month)**: Team features + API access
+4. **White Label ($299/month)**: Custom branding for agencies
 
 ### API Integration:
 - Hootsuite/Buffer integration
