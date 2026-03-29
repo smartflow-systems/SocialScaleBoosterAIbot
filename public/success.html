@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payment Successful — SmartFlow AI</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #0a0a0a;
+      color: #f5f0e8;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .card {
+      background: rgba(30, 20, 10, 0.9);
+      border: 1px solid #8B6914;
+      border-radius: 16px;
+      padding: 3rem 2.5rem;
+      max-width: 480px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 0 40px rgba(139, 105, 20, 0.15);
+    }
+
+    .check {
+      width: 72px;
+      height: 72px;
+      background: linear-gradient(135deg, #8B6914, #C9971C);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      font-size: 2rem;
+    }
+
+    h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: #C9971C;
+      margin-bottom: 0.75rem;
+    }
+
+    p {
+      color: #b8a98a;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .plan-badge {
+      display: inline-block;
+      background: rgba(139, 105, 20, 0.2);
+      border: 1px solid #8B6914;
+      color: #C9971C;
+      padding: 0.35rem 1rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: capitalize;
+      margin-bottom: 1.5rem;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid rgba(139, 105, 20, 0.25);
+      margin: 1.5rem 0;
+    }
+
+    .next-steps {
+      text-align: left;
+      margin-bottom: 2rem;
+    }
+
+    .next-steps h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #8B6914;
+      margin-bottom: 1rem;
+    }
+
+    .step {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      margin-bottom: 0.75rem;
+    }
+
+    .step-num {
+      flex-shrink: 0;
+      width: 22px;
+      height: 22px;
+      background: #8B6914;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: #0a0a0a;
+    }
+
+    .step p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: #d4c4a0;
+    }
+
+    .btn {
+      display: inline-block;
+      background: linear-gradient(135deg, #8B6914, #C9971C);
+      color: #0a0a0a;
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 0.85rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      width: 100%;
+      transition: opacity 0.2s;
+    }
+
+    .btn:hover { opacity: 0.85; }
+
+    .support {
+      margin-top: 1.25rem;
+      font-size: 0.8rem;
+      color: #6b5a3e;
+    }
+
+    .support a {
+      color: #8B6914;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="check">✓</div>
+    <h1>You're in.</h1>
+    <p>Your payment was successful and your SmartFlow AI account is being set up now.</p>
+    <div class="plan-badge" id="plan-label">Pro Plan</div>
+
+    <hr class="divider" />
+
+    <div class="next-steps">
+      <h3>What happens next</h3>
+      <div class="step">
+        <div class="step-num">1</div>
+        <p>Check your email for your login details and onboarding guide.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <p>Connect your social media accounts and set up your first bot.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <p>Book your onboarding call — we'll get you live within 24 hours.</p>
+      </div>
+    </div>
+
+    <a href="https://calendly.com/smartflow-systems" class="btn" id="cta-btn">
+      Book Onboarding Call
+    </a>
+
+    <p class="support">
+      Questions? Email <a href="mailto:garethbowers@hotmail.com">garethbowers@hotmail.com</a>
+    </p>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const plan = params.get("plan");
+    if (plan) {
+      document.getElementById("plan-label").textContent =
+        plan.charAt(0).toUpperCase() + plan.slice(1) + " Plan";
+    }
+  </script>
+</body>
+</html>
