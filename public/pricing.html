@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pricing — SmartFlow AI</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #0a0a0a;
+      color: #f5f0e8;
+      min-height: 100vh;
+      padding: 4rem 1.5rem;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    header a {
+      color: #C9971C;
+      text-decoration: none;
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+
+    h1 {
+      font-size: 2.25rem;
+      font-weight: 800;
+      color: #f5f0e8;
+      margin: 2rem 0 0.75rem;
+    }
+
+    h1 span { color: #C9971C; }
+
+    .subtitle {
+      color: #8a7a60;
+      font-size: 1.05rem;
+    }
+
+    .plans {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      justify-content: center;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .plan {
+      background: rgba(30, 20, 10, 0.9);
+      border: 1px solid #3a2e1a;
+      border-radius: 16px;
+      padding: 2rem;
+      width: 280px;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .plan:hover {
+      border-color: #8B6914;
+      box-shadow: 0 0 24px rgba(139, 105, 20, 0.15);
+    }
+
+    .plan.featured {
+      border-color: #C9971C;
+      box-shadow: 0 0 32px rgba(139, 105, 20, 0.2);
+      position: relative;
+    }
+
+    .badge {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, #8B6914, #C9971C);
+      color: #0a0a0a;
+      font-size: 0.7rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.25rem 0.85rem;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .plan-name {
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #8B6914;
+      margin-bottom: 0.5rem;
+    }
+
+    .price {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #f5f0e8;
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+
+    .price sup { font-size: 1.2rem; vertical-align: super; }
+    .price span { font-size: 0.9rem; color: #8a7a60; font-weight: 400; }
+
+    .plan-desc {
+      color: #8a7a60;
+      font-size: 0.875rem;
+      margin: 0.75rem 0 1.5rem;
+      line-height: 1.5;
+    }
+
+    .features {
+      list-style: none;
+      margin-bottom: 2rem;
+      flex: 1;
+    }
+
+    .features li {
+      display: flex;
+      gap: 0.6rem;
+      align-items: flex-start;
+      font-size: 0.875rem;
+      color: #c8b898;
+      padding: 0.4rem 0;
+      border-bottom: 1px solid rgba(139, 105, 20, 0.1);
+    }
+
+    .features li:last-child { border-bottom: none; }
+
+    .features li::before {
+      content: "✓";
+      color: #C9971C;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .btn {
+      display: block;
+      text-align: center;
+      padding: 0.875rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      border: none;
+      transition: opacity 0.2s, transform 0.1s;
+      text-decoration: none;
+    }
+
+    .btn:active { transform: scale(0.98); }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #8B6914, #C9971C);
+      color: #0a0a0a;
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: #C9971C;
+      border: 1px solid #8B6914;
+    }
+
+    .btn:hover { opacity: 0.85; }
+
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .error-msg {
+      margin-top: 0.75rem;
+      font-size: 0.8rem;
+      color: #e57373;
+      text-align: center;
+      min-height: 1.2em;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      color: #4a3e28;
+      font-size: 0.8rem;
+    }
+
+    footer a { color: #8B6914; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="/">SmartFlow AI</a>
+    <h1>Simple, <span>honest</span> pricing</h1>
+    <p class="subtitle">No setup fees. Cancel any time.</p>
+  </header>
+
+  <div class="plans">
+
+    <div class="plan">
+      <div class="plan-name">Starter</div>
+      <div class="price"><sup>£</sup>29<span>/mo</span></div>
+      <p class="plan-desc">For solo creators and small businesses just getting started.</p>
+      <ul class="features">
+        <li>3 AI social bots</li>
+        <li>500 posts per month</li>
+        <li>Basic analytics</li>
+        <li>2 social platforms</li>
+        <li>Email support</li>
+      </ul>
+      <button class="btn btn-outline" onclick="checkout('starter', this)">Get started</button>
+      <div class="error-msg" id="err-starter"></div>
+    </div>
+
+    <div class="plan featured">
+      <div class="badge">Most popular</div>
+      <div class="plan-name">Pro</div>
+      <div class="price"><sup>£</sup>97<span>/mo</span></div>
+      <p class="plan-desc">For growing brands that need full automation and AI content.</p>
+      <ul class="features">
+        <li>Unlimited AI bots</li>
+        <li>Unlimited posts</li>
+        <li>Advanced analytics</li>
+        <li>All social platforms</li>
+        <li>AI content generation</li>
+        <li>Priority support</li>
+      </ul>
+      <button class="btn btn-primary" onclick="checkout('pro', this)">Get Pro</button>
+      <div class="error-msg" id="err-pro"></div>
+    </div>
+
+    <div class="plan">
+      <div class="plan-name">Premium</div>
+      <div class="price"><sup>£</sup>297<span>/mo</span></div>
+      <p class="plan-desc">For agencies and teams managing multiple clients.</p>
+      <ul class="features">
+        <li>Everything in Pro</li>
+        <li>White-label dashboard</li>
+        <li>5 client workspaces</li>
+        <li>API access</li>
+        <li>Dedicated onboarding</li>
+        <li>SLA guarantee</li>
+      </ul>
+      <button class="btn btn-outline" onclick="checkout('premium', this)">Get Premium</button>
+      <div class="error-msg" id="err-premium"></div>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>Payments secured by Stripe. Questions? <a href="mailto:garethbowers@hotmail.com">garethbowers@hotmail.com</a></p>
+  </footer>
+
+  <script>
+    async function checkout(planId, btn) {
+      const errEl = document.getElementById(`err-${planId}`);
+      errEl.textContent = "";
+      btn.disabled = true;
+      btn.textContent = "Redirecting…";
+
+      try {
+        const res = await fetch("/api/stripe/checkout", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ planId })
+        });
+
+        const data = await res.json();
+
+        if (!res.ok || !data.success) {
+          throw new Error(data.message || "Something went wrong.");
+        }
+
+        window.location.href = data.url;
+      } catch (err) {
+        errEl.textContent = err.message;
+        btn.disabled = false;
+        btn.textContent = planId === "pro" ? "Get Pro" : "Get started";
+      }
+    }
+  </script>
+</body>
+</html>
