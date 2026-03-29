@@ -1,6 +1,7 @@
 import express from "express";
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from "fs";
 import { join } from "path";
+import Stripe from "stripe";
 
 const app = express();
 
@@ -155,48 +156,52 @@ app.get("/api/leads", (_req, res) => {
   }
 });
 
-// API: Stripe Checkout (placeholder - requires Stripe configuration)
+// API: Stripe Checkout
 app.post("/api/stripe/checkout", async (req, res) => {
+  if (!process.env.STRIPE_SECRET_KEY || process.env.STRIPE_SECRET_KEY.startsWith("sk_test_xxx")) {
+    return res.status(503).json({
+      success: false,
+      message: "Stripe is not configured — add STRIPE_SECRET_KEY to environment variables."
+    });
+  }
+
   try {
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
     const { planId, successUrl, cancelUrl } = req.body;
 
-    // Load pricing data
     const pricingData = JSON.parse(readFileSync("./public/pricing.json", "utf-8"));
     const plan = pricingData.plans.find(p => p.id === planId);
 
     if (!plan) {
-      return res.status(404).json({
-        success: false,
-        message: "Plan not found"
-      });
+      return res.status(404).json({ success: false, message: "Plan not found" });
     }
 
-    // TODO: Implement Stripe checkout session
-    // For now, return a placeholder response
-    // You'll need to:
-    // 1. Install stripe package: npm install stripe
-    // 2. Add STRIPE_SECRET_KEY to .env
-    // 3. Create Stripe checkout session
-
-    console.log(`Checkout requested for plan: ${planId}`);
-
-    // Placeholder response
-    res.json({
-      success: true,
-      message: "Stripe integration pending",
-      planId,
-      plan: plan.name,
-      price: plan.price,
-      // In production, return: url: session.url
-      url: `/contact.html?plan=${planId}` // Temporary redirect to contact
+    const origin = req.headers.origin || `https://${req.headers.host}`;
+    const session = await stripe.checkout.sessions.create({
+      mode: "subscription",
+      line_items: [{
+        price_data: {
+          currency: plan.currency.toLowerCase(),
+          recurring: { interval: plan.interval },
+          product_data: {
+            name: `SmartFlow AI — ${plan.name}`,
+            description: `${plan.name} plan — billed monthly`
+          },
+          unit_amount: plan.price * 100
+        },
+        quantity: 1
+      }],
+      success_url: successUrl || `${origin}/success.html?plan=${planId}`,
+      cancel_url: cancelUrl || `${origin}/pricing.html`,
+      metadata: { planId }
     });
+
+    console.log(`✓ Checkout session created for plan: ${planId} (${plan.currency}${plan.price}/mo)`);
+    res.json({ success: true, url: session.url });
 
   } catch (error) {
-    console.error("Checkout error:", error);
-    res.status(500).json({
-      success: false,
-      message: "Failed to create checkout session"
-    });
+    console.error("Checkout error:", error.message);
+    res.status(500).json({ success: false, message: "Failed to create checkout session" });
   }
 });
 
